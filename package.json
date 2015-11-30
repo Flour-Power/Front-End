@@ -12,7 +12,8 @@
     "babelify": "^6.3.0",
     "browserify": "^11.2.0",
     "chai": "^3.4.0",
-    "foundation-sites": "^5.5.3",
+    "foundation-sites": "^6.0.3",
+    "browserify-shim": "^3.8.11",
     "gulp": "^3.9.0",
     "gulp-htmlhint": "^0.3.0",
     "gulp-jscs": "^3.0.1",
@@ -36,10 +37,22 @@
     "watchify": "^3.4.0"
   },
   "dependencies": {
+    "bootstrap": "^3.3.6",
     "font-awesome": "^4.4.0",
     "jquery": "^2.1.4",
     "moment": "^2.10.6",
     "normalize.css": "^3.0.3",
     "underscore": "^1.8.3"
+  },
+  "browser": {
+  "jquery": "./node_modules/jquery/dist/jquery.js",
+  "foundation": "./node_modules/foundation-sites/dist/foundation.js"
+  },
+  "browserify-shim": {
+    "jquery": "$",
+    "foundation": "foundation"
+  },
+  "browserify": {
+    "transform": ["browserify-shim"]
   }
 }
