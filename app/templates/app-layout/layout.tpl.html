@@ -1,0 +1,36 @@
+<nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+    <li class="Logo">
+      <h1><a href="#/">Flower Icon</a></h1>
+    </li>
+  </ul>
+  <section class="top-bar-section">
+    <ul class="right">
+      <li><a href="#/dashboard">{{vm.userName}}</a></li>
+      <li><a href="#/categories">Categories</a></li>
+      <li><a href="#">Logout</a></li>
+    </ul>
+  </section>
+</nav>
+
+
+<div>
+  <section class="heading">Heading {{vm.userName}}'s {{vm.title}}</section>
+  <section class="details">Details {{vm.details}} {{vm.photos}}</section>
+  <section class="content" ui-view>Content</section>
+</div>
+
+
+<!-- Side Panel: UserName's Collections -->
+<section class="categories">
+  <ul class="category-icons">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+
+</section>
+<footer>FlourPower 2015</footer>

@@ -1,5 +1,5 @@
 ## Welcome to My Project
-
+Welcome to the Flour Power Web-App documentation. This application will allow you to store and read your favorite recipes from varied media types (web, print, etc).
 
 
 
