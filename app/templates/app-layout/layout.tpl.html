@@ -6,17 +6,17 @@
   </ul>
   <section class="top-bar-section">
     <ul class="right">
-      <li><a href="#/dashboard">{{vm.userName}}</a></li>
+      <li><a href="#/dashboard">UserName</a></li>
       <li><a href="#/categories">Categories</a></li>
-      <li><a href="#">Logout</a></li>
+      <li><a ng-click="logmeout()">Logout</a></li>
     </ul>
   </section>
 </nav>
 
 
 <div>
-  <section class="heading">Heading {{vm.userName}}'s {{vm.title}}</section>
-  <section class="details">Details {{vm.details}} {{vm.photos}}</section>
+  <section class="heading">Heading</section>
+  <section class="details">Details</section>
   <section class="content" ui-view>Content</section>
 </div>
 
