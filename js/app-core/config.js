@@ -15,12 +15,12 @@ let config = function($stateProvider, $urlRouterProvider) {
     })
     .state('access.register', {
       url: '/signup',
-      controller: 'RegisterController',
+      controller: 'RegisterController as vm',
       templateUrl: 'templates/app-layout/register.tpl.html'
     })
     .state('access.login', {
       url: '/users',
-      controller: 'LoginController',
+      controller: 'LoginController as vm',
       templateUrl: 'templates/app-layout/login.tpl.html'
     })
      .state('root', {
@@ -29,7 +29,7 @@ let config = function($stateProvider, $urlRouterProvider) {
     })
      .state('root.home', {
       url: '/home',
-      controller: 'HomeController',
+      controller: 'HomeController as vm',
       templateUrl: 'templates/app-layout/home.tpl.html'
     });
 

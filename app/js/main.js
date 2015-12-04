@@ -18,18 +18,18 @@ var config = function config($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/app-layout/welcome.tpl.html'
   }).state('access.register', {
     url: '/signup',
-    controller: 'RegisterController',
+    controller: 'RegisterController as vm',
     templateUrl: 'templates/app-layout/register.tpl.html'
   }).state('access.login', {
     url: '/users',
-    controller: 'LoginController',
+    controller: 'LoginController as vm',
     templateUrl: 'templates/app-layout/login.tpl.html'
   }).state('root', {
     abstract: true,
     templateUrl: 'templates/app-layout/layout.tpl.html'
   }).state('root.home', {
     url: '/home',
-    controller: 'HomeController',
+    controller: 'HomeController as vm',
     templateUrl: 'templates/app-layout/home.tpl.html'
   });
 };
@@ -74,7 +74,7 @@ var HomeController = function HomeController($scope, UserService, $state) {
     promise.then(function (res) {
       console.log(res);
       if (res.data.status === 'Authentication failed.') {
-        $state.go('root.login');
+        $state.go('access.login');
       } else {
         $scope.message = 'I am logged in';
       }
@@ -181,14 +181,14 @@ var UserService = function UserService($http, SERVER, $cookies, $state) {
 
   this.checkAuth = function () {
 
-    var token = $cookies.get('authToken');
+    var token = $cookies.get('auth-token');
 
     SERVER.CONFIG.headers['auth-token'] = token;
 
     if (token) {
       return $http.get(SERVER.URL + 'check', SERVER.CONFIG);
     } else {
-      $state.go('root.login');
+      $state.go('access.login');
     }
   };
 
@@ -197,7 +197,7 @@ var UserService = function UserService($http, SERVER, $cookies, $state) {
   };
 
   this.loginSuccess = function (res) {
-    $cookies.put('authToken', res.data.auth_token);
+    $cookies.put('auth-token', res.data.auth_token);
     SERVER.CONFIG.headers['auth-token'] = res.data.auth_token;
     $state.go('root.home');
   };

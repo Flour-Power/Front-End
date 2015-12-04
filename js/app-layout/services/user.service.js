@@ -8,14 +8,14 @@ let UserService = function($http, SERVER, $cookies, $state) {
   
   this.checkAuth = function () {
 
-    let token = $cookies.get('authToken');
+    let token = $cookies.get('auth-token');
 
     SERVER.CONFIG.headers['auth-token'] = token;
     
     if (token) {
       return $http.get(SERVER.URL + 'check', SERVER.CONFIG);
     } else {
-      $state.go('root.login');
+      $state.go('access.login');
     }
 
   };
@@ -25,7 +25,7 @@ let UserService = function($http, SERVER, $cookies, $state) {
   };
 
   this.loginSuccess = function (res) {
-    $cookies.put('authToken', res.data.auth_token);
+    $cookies.put('auth-token', res.data.auth_token);
     SERVER.CONFIG.headers['auth-token'] = res.data.auth_token;
     $state.go('root.home');
   };
