@@ -1,6 +1,293 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var config = function config($stateProvider, $urlRouterProvider) {
+
+  $urlRouterProvider.otherwise('/');
+
+  $stateProvider.state('root', {
+    abstract: true,
+    templateUrl: 'templates/app-layout/layout.tpl.html'
+  }).state('root.home', {
+    url: '/',
+    controller: 'HomeController as vm',
+    templateUrl: 'templates/app-layout/home.tpl.html'
+  }).state('root.dashboard', {
+    url: '/dashboard',
+    controller: 'DashboardController as vm',
+    templateUrl: 'templates/app-user/dashboard.tpl.html'
+  });
+};
+
+config.$inject = ['$stateProvider', '$urlRouterProvider'];
+
+exports['default'] = config;
+module.exports = exports['default'];
+
+},{}],2:[function(require,module,exports){
+'use strict';
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _angular = require('angular');
+
+var _angular2 = _interopRequireDefault(_angular);
+
+require('angular-ui-router');
+
+require('angular-cookies');
+
+var _config = require('./config');
+
+var _config2 = _interopRequireDefault(_config);
+
+_angular2['default'].module('app.core', ['ui.router', 'ngCookies']).constant('SERVER', {
+  URL: 'http://flour-power.herokuapp.com',
+  CONFIG: {
+    headers: {}
+  }
+}).config(_config2['default']);
+
+},{"./config":1,"angular":14,"angular-cookies":11,"angular-ui-router":12}],3:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var HomeController = function HomeController($scope, HomeService, $cookies, $state) {
+
+  // Authentication
+  var promise = HomeService.checkAuth();
+
+  if (promise) {
+    promise.then(function (res) {
+      console.log(res);
+      if (res.data.status === 'Authentication failed.') {
+        $state.go('root.home');
+      } else {
+        $scope.message = 'I am logged in';
+      }
+    });
+  }
+
+  // Register User
+  $scope.register = function (user) {
+    console.log(user);
+    HomeService.register(user);
+  };
+
+  // Login into Session
+  $scope.login = function (user) {
+    console.log(user);
+    HomeService.sendLogin(user).then(function (res) {
+      console.log(res);
+      HomeService.loginSuccess(res);
+      console.log(res);
+    });
+  };
+
+  // Logout of Session
+  $scope.logmeout = function () {
+    HomeService.logout();
+  };
+};
+
+HomeController.$inject = ['$scope', 'HomeService', '$cookies', '$state'];
+
+exports['default'] = HomeController;
+module.exports = exports['default'];
+
+},{}],4:[function(require,module,exports){
+'use strict';
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _angular = require('angular');
+
+var _angular2 = _interopRequireDefault(_angular);
+
+require('angular-ui-router');
+
+require('../app-core/index');
+
+var _controllersHomeController = require('./controllers/home.controller');
+
+var _controllersHomeController2 = _interopRequireDefault(_controllersHomeController);
+
+var _servicesHomeService = require('./services/home.service');
+
+var _servicesHomeService2 = _interopRequireDefault(_servicesHomeService);
+
+_angular2['default'].module('app.layout', ['app.core']).controller('HomeController', _controllersHomeController2['default']).service('HomeService', _servicesHomeService2['default']);
+
+},{"../app-core/index":2,"./controllers/home.controller":3,"./services/home.service":5,"angular":14,"angular-ui-router":12}],5:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var HomeService = function HomeService($http, SERVER, $cookies, $state) {
+
+  console.log(SERVER);
+
+  // Check Authentication
+  this.checkAuth = function () {
+
+    var token = $cookies.get('auth-token');
+
+    SERVER.CONFIG.headers['auth-token'] = token;
+
+    console.log('checkAuth is running', token);
+
+    if (token) {
+      // return $http.get(SERVER.URL + 'check', SERVER.CONFIG);
+    } else {
+        $state.go('root.home');
+      }
+  };
+
+  // Register New User
+
+  //User Constructor
+  var User = function User(user) {
+    this.email = user.email;
+    this.password = user.password;
+  };
+
+  // Register New User
+  this.register = function (user) {
+    console.log(user);
+
+    var u = new User(user);
+
+    return $http.post(SERVER.URL + 'users/new', u).then(function (res) {
+      console.log(res);
+
+      //With Successful Registration
+      $cookies.put('auth-token', res.data.user.auth_token);
+      $cookies.put('id', res.data.user.id);
+
+      SERVER.CONFIG.headers['auth-token'] = res.data.user.auth_token;
+      $state.go('root.dashboard');
+    });
+  };
+
+  // User Login
+  this.sendLogin = function (user) {
+    return $http.post(SERVER.URL + 'users', user, SERVER.CONFIG);
+  };
+
+  this.loginSuccess = function (res) {
+    $cookies.put('auth-token', res.data.user.auth_token);
+    SERVER.CONFIG.headers['auth-token'] = res.data.auth_token;
+    $state.go('root.dashboard');
+  };
+
+  // Logout
+  this.logout = function () {
+    $cookies.remove('auth-token');
+    SERVER.CONFIG.headers['auth-token'] = null;
+    $state.go('root.home');
+  };
+};
+
+HomeService.$inject = ['$http', 'SERVER', '$cookies', '$state'];
+
+exports['default'] = HomeService;
+module.exports = exports['default'];
+
+},{}],6:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var DashboardController = function DashboardController($scope, DashboardService, $state) {
+
+  var vm = this;
+
+  vm.message = 'hello';
+
+  DashboardService.getDashboard().then(function (res) {
+    vm.recipes = res.data.results;
+    console.log(vm.recipes);
+    return vm.recipes;
+  });
+
+  // $scope.addRecipe = function() {
+  //   DashboardService.add();
+  // };
+};
+
+DashboardController.$inject = ['$scope', 'DashboardService', '$state'];
+
+exports['default'] = DashboardController;
+module.exports = exports['default'];
+
+},{}],7:[function(require,module,exports){
+'use strict';
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _angular = require('angular');
+
+var _angular2 = _interopRequireDefault(_angular);
+
+require('../app-core/index');
+
+var _controllersDashboardController = require('./controllers/dashboard.controller');
+
+var _controllersDashboardController2 = _interopRequireDefault(_controllersDashboardController);
+
+var _servicesDashboardService = require('./services/dashboard.service');
+
+var _servicesDashboardService2 = _interopRequireDefault(_servicesDashboardService);
+
+_angular2['default'].module('app.user', ['app.core']).controller('DashboardController', _controllersDashboardController2['default']).service('DashboardService', _servicesDashboardService2['default']);
+
+},{"../app-core/index":2,"./controllers/dashboard.controller":6,"./services/dashboard.service":8,"angular":14}],8:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var DashboardService = function DashboardService($http, SERVER, $cookies) {
+
+  var url = SERVER.URL;
+  // Get User By Id
+  // Render Index of User's Recipes
+
+  this.getDashboard = function (id) {
+    var token = $cookies.get('auth-token');
+    console.log(this);
+    return $http({
+      url: url + 'users/:id',
+      method: 'GET',
+      headers: {
+        auth_token: token
+      },
+      data: {}
+    });
+  };
+
+  // this.add = function () {
+  //   $state.go('root.add-recipe');
+  // };
+};
+
+DashboardService.$inject = ['$http', 'SERVER', '$cookies'];
+
+exports['default'] = DashboardService;
+module.exports = exports['default'];
+
+},{}],9:[function(require,module,exports){
+// Core Files
+'use strict';
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _angular = require('angular');
@@ -17,12 +304,26 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 require('foundation');
 
+// Modules
+
+require('./app-core/index');
+
+require('./app-layout/index');
+
+require('./app-user/index');
+
 // Start it up
 (0, _jquery2['default'])(document).foundation();
 
 // Set up a run block on an angular module to help with
 // loading foundation after templates load
-_angular2['default'].module('app', ['ui.router']).run(function ($rootScope) {
+_angular2['default'].module('app', ['app.core', 'app.layout', 'app.user']).run(function (HomeService, $rootScope) {
+
+  // $stateChangeSuccess comes from Ui Router
+  $rootScope.$on('$stateChangeSuccess', function () {
+    HomeService.checkAuth();
+  });
+
   // $viewContentLoaded comes from Ui Router
   $rootScope.$on('$viewContentLoaded', function (event, data) {
     (0, _jquery2['default'])(document).foundation();
@@ -31,7 +332,334 @@ _angular2['default'].module('app', ['ui.router']).run(function ($rootScope) {
 
 console.log('Hello, World');
 
-},{"angular":4,"angular-ui-router":2,"foundation":5,"jquery":6}],2:[function(require,module,exports){
+},{"./app-core/index":2,"./app-layout/index":4,"./app-user/index":7,"angular":14,"angular-ui-router":12,"foundation":15,"jquery":16}],10:[function(require,module,exports){
+/**
+ * @license AngularJS v1.4.8
+ * (c) 2010-2015 Google, Inc. http://angularjs.org
+ * License: MIT
+ */
+(function(window, angular, undefined) {'use strict';
+
+/**
+ * @ngdoc module
+ * @name ngCookies
+ * @description
+ *
+ * # ngCookies
+ *
+ * The `ngCookies` module provides a convenient wrapper for reading and writing browser cookies.
+ *
+ *
+ * <div doc-module-components="ngCookies"></div>
+ *
+ * See {@link ngCookies.$cookies `$cookies`} for usage.
+ */
+
+
+angular.module('ngCookies', ['ng']).
+  /**
+   * @ngdoc provider
+   * @name $cookiesProvider
+   * @description
+   * Use `$cookiesProvider` to change the default behavior of the {@link ngCookies.$cookies $cookies} service.
+   * */
+   provider('$cookies', [function $CookiesProvider() {
+    /**
+     * @ngdoc property
+     * @name $cookiesProvider#defaults
+     * @description
+     *
+     * Object containing default options to pass when setting cookies.
+     *
+     * The object may have following properties:
+     *
+     * - **path** - `{string}` - The cookie will be available only for this path and its
+     *   sub-paths. By default, this would be the URL that appears in your base tag.
+     * - **domain** - `{string}` - The cookie will be available only for this domain and
+     *   its sub-domains. For obvious security reasons the user agent will not accept the
+     *   cookie if the current domain is not a sub domain or equals to the requested domain.
+     * - **expires** - `{string|Date}` - String of the form "Wdy, DD Mon YYYY HH:MM:SS GMT"
+     *   or a Date object indicating the exact date/time this cookie will expire.
+     * - **secure** - `{boolean}` - The cookie will be available only in secured connection.
+     *
+     * Note: by default the address that appears in your `<base>` tag will be used as path.
+     * This is important so that cookies will be visible for all routes in case html5mode is enabled
+     *
+     **/
+    var defaults = this.defaults = {};
+
+    function calcOptions(options) {
+      return options ? angular.extend({}, defaults, options) : defaults;
+    }
+
+    /**
+     * @ngdoc service
+     * @name $cookies
+     *
+     * @description
+     * Provides read/write access to browser's cookies.
+     *
+     * <div class="alert alert-info">
+     * Up until Angular 1.3, `$cookies` exposed properties that represented the
+     * current browser cookie values. In version 1.4, this behavior has changed, and
+     * `$cookies` now provides a standard api of getters, setters etc.
+     * </div>
+     *
+     * Requires the {@link ngCookies `ngCookies`} module to be installed.
+     *
+     * @example
+     *
+     * ```js
+     * angular.module('cookiesExample', ['ngCookies'])
+     *   .controller('ExampleController', ['$cookies', function($cookies) {
+     *     // Retrieving a cookie
+     *     var favoriteCookie = $cookies.get('myFavorite');
+     *     // Setting a cookie
+     *     $cookies.put('myFavorite', 'oatmeal');
+     *   }]);
+     * ```
+     */
+    this.$get = ['$$cookieReader', '$$cookieWriter', function($$cookieReader, $$cookieWriter) {
+      return {
+        /**
+         * @ngdoc method
+         * @name $cookies#get
+         *
+         * @description
+         * Returns the value of given cookie key
+         *
+         * @param {string} key Id to use for lookup.
+         * @returns {string} Raw cookie value.
+         */
+        get: function(key) {
+          return $$cookieReader()[key];
+        },
+
+        /**
+         * @ngdoc method
+         * @name $cookies#getObject
+         *
+         * @description
+         * Returns the deserialized value of given cookie key
+         *
+         * @param {string} key Id to use for lookup.
+         * @returns {Object} Deserialized cookie value.
+         */
+        getObject: function(key) {
+          var value = this.get(key);
+          return value ? angular.fromJson(value) : value;
+        },
+
+        /**
+         * @ngdoc method
+         * @name $cookies#getAll
+         *
+         * @description
+         * Returns a key value object with all the cookies
+         *
+         * @returns {Object} All cookies
+         */
+        getAll: function() {
+          return $$cookieReader();
+        },
+
+        /**
+         * @ngdoc method
+         * @name $cookies#put
+         *
+         * @description
+         * Sets a value for given cookie key
+         *
+         * @param {string} key Id for the `value`.
+         * @param {string} value Raw value to be stored.
+         * @param {Object=} options Options object.
+         *    See {@link ngCookies.$cookiesProvider#defaults $cookiesProvider.defaults}
+         */
+        put: function(key, value, options) {
+          $$cookieWriter(key, value, calcOptions(options));
+        },
+
+        /**
+         * @ngdoc method
+         * @name $cookies#putObject
+         *
+         * @description
+         * Serializes and sets a value for given cookie key
+         *
+         * @param {string} key Id for the `value`.
+         * @param {Object} value Value to be stored.
+         * @param {Object=} options Options object.
+         *    See {@link ngCookies.$cookiesProvider#defaults $cookiesProvider.defaults}
+         */
+        putObject: function(key, value, options) {
+          this.put(key, angular.toJson(value), options);
+        },
+
+        /**
+         * @ngdoc method
+         * @name $cookies#remove
+         *
+         * @description
+         * Remove given cookie
+         *
+         * @param {string} key Id of the key-value pair to delete.
+         * @param {Object=} options Options object.
+         *    See {@link ngCookies.$cookiesProvider#defaults $cookiesProvider.defaults}
+         */
+        remove: function(key, options) {
+          $$cookieWriter(key, undefined, calcOptions(options));
+        }
+      };
+    }];
+  }]);
+
+angular.module('ngCookies').
+/**
+ * @ngdoc service
+ * @name $cookieStore
+ * @deprecated
+ * @requires $cookies
+ *
+ * @description
+ * Provides a key-value (string-object) storage, that is backed by session cookies.
+ * Objects put or retrieved from this storage are automatically serialized or
+ * deserialized by angular's toJson/fromJson.
+ *
+ * Requires the {@link ngCookies `ngCookies`} module to be installed.
+ *
+ * <div class="alert alert-danger">
+ * **Note:** The $cookieStore service is **deprecated**.
+ * Please use the {@link ngCookies.$cookies `$cookies`} service instead.
+ * </div>
+ *
+ * @example
+ *
+ * ```js
+ * angular.module('cookieStoreExample', ['ngCookies'])
+ *   .controller('ExampleController', ['$cookieStore', function($cookieStore) {
+ *     // Put cookie
+ *     $cookieStore.put('myFavorite','oatmeal');
+ *     // Get cookie
+ *     var favoriteCookie = $cookieStore.get('myFavorite');
+ *     // Removing a cookie
+ *     $cookieStore.remove('myFavorite');
+ *   }]);
+ * ```
+ */
+ factory('$cookieStore', ['$cookies', function($cookies) {
+
+    return {
+      /**
+       * @ngdoc method
+       * @name $cookieStore#get
+       *
+       * @description
+       * Returns the value of given cookie key
+       *
+       * @param {string} key Id to use for lookup.
+       * @returns {Object} Deserialized cookie value, undefined if the cookie does not exist.
+       */
+      get: function(key) {
+        return $cookies.getObject(key);
+      },
+
+      /**
+       * @ngdoc method
+       * @name $cookieStore#put
+       *
+       * @description
+       * Sets a value for given cookie key
+       *
+       * @param {string} key Id for the `value`.
+       * @param {Object} value Value to be stored.
+       */
+      put: function(key, value) {
+        $cookies.putObject(key, value);
+      },
+
+      /**
+       * @ngdoc method
+       * @name $cookieStore#remove
+       *
+       * @description
+       * Remove given cookie
+       *
+       * @param {string} key Id of the key-value pair to delete.
+       */
+      remove: function(key) {
+        $cookies.remove(key);
+      }
+    };
+
+  }]);
+
+/**
+ * @name $$cookieWriter
+ * @requires $document
+ *
+ * @description
+ * This is a private service for writing cookies
+ *
+ * @param {string} name Cookie name
+ * @param {string=} value Cookie value (if undefined, cookie will be deleted)
+ * @param {Object=} options Object with options that need to be stored for the cookie.
+ */
+function $$CookieWriter($document, $log, $browser) {
+  var cookiePath = $browser.baseHref();
+  var rawDocument = $document[0];
+
+  function buildCookieString(name, value, options) {
+    var path, expires;
+    options = options || {};
+    expires = options.expires;
+    path = angular.isDefined(options.path) ? options.path : cookiePath;
+    if (angular.isUndefined(value)) {
+      expires = 'Thu, 01 Jan 1970 00:00:00 GMT';
+      value = '';
+    }
+    if (angular.isString(expires)) {
+      expires = new Date(expires);
+    }
+
+    var str = encodeURIComponent(name) + '=' + encodeURIComponent(value);
+    str += path ? ';path=' + path : '';
+    str += options.domain ? ';domain=' + options.domain : '';
+    str += expires ? ';expires=' + expires.toUTCString() : '';
+    str += options.secure ? ';secure' : '';
+
+    // per http://www.ietf.org/rfc/rfc2109.txt browser must allow at minimum:
+    // - 300 cookies
+    // - 20 cookies per unique domain
+    // - 4096 bytes per cookie
+    var cookieLength = str.length + 1;
+    if (cookieLength > 4096) {
+      $log.warn("Cookie '" + name +
+        "' possibly not set or overflowed because it was too large (" +
+        cookieLength + " > 4096 bytes)!");
+    }
+
+    return str;
+  }
+
+  return function(name, value, options) {
+    rawDocument.cookie = buildCookieString(name, value, options);
+  };
+}
+
+$$CookieWriter.$inject = ['$document', '$log', '$browser'];
+
+angular.module('ngCookies').provider('$$cookieWriter', function $$CookieWriterProvider() {
+  this.$get = $$CookieWriter;
+});
+
+
+})(window, window.angular);
+
+},{}],11:[function(require,module,exports){
+require('./angular-cookies');
+module.exports = 'ngCookies';
+
+},{"./angular-cookies":10}],12:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.15
@@ -4402,7 +5030,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],3:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.8
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -33421,11 +34049,11 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],4:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":3}],5:[function(require,module,exports){
+},{"./angular":13}],15:[function(require,module,exports){
 (function (global){
 ; var __browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 !function($) {
@@ -40866,7 +41494,7 @@ Foundation.plugin(ResponsiveToggle, 'ResponsiveToggle');
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],6:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 (function (global){
 ; var __browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 /*!
@@ -50086,7 +50714,7 @@ return jQuery;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}]},{},[1])
+},{}]},{},[9])
 
 
 //# sourceMappingURL=main.js.map

@@ -3067,6 +3067,7 @@ table.hover tr:nth-of-type(even):hover {
     float: right; } }
 
 body {
+  color: purple;
   background: #e2ebf3; }
 
 /*# sourceMappingURL=main.css.map */
