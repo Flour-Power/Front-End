@@ -3067,7 +3067,30 @@ table.hover tr:nth-of-type(even):hover {
     float: right; } }
 
 body {
-  color: purple;
-  background: #e2ebf3; }
+  background-image: url("../photos/pink.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%; }
+
+nav {
+  border-bottom: 2px solid blue;
+  opacity: 0.9; }
+
+.top-bar {
+  background: transparent;
+  height: 4em; }
+  .top-bar section {
+    display: inline-block; }
+  .top-bar .titl-area {
+    float: left; }
+  .top-bar .right {
+    float: right; }
+
+.home {
+  border: 1px solid black;
+  border-radius: 4px;
+  width: 50%;
+  margin: 20% auto 20%;
+  padding: 30px; }
 
 /*# sourceMappingURL=main.css.map */

@@ -46,11 +46,12 @@ let HomeService = function($http, SERVER, $cookies, $state) {
 
   // User Login
   this.sendLogin = function (user) {
-    return $http.post(SERVER.URL + 'users', user, SERVER.CONFIG);
+    return $http.post(SERVER.URL + '/users', user, SERVER.CONFIG);
   };
 
   this.loginSuccess = function (res) {
-    $cookies.put('auth-token', res.data.user.auth_token);
+    console.log('hi');
+    $cookies.put('auth-token', res.data.auth_token);
     SERVER.CONFIG.headers['auth-token'] = res.data.auth_token;
     $state.go('root.dashboard');
   };

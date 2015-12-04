@@ -1,4 +1,3 @@
-
 let config = function($stateProvider, $urlRouterProvider) {
   
   $urlRouterProvider.otherwise('/');
@@ -9,7 +8,7 @@ let config = function($stateProvider, $urlRouterProvider) {
       abstract: true,
       templateUrl: 'templates/app-layout/layout.tpl.html'
     })
-    .state('root.home', {
+    .state('home', {
       url: '/',
       controller: 'HomeController as vm',
       templateUrl: 'templates/app-layout/home.tpl.html'

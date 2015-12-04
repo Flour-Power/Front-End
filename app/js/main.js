@@ -4,7 +4,6 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-
 var config = function config($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise('/');
@@ -12,7 +11,7 @@ var config = function config($stateProvider, $urlRouterProvider) {
   $stateProvider.state('root', {
     abstract: true,
     templateUrl: 'templates/app-layout/layout.tpl.html'
-  }).state('root.home', {
+  }).state('home', {
     url: '/',
     controller: 'HomeController as vm',
     templateUrl: 'templates/app-layout/home.tpl.html'
@@ -66,7 +65,7 @@ var HomeController = function HomeController($scope, HomeService, $cookies, $sta
   if (promise) {
     promise.then(function (res) {
       console.log(res);
-      if (res.data.status === 'Authentication failed.') {
+      if (res.data.status === 'Not Authorized') {
         $state.go('root.home');
       } else {
         $scope.message = 'I am logged in';
@@ -178,11 +177,12 @@ var HomeService = function HomeService($http, SERVER, $cookies, $state) {
 
   // User Login
   this.sendLogin = function (user) {
-    return $http.post(SERVER.URL + 'users', user, SERVER.CONFIG);
+    return $http.post(SERVER.URL + '/users', user, SERVER.CONFIG);
   };
 
   this.loginSuccess = function (res) {
-    $cookies.put('auth-token', res.data.user.auth_token);
+    console.log('hi');
+    $cookies.put('auth-token', res.data.auth_token);
     SERVER.CONFIG.headers['auth-token'] = res.data.auth_token;
     $state.go('root.dashboard');
   };
@@ -265,7 +265,7 @@ var DashboardService = function DashboardService($http, SERVER, $cookies) {
     var token = $cookies.get('auth-token');
     console.log(this);
     return $http({
-      url: url + 'users/:id',
+      url: url + '/categories',
       method: 'GET',
       headers: {
         auth_token: token

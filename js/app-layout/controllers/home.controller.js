@@ -6,7 +6,7 @@ let HomeController = function($scope, HomeService, $cookies, $state) {
   if (promise) {
     promise.then( (res) => {
       console.log(res);
-      if (res.data.status === 'Authentication failed.') {
+      if (res.data.status === 'Not Authorized') {
         $state.go('root.home');
       } else {
         $scope.message = 'I am logged in';
