@@ -155,6 +155,7 @@ var HomeService = function HomeService($http, SERVER, $cookies, $state) {
   var User = function User(user) {
     this.email = user.email;
     this.password = user.password;
+    console.log('hiiii');
   };
 
   // Register New User
@@ -163,7 +164,7 @@ var HomeService = function HomeService($http, SERVER, $cookies, $state) {
 
     var u = new User(user);
 
-    return $http.post(SERVER.URL + 'users/new', u).then(function (res) {
+    return $http.post(SERVER.URL + '/users/new', u).then(function (res) {
       console.log(res);
 
       //With Successful Registration
@@ -210,14 +211,19 @@ var DashboardController = function DashboardController($scope, DashboardService,
 
   var vm = this;
 
+  // vm.recipes = [];
+
   vm.message = 'hello';
 
-  DashboardService.getDashboard().then(function (res) {
-    vm.recipes = res.data.results;
-    console.log(vm.recipes);
-    return vm.recipes;
-  });
+  activate();
 
+  function activate() {
+    DashboardService.getDashboard().then(function (res) {
+      vm.recipes = res.data.recipes;
+      console.log(vm.recipes);
+      // return vm.recipes;
+    });
+  }
   // $scope.addRecipe = function() {
   //   DashboardService.add();
   // };
@@ -261,11 +267,10 @@ var DashboardService = function DashboardService($http, SERVER, $cookies) {
   // Get User By Id
   // Render Index of User's Recipes
 
-  this.getDashboard = function (id) {
+  this.getDashboard = function () {
     var token = $cookies.get('auth-token');
-    console.log(this);
     return $http({
-      url: url + '/categories',
+      url: url + '/recipes',
       method: 'GET',
       headers: {
         auth_token: token

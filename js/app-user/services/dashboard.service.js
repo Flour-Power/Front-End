@@ -4,12 +4,10 @@ let DashboardService = function($http, SERVER, $cookies) {
   // Get User By Id
   // Render Index of User's Recipes
   
-
-  this.getDashboard = function(id) {
+  this.getDashboard = function() {
     let token = $cookies.get('auth-token');
-    console.log(this);
     return $http({
-      url: url + '/categories',
+      url: url + '/recipes',
       method: 'GET',
       headers: {
         auth_token: token
@@ -19,6 +17,8 @@ let DashboardService = function($http, SERVER, $cookies) {
     });
   
   };
+
+
 
   // this.add = function () {
   //   $state.go('root.add-recipe');

@@ -24,6 +24,7 @@ let HomeService = function($http, SERVER, $cookies, $state) {
   let User = function(user) {
     this.email = user.email;
     this.password = user.password;
+    console.log('hiiii');
   };
   
   // Register New User 
@@ -32,7 +33,7 @@ let HomeService = function($http, SERVER, $cookies, $state) {
 
     let u = new User(user);
 
-    return $http.post(SERVER.URL + 'users/new', u).then((res) => {
+    return $http.post(SERVER.URL + '/users/new', u).then((res) => {
       console.log(res);
 
       //With Successful Registration
