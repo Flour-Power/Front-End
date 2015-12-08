@@ -211,7 +211,7 @@ var DashboardController = function DashboardController($scope, DashboardService,
 
   var vm = this;
 
-  // vm.recipes = [];
+  vm.recipes = [];
 
   vm.message = 'hello';
 
@@ -221,6 +221,14 @@ var DashboardController = function DashboardController($scope, DashboardService,
     DashboardService.getDashboard().then(function (res) {
       vm.recipes = res.data.recipes;
       console.log(vm.recipes);
+      vm.recipes.forEach(function (category) {
+        vm.category = category.category;
+        console.log('Category: ', category.category);
+        category.recipes.forEach(function (recipe) {
+          vm.singleRecipe = recipe.name;
+          console.log('Recipe:', recipe.name);
+        });
+      });
       // return vm.recipes;
     });
   }

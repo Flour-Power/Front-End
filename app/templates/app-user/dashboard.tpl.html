@@ -3,11 +3,19 @@
   <h1>{{ vm.message }}</h1>
 
 
-  <ul class="recipe-index" ng-repeat="stuff in vm.recipes">
-    <li>{{ stuff.category }}</li>
+  <ul class="collection-index" ng-repeat="category in collection track by vm.category.id">
+    <li>{{ collection.category }}</li>
+    <li>{{ collection.category.singleRecipe }}</li>
+
+<!--     <li>{{stuff.recipes}}</li> -->
     
   </ul>
 
 <!--   <button ng-click="newRecipe">New Recipe</button> -->
   
+</div>
+
+
+<div ng-repeat="model in collection track by model.id">
+  {{model.name}}
 </div>
