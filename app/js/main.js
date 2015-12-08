@@ -15,6 +15,10 @@ var config = function config($stateProvider, $urlRouterProvider) {
     url: '/',
     controller: 'HomeController as vm',
     templateUrl: 'templates/app-layout/home.tpl.html'
+  }).state('register', {
+    url: '/register',
+    controller: 'HomeController as vm',
+    templateUrl: 'templates/app-layout/register.tpl.html'
   }).state('root.dashboard', {
     url: '/dashboard',
     controller: 'DashboardController as vm',
@@ -278,7 +282,7 @@ var DashboardService = function DashboardService($http, SERVER, $cookies) {
   this.getDashboard = function () {
     var token = $cookies.get('auth-token');
     return $http({
-      url: url + '/recipes',
+      url: url + '/recipes' + '?categorized=false',
       method: 'GET',
       headers: {
         auth_token: token

@@ -3082,7 +3082,7 @@ nav {
   height: 4em; }
   .top-bar section {
     display: inline-block; }
-  .top-bar .titl-area {
+  .top-bar .title-area {
     float: left; }
   .top-bar .right {
     float: right; }
@@ -3093,5 +3093,9 @@ nav {
   width: 50%;
   margin: 20% auto 20%;
   padding: 30px; }
+
+.register {
+  width: 800px;
+  margin: 25px auto; }
 
 /*# sourceMappingURL=main.css.map */

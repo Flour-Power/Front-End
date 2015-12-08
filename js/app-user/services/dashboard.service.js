@@ -7,7 +7,7 @@ let DashboardService = function($http, SERVER, $cookies) {
   this.getDashboard = function() {
     let token = $cookies.get('auth-token');
     return $http({
-      url: url + '/recipes',
+      url: url + '/recipes' + '?categorized=false',
       method: 'GET',
       headers: {
         auth_token: token

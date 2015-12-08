@@ -1,0 +1,21 @@
+<form class="register" data-abide>
+  <div class="email-field">
+    <label>Email <small>required</small>
+      <input type="email" required>
+    </label>
+    <small class="error">An email address is required.</small>
+  </div>
+  <div class="password-field">
+    <label>Password <small>required</small>
+      <input type="password" id="password" required pattern="[a-zA-Z]+">
+    </label>
+    <small class="error">Your password must match the requirements</small>
+  </div>
+  <div class="password-confirmation-field">
+    <label>Confirm Password <small>required</small>
+      <input type="password" required pattern="[a-zA-Z]+" data-equalto="password">
+    </label>
+    <small class="error">The password did not match</small>
+  </div>
+  <button type="submit">Submit</button>
+</form>
