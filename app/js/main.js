@@ -10,10 +10,10 @@ var config = function config($stateProvider, $urlRouterProvider) {
 
   $stateProvider.state('root', {
     abstract: true,
+    controller: 'HomeController as vm',
     templateUrl: 'templates/app-layout/layout.tpl.html'
   }).state('home', {
     url: '/',
-    controller: 'HomeController as vm',
     templateUrl: 'templates/app-layout/home.tpl.html'
   }).state('register', {
     url: '/register',
@@ -216,8 +216,12 @@ var DashboardController = function DashboardController($scope, DashboardService,
   var vm = this;
 
   vm.recipes = [];
+  vm.categories = [];
+  vm.catRecipes = [];
+  vm.categoryNames = [];
 
   vm.message = 'hello';
+  // vm.clicked = clicked;
 
   activate();
 
@@ -236,10 +240,30 @@ var DashboardController = function DashboardController($scope, DashboardService,
       // });
       // return vm.recipes;
     });
+
+    // DashboardService.getRecipes().then( (res) => {
+    //   vm.categories = res.data.recipes;
+    //   console.log('categories:', vm.categories);
+    //     vm.categories.forEach( function (recipes) {
+    //       vm.categoryNames = recipes.category;
+    //       console.log('labels:', vm.categoryNames);
+    //     });
+    // });
+
+    // DashboardService.getCategories().then( (res) => {
+    //   vm.categories = res.data.categories;
+    //   console.log('categories:', vm.categories);
+    // });
   }
-  // $scope.addRecipe = function() {
-  //   DashboardService.add();
-  // };
+
+  // function clicked (category) {
+  //   console.log('clicked', category.id);
+  // }
+
+  DashboardService.getCategoryRecipes().then(function (res) {
+    vm.catRecipes = res.data.recipes;
+    console.log('3:', vm.catRecipes);
+  });
 };
 
 DashboardController.$inject = ['$scope', 'DashboardService', '$state'];
@@ -277,24 +301,52 @@ Object.defineProperty(exports, '__esModule', {
 var DashboardService = function DashboardService($http, SERVER, $cookies) {
 
   var url = SERVER.URL;
-  // Get User By Id
-  // Render Index of User's Recipes
 
-  this.getDashboard = function () {
+  this.getDashboard = getDashboard;
+
+  function getDashboard() {
     var token = $cookies.get('auth-token');
     return $http({
       url: url + '/recipes' + '?categorized=false',
       method: 'GET',
       headers: {
         auth_token: token
-      },
-      data: {}
+      }
+    });
+  }
+
+  this.getRecipes = function () {
+    var token = $cookies.get('auth-token');
+    return $http({
+      url: url + '/recipes',
+      method: 'GET',
+      headers: {
+        auth_token: token
+      }
     });
   };
 
-  // this.add = function () {
-  //   $state.go('root.add-recipe');
+  // this.getCategories = function() {
+  //   let token = $cookies.get('auth-token');
+  //   return $http({
+  //     url: url + '/categories',
+  //     method: 'GET',
+  //     headers: {
+  //       auth_token: token
+  //     }
+  //   });
   // };
+
+  this.getCategoryRecipes = function (id) {
+    var token = $cookies.get('auth-token');
+    return $http({
+      url: url + '/categories' + '/' + '3' + '/recipes',
+      method: 'GET',
+      headers: {
+        auth_token: token
+      }
+    });
+  };
 };
 
 DashboardService.$inject = ['$http', 'SERVER', '$cookies'];

@@ -7,23 +7,17 @@
       {{ recipe.name }}
       <img ng-if="recipe.source_image_url" ng-src="{{ recipe.source_image_url }}" height="100" width="100">
     <img ng-if="!recipe.source_image_url" src="http://placehold.it/100x100">
+    </li>
+      
+  </ul>
 
-
-<!--       <h3>Categories</h3>
-      <ul>
-        <li ng-repeat="category in recipe.categories">
-          {{ category }}
-        </li>
-      </ul>
-      <h3>Ingredients</h3>
-      <ul>
-        <li ng-repeat="ingredient in recipe.ingredients">
-          {{ ingredient.name }}
-        </li>
-      </ul> -->
-
+<footer>
+  <ul>
+    <li ng-repeat="category in vm.categoryNames"> 
+    {{ category.category }}{{ category.id }}
     </li>
   </ul>
+</footer>
  
 
   

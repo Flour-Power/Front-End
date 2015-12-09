@@ -6,11 +6,11 @@ let config = function($stateProvider, $urlRouterProvider) {
 
     .state('root', {
       abstract: true,
+      controller: 'HomeController as vm',
       templateUrl: 'templates/app-layout/layout.tpl.html'
     })
     .state('home', {
       url: '/',
-      controller: 'HomeController as vm',
       templateUrl: 'templates/app-layout/home.tpl.html'
     })
     .state('register', {
@@ -23,6 +23,7 @@ let config = function($stateProvider, $urlRouterProvider) {
       controller: 'DashboardController as vm',
       templateUrl: 'templates/app-user/dashboard.tpl.html'
     });
+
 };
 
 config.$inject = ['$stateProvider', '$urlRouterProvider'];

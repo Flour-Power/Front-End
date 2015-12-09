@@ -64,6 +64,7 @@ let HomeService = function($http, SERVER, $cookies, $state) {
     $state.go('root.home');
   };
 
+
   
 };
 

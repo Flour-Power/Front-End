@@ -3,8 +3,12 @@ let DashboardController = function($scope, DashboardService, $state) {
   let vm = this;
 
   vm.recipes = [];
+  vm.categories = [];
+  vm.catRecipes = [];
+  vm.categoryNames = [];
 
   vm.message = 'hello';
+  // vm.clicked = clicked;
 
   activate();
 
@@ -20,15 +24,37 @@ let DashboardController = function($scope, DashboardService, $state) {
       //     // vm.singleRecipe = recipe.name;
       //     console.log('Recipe:', recipe.name);
       //   });
-        
+
       // });
       // return vm.recipes;
     });
-  }
-  // $scope.addRecipe = function() {
-  //   DashboardService.add();
-  // };  
 
+    // DashboardService.getRecipes().then( (res) => { 
+    //   vm.categories = res.data.recipes;
+    //   console.log('categories:', vm.categories);
+    //     vm.categories.forEach( function (recipes) {
+    //       vm.categoryNames = recipes.category;
+    //       console.log('labels:', vm.categoryNames);
+    //     });
+    // });
+
+    // DashboardService.getCategories().then( (res) => { 
+    //   vm.categories = res.data.categories;
+    //   console.log('categories:', vm.categories);
+    // });
+
+    
+
+  }
+
+  // function clicked (category) {
+  //   console.log('clicked', category.id);
+  // }
+
+  DashboardService.getCategoryRecipes().then( (res) => { 
+    vm.catRecipes = res.data.recipes;
+    console.log('3:', vm.catRecipes);
+  });
 };
 
 DashboardController.$inject = ['$scope','DashboardService', '$state'];
