@@ -28,7 +28,7 @@ var config = function config($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/app-recipes/category.tpl.html',
     controller: 'CategoryController as vm'
   }).state('root.singleRecipe', {
-    url: '/recipes/28',
+    url: '/recipes/:id',
     templateUrl: 'templates/app-recipes/recipe-single.tpl.html',
     controller: 'SingleRecipeController as vm'
   });
@@ -69,7 +69,7 @@ _angular2['default'].module('app.core', ['ui.router', 'ngCookies']).constant('SE
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var HomeController = function HomeController($scope, HomeService, $cookies, $state) {
+var HomeController = function HomeController($scope, HomeService, DashboardService, $cookies, $state) {
 
   // Authentication
   var promise = HomeService.checkAuth();
@@ -106,9 +106,16 @@ var HomeController = function HomeController($scope, HomeService, $cookies, $sta
   $scope.logmeout = function () {
     HomeService.logout();
   };
+
+  // $scope.activate = function () {
+  //   HomeService.getCategories().then( (res) => {
+  //     vm.categories = res.data.categories;
+  //     console.log('categories:', vm.categories);
+  //   });
+  // };
 };
 
-HomeController.$inject = ['$scope', 'HomeService', '$cookies', '$state'];
+HomeController.$inject = ['$scope', 'HomeService', 'DashboardService', '$cookies', '$state'];
 
 exports['default'] = HomeController;
 module.exports = exports['default'];
@@ -126,6 +133,8 @@ require('angular-ui-router');
 
 require('../app-core/index');
 
+require('../app-user/index');
+
 var _controllersHomeController = require('./controllers/home.controller');
 
 var _controllersHomeController2 = _interopRequireDefault(_controllersHomeController);
@@ -134,9 +143,13 @@ var _servicesHomeService = require('./services/home.service');
 
 var _servicesHomeService2 = _interopRequireDefault(_servicesHomeService);
 
+// import DashboardService from '.../services/dashboard.service';
+
 _angular2['default'].module('app.layout', ['app.core']).controller('HomeController', _controllersHomeController2['default']).service('HomeService', _servicesHomeService2['default']);
 
-},{"../app-core/index":2,"./controllers/home.controller":3,"./services/home.service":5,"angular":18,"angular-ui-router":16}],5:[function(require,module,exports){
+// .service('DashboardService', DashboardService)
+
+},{"../app-core/index":2,"../app-user/index":11,"./controllers/home.controller":3,"./services/home.service":5,"angular":18,"angular-ui-router":16}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -207,6 +220,18 @@ var HomeService = function HomeService($http, SERVER, $cookies, $state) {
     SERVER.CONFIG.headers['auth-token'] = null;
     $state.go('root.home');
   };
+
+  // // Categories
+  // this.getCategories = function() {
+  //   let token = $cookies.get('auth-token');
+  //   return $http({
+  //     url: url + '/categories',
+  //     method: 'GET',
+  //     headers: {
+  //       auth_token: token
+  //     }
+  //   });
+  // };
 };
 
 HomeService.$inject = ['$http', 'SERVER', '$cookies', '$state'];
@@ -232,7 +257,7 @@ var CategoryController = function CategoryController($scope, $stateParams, Recip
 
     RecipeService.getCategoryRecipes($stateParams.id).then(function (res) {
       vm.catRecipes = res.data.recipes;
-      console.log('3:', vm.catRecipes);
+      console.log('Recipes In This Category:', vm.catRecipes);
     });
   }
 };
@@ -257,7 +282,7 @@ var SingleRecipeController = function SingleRecipeController(RecipeService, $sta
   function activate() {
     RecipeService.getRecipe($stateParams.id).then(function (res) {
       vm.recipe = res.data;
-      console.log('RECIPE', res);
+      console.log('RECIPE', vm.recipe.name);
     });
   }
 };
@@ -316,7 +341,7 @@ var RecipeService = function RecipeService($http, SERVER, $cookies) {
   this.getRecipe = function (id) {
     var token = $cookies.get('auth-token');
     return $http({
-      url: url + '/recipes/:id',
+      url: url + '/recipes' + '/' + id,
       method: 'GET',
       headers: {
         auth_token: token

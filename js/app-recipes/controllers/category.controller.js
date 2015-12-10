@@ -11,7 +11,7 @@ let CategoryController = function($scope, $stateParams, RecipeService, $state) {
   
     RecipeService.getCategoryRecipes($stateParams.id).then( (res) => { 
       vm.catRecipes = res.data.recipes;
-      console.log('3:', vm.catRecipes);
+      console.log('Recipes In This Category:', vm.catRecipes);
     }); 
   }
 

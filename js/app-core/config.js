@@ -29,7 +29,7 @@ let config = function($stateProvider, $urlRouterProvider) {
       controller: 'CategoryController as vm'
     })
     .state('root.singleRecipe', {
-      url: '/recipes/28',
+      url: '/recipes/:id',
       templateUrl: 'templates/app-recipes/recipe-single.tpl.html',
       controller: 'SingleRecipeController as vm'
     });

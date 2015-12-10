@@ -1,4 +1,6 @@
-let HomeController = function($scope, HomeService, $cookies, $state) {
+let HomeController = function($scope, HomeService, DashboardService, $cookies, $state) {
+
+
 
   // Authentication
   let promise = HomeService.checkAuth();
@@ -35,9 +37,15 @@ let HomeController = function($scope, HomeService, $cookies, $state) {
   $scope.logmeout = function() {
     HomeService.logout();
   };  
-
+  
+  // $scope.activate = function () {
+  //   HomeService.getCategories().then( (res) => { 
+  //     vm.categories = res.data.categories;
+  //     console.log('categories:', vm.categories);
+  //   });
+  // };
 };
 
-HomeController.$inject = ['$scope', 'HomeService', '$cookies', '$state'];
+HomeController.$inject = ['$scope', 'HomeService', 'DashboardService', '$cookies', '$state'];
 
 export default HomeController;

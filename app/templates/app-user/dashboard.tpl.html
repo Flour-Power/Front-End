@@ -4,7 +4,7 @@
 
   <ul>
     <li ng-repeat="recipe in vm.recipes">
-      {{ recipe.name }}
+    <a href="#/recipes/{{ recipe.id }}">{{ recipe.name }}</a>
       <img ng-if="recipe.source_image_url" ng-src="{{ recipe.source_image_url }}" height="100" width="100">
     <img ng-if="!recipe.source_image_url" src="http://placehold.it/100x100">
     </li>

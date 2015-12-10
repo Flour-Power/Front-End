@@ -7,7 +7,7 @@ let SingleRecipeController = function(RecipeService, $stateParams) {
   function activate () {
     RecipeService.getRecipe($stateParams.id).then( (res) => {
       vm.recipe = res.data;
-      console.log('RECIPE', res);
+      console.log('RECIPE', vm.recipe.name);
     });
   }
 

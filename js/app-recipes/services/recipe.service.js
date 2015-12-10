@@ -16,7 +16,7 @@ let RecipeService = function($http, SERVER, $cookies) {
   this.getRecipe = function(id) {
     let token = $cookies.get('auth-token');
     return $http({
-      url: url + '/recipes/:id',
+      url: url + '/recipes' + '/' + id,
       method: 'GET',
       headers: {
         auth_token: token
