@@ -4,12 +4,14 @@ import '../app-core/index';
 
 
 import CategoryController from './controllers/category.controller';
-import CategoryService from './services/category.service';
+import SingleRecipeController from './controllers/singleRecipe.controller';
+import RecipeService from './services/recipe.service';
 
 
 
 angular
   .module('app.recipes', ['app.core'])
   .controller('CategoryController', CategoryController)
-  .service('CategoryService', CategoryService)
+  .controller('SingleRecipeController', SingleRecipeController)
+  .service('RecipeService', RecipeService)
 ;

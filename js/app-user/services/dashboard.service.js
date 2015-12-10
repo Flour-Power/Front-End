@@ -27,16 +27,16 @@ let DashboardService = function($http, SERVER, $cookies) {
   //   });
   // };
   
-  // this.getCategories = function() {
-  //   let token = $cookies.get('auth-token');
-  //   return $http({
-  //     url: url + '/categories',
-  //     method: 'GET',
-  //     headers: {
-  //       auth_token: token
-  //     }
-  //   });
-  // };
+  this.getCategories = function() {
+    let token = $cookies.get('auth-token');
+    return $http({
+      url: url + '/categories',
+      method: 'GET',
+      headers: {
+        auth_token: token
+      }
+    });
+  };
 
 
 };

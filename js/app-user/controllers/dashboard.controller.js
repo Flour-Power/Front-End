@@ -28,6 +28,8 @@ let DashboardController = function($scope, DashboardService, $state) {
       // return vm.recipes;
     });
 
+    
+
     // DashboardService.getRecipes().then( (res) => { 
     //   vm.categories = res.data.recipes;
     //   console.log('categories:', vm.categories);
@@ -37,10 +39,10 @@ let DashboardController = function($scope, DashboardService, $state) {
     //     });
     // });
 
-    // DashboardService.getCategories().then( (res) => { 
-    //   vm.categories = res.data.categories;
-    //   console.log('categories:', vm.categories);
-    // });
+    DashboardService.getCategories().then( (res) => { 
+      vm.categories = res.data.categories;
+      console.log('categories:', vm.categories);
+    });
 
   }
 

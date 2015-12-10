@@ -1,4 +1,4 @@
-let CategoryController = function($scope, CategoryService, $state) {
+let CategoryController = function($scope, $stateParams, RecipeService, $state) {
   
   let vm = this;
 
@@ -9,7 +9,7 @@ let CategoryController = function($scope, CategoryService, $state) {
 
   function activate () {
   
-    CategoryService.getCategoryRecipes().then( (res) => { 
+    RecipeService.getCategoryRecipes($stateParams.id).then( (res) => { 
       vm.catRecipes = res.data.recipes;
       console.log('3:', vm.catRecipes);
     }); 
@@ -17,6 +17,6 @@ let CategoryController = function($scope, CategoryService, $state) {
 
 };
 
-CategoryController.$inject = ['$scope','CategoryService', '$state'];
+CategoryController.$inject = ['$scope', '$stateParams', 'RecipeService', '$state'];
 
 export default CategoryController;

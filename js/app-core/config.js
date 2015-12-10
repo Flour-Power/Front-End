@@ -24,9 +24,14 @@ let config = function($stateProvider, $urlRouterProvider) {
       templateUrl: 'templates/app-user/dashboard.tpl.html'
     })
     .state('root.category', {
-      url: '/3',
+      url: '/category/:id',
       templateUrl: 'templates/app-recipes/category.tpl.html',
       controller: 'CategoryController as vm'
+    })
+    .state('root.singleRecipe', {
+      url: '/recipes/28',
+      templateUrl: 'templates/app-recipes/recipe-single.tpl.html',
+      controller: 'SingleRecipeController as vm'
     });
 
 };

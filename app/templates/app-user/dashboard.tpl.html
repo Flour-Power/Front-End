@@ -13,8 +13,8 @@
 
 <footer>
   <ul>
-    <li ng-repeat="category in vm.categoryNames"> 
-    {{ category.category }}{{ category.id }}
+    <li ng-repeat="category in vm.categories"> 
+    <a href="#/category/{{ category.id }}">{{ category.name }}</a>
     </li>
   </ul>
 </footer>
