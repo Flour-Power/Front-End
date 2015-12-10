@@ -23,6 +23,10 @@ var config = function config($stateProvider, $urlRouterProvider) {
     url: '/dashboard',
     controller: 'DashboardController as vm',
     templateUrl: 'templates/app-user/dashboard.tpl.html'
+  }).state('root.category', {
+    url: '/3',
+    templateUrl: 'templates/app-recipes/category.tpl.html',
+    controller: 'CategoryController as vm'
   });
 };
 
@@ -55,7 +59,7 @@ _angular2['default'].module('app.core', ['ui.router', 'ngCookies']).constant('SE
   }
 }).config(_config2['default']);
 
-},{"./config":1,"angular":14,"angular-cookies":11,"angular-ui-router":12}],3:[function(require,module,exports){
+},{"./config":1,"angular":17,"angular-cookies":14,"angular-ui-router":15}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -127,7 +131,7 @@ var _servicesHomeService2 = _interopRequireDefault(_servicesHomeService);
 
 _angular2['default'].module('app.layout', ['app.core']).controller('HomeController', _controllersHomeController2['default']).service('HomeService', _servicesHomeService2['default']);
 
-},{"../app-core/index":2,"./controllers/home.controller":3,"./services/home.service":5,"angular":14,"angular-ui-router":12}],5:[function(require,module,exports){
+},{"../app-core/index":2,"./controllers/home.controller":3,"./services/home.service":5,"angular":17,"angular-ui-router":15}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -211,13 +215,88 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+var CategoryController = function CategoryController($scope, CategoryService, $state) {
+
+  var vm = this;
+
+  vm.catRecipes = [];
+
+  activate();
+
+  function activate() {
+
+    CategoryService.getCategoryRecipes().then(function (res) {
+      vm.catRecipes = res.data.recipes;
+      console.log('3:', vm.catRecipes);
+    });
+  }
+};
+
+CategoryController.$inject = ['$scope', 'CategoryService', '$state'];
+
+exports['default'] = CategoryController;
+module.exports = exports['default'];
+
+},{}],7:[function(require,module,exports){
+'use strict';
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _angular = require('angular');
+
+var _angular2 = _interopRequireDefault(_angular);
+
+require('../app-core/index');
+
+var _controllersCategoryController = require('./controllers/category.controller');
+
+var _controllersCategoryController2 = _interopRequireDefault(_controllersCategoryController);
+
+var _servicesCategoryService = require('./services/category.service');
+
+var _servicesCategoryService2 = _interopRequireDefault(_servicesCategoryService);
+
+_angular2['default'].module('app.recipes', ['app.core']).controller('CategoryController', _controllersCategoryController2['default']).service('CategoryService', _servicesCategoryService2['default']);
+
+},{"../app-core/index":2,"./controllers/category.controller":6,"./services/category.service":8,"angular":17}],8:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var CategoryService = function CategoryService($http, SERVER, $cookies) {
+
+  var url = SERVER.URL;
+
+  this.getCategoryRecipes = function (id) {
+    var token = $cookies.get('auth-token');
+    return $http({
+      url: url + '/categories' + '/' + '3' + '/recipes',
+      method: 'GET',
+      headers: {
+        auth_token: token
+      }
+    });
+  };
+};
+
+CategoryService.$inject = ['$http', 'SERVER', '$cookies'];
+
+exports['default'] = CategoryService;
+module.exports = exports['default'];
+
+},{}],9:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
 var DashboardController = function DashboardController($scope, DashboardService, $state) {
 
   var vm = this;
 
   vm.recipes = [];
   vm.categories = [];
-  vm.catRecipes = [];
   vm.categoryNames = [];
 
   vm.message = 'hello';
@@ -259,11 +338,6 @@ var DashboardController = function DashboardController($scope, DashboardService,
   // function clicked (category) {
   //   console.log('clicked', category.id);
   // }
-
-  DashboardService.getCategoryRecipes().then(function (res) {
-    vm.catRecipes = res.data.recipes;
-    console.log('3:', vm.catRecipes);
-  });
 };
 
 DashboardController.$inject = ['$scope', 'DashboardService', '$state'];
@@ -271,7 +345,7 @@ DashboardController.$inject = ['$scope', 'DashboardService', '$state'];
 exports['default'] = DashboardController;
 module.exports = exports['default'];
 
-},{}],7:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -292,7 +366,7 @@ var _servicesDashboardService2 = _interopRequireDefault(_servicesDashboardServic
 
 _angular2['default'].module('app.user', ['app.core']).controller('DashboardController', _controllersDashboardController2['default']).service('DashboardService', _servicesDashboardService2['default']);
 
-},{"../app-core/index":2,"./controllers/dashboard.controller":6,"./services/dashboard.service":8,"angular":14}],8:[function(require,module,exports){
+},{"../app-core/index":2,"./controllers/dashboard.controller":9,"./services/dashboard.service":11,"angular":17}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -315,16 +389,16 @@ var DashboardService = function DashboardService($http, SERVER, $cookies) {
     });
   }
 
-  this.getRecipes = function () {
-    var token = $cookies.get('auth-token');
-    return $http({
-      url: url + '/recipes',
-      method: 'GET',
-      headers: {
-        auth_token: token
-      }
-    });
-  };
+  // this.getRecipes = function() {
+  //   let token = $cookies.get('auth-token');
+  //   return $http({
+  //     url: url + '/recipes',
+  //     method: 'GET',
+  //     headers: {
+  //       auth_token: token
+  //     }
+  //   });
+  // };
 
   // this.getCategories = function() {
   //   let token = $cookies.get('auth-token');
@@ -336,17 +410,6 @@ var DashboardService = function DashboardService($http, SERVER, $cookies) {
   //     }
   //   });
   // };
-
-  this.getCategoryRecipes = function (id) {
-    var token = $cookies.get('auth-token');
-    return $http({
-      url: url + '/categories' + '/' + '3' + '/recipes',
-      method: 'GET',
-      headers: {
-        auth_token: token
-      }
-    });
-  };
 };
 
 DashboardService.$inject = ['$http', 'SERVER', '$cookies'];
@@ -354,7 +417,7 @@ DashboardService.$inject = ['$http', 'SERVER', '$cookies'];
 exports['default'] = DashboardService;
 module.exports = exports['default'];
 
-},{}],9:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 // Core Files
 'use strict';
 
@@ -382,12 +445,14 @@ require('./app-layout/index');
 
 require('./app-user/index');
 
+require('./app-recipes/index');
+
 // Start it up
 (0, _jquery2['default'])(document).foundation();
 
 // Set up a run block on an angular module to help with
 // loading foundation after templates load
-_angular2['default'].module('app', ['app.core', 'app.layout', 'app.user']).run(function (HomeService, $rootScope) {
+_angular2['default'].module('app', ['app.core', 'app.layout', 'app.user', 'app.recipes']).run(function (HomeService, $rootScope) {
 
   // $stateChangeSuccess comes from Ui Router
   $rootScope.$on('$stateChangeSuccess', function () {
@@ -402,7 +467,7 @@ _angular2['default'].module('app', ['app.core', 'app.layout', 'app.user']).run(f
 
 console.log('Hello, World');
 
-},{"./app-core/index":2,"./app-layout/index":4,"./app-user/index":7,"angular":14,"angular-ui-router":12,"foundation":15,"jquery":16}],10:[function(require,module,exports){
+},{"./app-core/index":2,"./app-layout/index":4,"./app-recipes/index":7,"./app-user/index":10,"angular":17,"angular-ui-router":15,"foundation":18,"jquery":19}],13:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.8
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -725,11 +790,11 @@ angular.module('ngCookies').provider('$$cookieWriter', function $$CookieWriterPr
 
 })(window, window.angular);
 
-},{}],11:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 require('./angular-cookies');
 module.exports = 'ngCookies';
 
-},{"./angular-cookies":10}],12:[function(require,module,exports){
+},{"./angular-cookies":13}],15:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.15
@@ -5100,7 +5165,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],13:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.8
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -34119,11 +34184,11 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],14:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":13}],15:[function(require,module,exports){
+},{"./angular":16}],18:[function(require,module,exports){
 (function (global){
 ; var __browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 !function($) {
@@ -41564,7 +41629,7 @@ Foundation.plugin(ResponsiveToggle, 'ResponsiveToggle');
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],16:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 (function (global){
 ; var __browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 /*!
@@ -50784,7 +50849,7 @@ return jQuery;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}]},{},[9])
+},{}]},{},[12])
 
 
 //# sourceMappingURL=main.js.map

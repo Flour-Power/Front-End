@@ -22,6 +22,11 @@ let config = function($stateProvider, $urlRouterProvider) {
       url: '/dashboard',
       controller: 'DashboardController as vm',
       templateUrl: 'templates/app-user/dashboard.tpl.html'
+    })
+    .state('root.category', {
+      url: '/3',
+      templateUrl: 'templates/app-recipes/category.tpl.html',
+      controller: 'CategoryController as vm'
     });
 
 };

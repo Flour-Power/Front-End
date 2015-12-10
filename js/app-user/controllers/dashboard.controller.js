@@ -4,7 +4,6 @@ let DashboardController = function($scope, DashboardService, $state) {
 
   vm.recipes = [];
   vm.categories = [];
-  vm.catRecipes = [];
   vm.categoryNames = [];
 
   vm.message = 'hello';
@@ -43,18 +42,13 @@ let DashboardController = function($scope, DashboardService, $state) {
     //   console.log('categories:', vm.categories);
     // });
 
-    
-
   }
 
   // function clicked (category) {
   //   console.log('clicked', category.id);
   // }
 
-  DashboardService.getCategoryRecipes().then( (res) => { 
-    vm.catRecipes = res.data.recipes;
-    console.log('3:', vm.catRecipes);
-  });
+ 
 };
 
 DashboardController.$inject = ['$scope','DashboardService', '$state'];

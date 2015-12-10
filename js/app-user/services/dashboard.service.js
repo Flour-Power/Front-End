@@ -16,16 +16,16 @@ let DashboardService = function($http, SERVER, $cookies) {
     });
   }
 
-  this.getRecipes = function() {
-    let token = $cookies.get('auth-token');
-    return $http({
-      url: url + '/recipes',
-      method: 'GET',
-      headers: {
-        auth_token: token
-      }
-    });
-  };
+  // this.getRecipes = function() {
+  //   let token = $cookies.get('auth-token');
+  //   return $http({
+  //     url: url + '/recipes',
+  //     method: 'GET',
+  //     headers: {
+  //       auth_token: token
+  //     }
+  //   });
+  // };
   
   // this.getCategories = function() {
   //   let token = $cookies.get('auth-token');
@@ -38,16 +38,6 @@ let DashboardService = function($http, SERVER, $cookies) {
   //   });
   // };
 
-  this.getCategoryRecipes = function(id) {
-    let token = $cookies.get('auth-token');
-    return $http({
-      url: url + '/categories' + '/' + '3' + '/recipes',
-      method: 'GET',
-      headers: {
-        auth_token: token
-      }
-    });
-  };
 
 };
 
