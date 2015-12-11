@@ -1,5 +1,8 @@
 <h3>{{ vm.recipe.name}}</h3>
 
+<img ng-if="vm.recipe.source_image_url" ng-src="{{ vm.recipe.source_image_url }}" height="100" width="100">
+<img ng-if="!vm.recipe.source_image_url" src="http://placehold.it/100x100">
+
 <!-- Populating Directions from DirectionsController -->
  <ul claas="directions" ng-controller="DirectionsController as directions">
   <h4>Directions</h4>
