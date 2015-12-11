@@ -8,10 +8,14 @@ let RecipeService = function($http, SERVER, $cookies) {
 
   function Recipe (recipeObj) {
     this.name        = recipeObj.name;
-    this.categories    = Array(recipeObj.category_names);
-    this.steps       = Array(recipeObj.steps);
-    this.ingredients = Array(recipeObj.ingredients);
+    this.categories  = recipeObj.category_names;
+    this.steps       = recipeObj.steps.split(';');
+    this.ingredients = recipeObj.ingredients;
+    this.itemName    = recipeObj.ingredients.name;
+    this.itemAmount  = recipeObj.ingredients.amount;
+    this.itemUnit    = recipeObj.ingredients.unit;
     this.image       = recipeObj.my_image;
+
   }
 
   function getCategoryRecipes(id) {

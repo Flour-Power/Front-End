@@ -1,10 +1,49 @@
 <h1>Add Recipe</h1>
 
-<form ng-submit="vm.addRecipe(recipe)">
-  <input placeholder="Name" ng-model="recipe.name">
-  <input placeholder="Categories" ng-model="recipe.categories">
-  <input placeholder="Steps" ng-model="recipe.steps">
-  <input placeholder="Ingredients" ng-model="recipe.ingredients">
-  <input placeholder="Image" ng-model="recipe.image">
-  <button>Add Recipe</button>
+ <fieldset class="addRecipeForm categoryFieldset" ng-model="recipe.categories">
+    <legend>Select At Least One Category</legend>
+    <input id="checkbox1" type="checkbox"><label for="checkbox1">Drinks</label>
+    <input id="checkbox2" type="checkbox"><label for="checkbox2">Appetizers</label>
+    <input id="checkbox3" type="checkbox"><label for="checkbox3">Main Courses</label>
+    <input id="checkbox4" type="checkbox"><label for="checkbox4">Desserts</label>
+    <input id="checkbox5" type="checkbox"><label for="checkbox5">Salads and Soups</label>
+    <input id="checkbox6" type="checkbox"><label for="checkbox6">Side Dishes</label>
+  </fieldset>
+
+<form class="addRecipeForm" ng-submit="vm.addRecipe(recipe)">
+  <label>Recipe Name
+    <input type="text" placeholder="Name" ng-model="recipe.name">
+  </label>
+
+  <label>Directions
+    <input type="text" placeholder="Steps" ng-model="recipe.steps">
+  </label>
+  <p class="help-text" id="directionsHelpText">
+  Add a ";" at the end of each complete step
+  </p>
+
+  <label>Ingredients
+    <input type="text" placeholder="Name" ng-model="recipe.itemName">
+    <input type="text" placeholder="Amount" ng-model="recipe.itemAmount">
+    <select placeholder="Unit" type="text" ng-model="recipe.itemUnit">
+      <option type="text" value=" ">--</option>
+      <option type="text" value="Bar(s)">Bar(s)</option>
+      <option type="text" value="Cup(s)">Cup(s)</option>
+      <option type="text" value="Gallon(s)">Gallon(s)</option>
+      <option type="text" value="Pint(s)">Pint(s)</option>
+      <option type="text" value="Pound(s)">Pound(s)</option>
+      <option type="text" value="Quart(s)">Quart(s)</option>
+      <option type="text" value="Serving(s)">Serving(s)</option>
+      <option type="text" value="Slice(s)">Slice(s)</option>
+      <option type="text" value="To Taste">To Taste</option>
+      <option type="text" value="TBS">TBS</option>
+      <option type="text" value="TSP">TSP</option>
+    </select>
+  </label>
+
+  <label>Image
+    <input type="image" placeholder="Image" ng-model="recipe.image">
+  </label>
+
+  <button ng-click="vm.addRecipe(recipe)">Add Recipe</button>
 </form>
