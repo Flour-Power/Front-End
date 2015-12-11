@@ -1,5 +1,11 @@
-<h3>{{ vm.recipe.name }}</h3>
+<h3>{{ vm.recipe.name}}</h3>
 
+<recipe-item recipe="vm.recipe"></recipe-item>
+
+<!-- <p ng-repeat=" directions in vm.directions">{{ directions }}</p> -->
+ <section ng-controller="DirectionsController as directions">
+ <p ng-repeat=" directions in directions">{{ directions }}</p>
+ </section>
 <!-- <ul>
   <li ng-repeat="recipe in vm.recipe">
     {{ recipe.name }}

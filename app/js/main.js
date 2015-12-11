@@ -63,7 +63,7 @@ _angular2['default'].module('app.core', ['ui.router', 'ngCookies']).constant('SE
   }
 }).config(_config2['default']);
 
-},{"./config":1,"angular":18,"angular-cookies":15,"angular-ui-router":16}],3:[function(require,module,exports){
+},{"./config":1,"angular":19,"angular-cookies":16,"angular-ui-router":17}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -149,7 +149,7 @@ _angular2['default'].module('app.layout', ['app.core']).controller('HomeControll
 
 // .service('DashboardService', DashboardService)
 
-},{"../app-core/index":2,"../app-user/index":11,"./controllers/home.controller":3,"./services/home.service":5,"angular":18,"angular-ui-router":16}],5:[function(require,module,exports){
+},{"../app-core/index":2,"../app-user/index":12,"./controllers/home.controller":3,"./services/home.service":5,"angular":19,"angular-ui-router":17}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -273,26 +273,49 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var SingleRecipeController = function SingleRecipeController(RecipeService, $stateParams) {
+var DirectionsController = function DirectionsController($scope, $stateParams, RecipeService, $state) {
+
+  $scope.directions = [];
+
+  RecipeService.getRecipe($stateParams.id).then(function (res) {
+    $scope.recipe = res.data;
+    $scope.directions = $scope.recipe.directions;
+    console.log('DIRECTIONS', $scope.directions);
+  });
+};
+
+DirectionsController.$inject = ['$scope', '$stateParams', 'RecipeService', '$state'];
+
+exports['default'] = DirectionsController;
+module.exports = exports['default'];
+
+},{}],8:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var SingleRecipeController = function SingleRecipeController($scope, $stateParams, RecipeService, $state) {
 
   var vm = this;
+  vm.recipe = [];
 
   activate();
 
   function activate() {
     RecipeService.getRecipe($stateParams.id).then(function (res) {
       vm.recipe = res.data;
-      console.log('RECIPE', vm.recipe.name);
+      console.log('RECIPE', vm.recipe);
     });
   }
 };
 
-SingleRecipeController.$inject = ['RecipeService', '$stateParams'];
+SingleRecipeController.$inject = ['$scope', '$stateParams', 'RecipeService', '$state'];
 
 exports['default'] = SingleRecipeController;
 module.exports = exports['default'];
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -311,13 +334,17 @@ var _controllersSingleRecipeController = require('./controllers/singleRecipe.con
 
 var _controllersSingleRecipeController2 = _interopRequireDefault(_controllersSingleRecipeController);
 
+var _controllersDirectionsController = require('./controllers/directions.controller');
+
+var _controllersDirectionsController2 = _interopRequireDefault(_controllersDirectionsController);
+
 var _servicesRecipeService = require('./services/recipe.service');
 
 var _servicesRecipeService2 = _interopRequireDefault(_servicesRecipeService);
 
-_angular2['default'].module('app.recipes', ['app.core']).controller('CategoryController', _controllersCategoryController2['default']).controller('SingleRecipeController', _controllersSingleRecipeController2['default']).service('RecipeService', _servicesRecipeService2['default']);
+_angular2['default'].module('app.recipes', ['app.core']).controller('CategoryController', _controllersCategoryController2['default']).controller('SingleRecipeController', _controllersSingleRecipeController2['default']).controller('DirectionsController', _controllersDirectionsController2['default']).service('RecipeService', _servicesRecipeService2['default']);
 
-},{"../app-core/index":2,"./controllers/category.controller":6,"./controllers/singleRecipe.controller":7,"./services/recipe.service":9,"angular":18}],9:[function(require,module,exports){
+},{"../app-core/index":2,"./controllers/category.controller":6,"./controllers/directions.controller":7,"./controllers/singleRecipe.controller":8,"./services/recipe.service":10,"angular":19}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -355,7 +382,7 @@ RecipeService.$inject = ['$http', 'SERVER', '$cookies'];
 exports['default'] = RecipeService;
 module.exports = exports['default'];
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -415,7 +442,7 @@ DashboardController.$inject = ['$scope', 'DashboardService', '$state'];
 exports['default'] = DashboardController;
 module.exports = exports['default'];
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -436,7 +463,7 @@ var _servicesDashboardService2 = _interopRequireDefault(_servicesDashboardServic
 
 _angular2['default'].module('app.user', ['app.core']).controller('DashboardController', _controllersDashboardController2['default']).service('DashboardService', _servicesDashboardService2['default']);
 
-},{"../app-core/index":2,"./controllers/dashboard.controller":10,"./services/dashboard.service":12,"angular":18}],12:[function(require,module,exports){
+},{"../app-core/index":2,"./controllers/dashboard.controller":11,"./services/dashboard.service":13,"angular":19}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -487,7 +514,7 @@ DashboardService.$inject = ['$http', 'SERVER', '$cookies'];
 exports['default'] = DashboardService;
 module.exports = exports['default'];
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 // Core Files
 'use strict';
 
@@ -537,7 +564,7 @@ _angular2['default'].module('app', ['app.core', 'app.layout', 'app.user', 'app.r
 
 console.log('Hello, World');
 
-},{"./app-core/index":2,"./app-layout/index":4,"./app-recipes/index":8,"./app-user/index":11,"angular":18,"angular-ui-router":16,"foundation":19,"jquery":20}],14:[function(require,module,exports){
+},{"./app-core/index":2,"./app-layout/index":4,"./app-recipes/index":9,"./app-user/index":12,"angular":19,"angular-ui-router":17,"foundation":20,"jquery":21}],15:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.8
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -860,11 +887,11 @@ angular.module('ngCookies').provider('$$cookieWriter', function $$CookieWriterPr
 
 })(window, window.angular);
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 require('./angular-cookies');
 module.exports = 'ngCookies';
 
-},{"./angular-cookies":14}],16:[function(require,module,exports){
+},{"./angular-cookies":15}],17:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.15
@@ -5235,7 +5262,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.8
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -34254,11 +34281,11 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":17}],19:[function(require,module,exports){
+},{"./angular":18}],20:[function(require,module,exports){
 (function (global){
 ; var __browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 !function($) {
@@ -41699,7 +41726,7 @@ Foundation.plugin(ResponsiveToggle, 'ResponsiveToggle');
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 (function (global){
 ; var __browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 /*!
@@ -50919,7 +50946,7 @@ return jQuery;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}]},{},[13])
+},{}]},{},[14])
 
 
 //# sourceMappingURL=main.js.map

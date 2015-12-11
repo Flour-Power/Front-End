@@ -33,7 +33,6 @@ let config = function($stateProvider, $urlRouterProvider) {
       templateUrl: 'templates/app-recipes/recipe-single.tpl.html',
       controller: 'SingleRecipeController as vm'
     });
-
 };
 
 config.$inject = ['$stateProvider', '$urlRouterProvider'];
