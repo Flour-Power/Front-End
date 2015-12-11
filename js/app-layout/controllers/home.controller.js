@@ -38,12 +38,6 @@ let HomeController = function($scope, HomeService, DashboardService, $cookies, $
     HomeService.logout();
   };  
   
-  // $scope.activate = function () {
-  //   HomeService.getCategories().then( (res) => { 
-  //     vm.categories = res.data.categories;
-  //     console.log('categories:', vm.categories);
-  //   });
-  // };
 };
 
 HomeController.$inject = ['$scope', 'HomeService', 'DashboardService', '$cookies', '$state'];

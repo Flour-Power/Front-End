@@ -1,16 +1,12 @@
 <h3>{{ vm.recipe.name}}</h3>
 
-<recipe-item recipe="vm.recipe"></recipe-item>
+<!-- Populating Directions from DirectionsController -->
+ <ul claas="directions" ng-controller="DirectionsController as directions">
+  <h4>Directions</h4>
+  <li ng-repeat="directions in directions">{{ directions }}</li>
+ </ul>
 
-<!-- <p ng-repeat=" directions in vm.directions">{{ directions }}</p> -->
- <section ng-controller="DirectionsController as directions">
- <p ng-repeat=" directions in directions">{{ directions }}</p>
- </section>
-<!-- <ul>
-  <li ng-repeat="recipe in vm.recipe">
-    {{ recipe.name }}
-    <img ng-if="recipe.source_image_url" ng-src="{{ recipe.source_image_url }}" height="100" width="100">
-  <img ng-if="!recipe.source_image_url" src="http://placehold.it/100x100">
-
-  </li>
-</ul> -->
+ <ul claas="ingredients" ng-controller="IngredientsController as ingredients">
+  <h4>Ingredients</h4>
+  <li ng-repeat="ingredient in ingredients">{{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}</li>
+ </ul>
