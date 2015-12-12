@@ -3,6 +3,7 @@ let RecipeService = function($http, SERVER, $cookies) {
   let url = SERVER.URL;
 
   this.getCategoryRecipes = getCategoryRecipes;
+  this.getCategories      = getCategories;
   this.getRecipe          = getRecipe;
   this.addRecipe          = addRecipe;
 
@@ -16,6 +17,17 @@ let RecipeService = function($http, SERVER, $cookies) {
     this.itemUnit    = recipeObj.ingredients.unit;
     this.image       = recipeObj.my_image;
 
+  }
+
+  function getCategories () {
+    let token = $cookies.get('auth-token');
+    return $http({
+      url: url + '/categories',
+      method: 'GET',
+      headers: {
+        auth_token: token
+      }
+    });
   }
 
   function getCategoryRecipes(id) {

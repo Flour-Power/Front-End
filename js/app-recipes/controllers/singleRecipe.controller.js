@@ -10,7 +10,14 @@ let SingleRecipeController = function($scope, $stateParams, RecipeService, $stat
       vm.recipe = res.data;
       console.log('RECIPE', vm.recipe);
     });
+
+    RecipeService.getCategories().then( (res) => { 
+      vm.categories = res.data.categories;
+      console.log('categories:', vm.categories);
+    });
   }
+
+
 
 };
 

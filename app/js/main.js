@@ -350,6 +350,11 @@ var SingleRecipeController = function SingleRecipeController($scope, $stateParam
       vm.recipe = res.data;
       console.log('RECIPE', vm.recipe);
     });
+
+    RecipeService.getCategories().then(function (res) {
+      vm.categories = res.data.categories;
+      console.log('categories:', vm.categories);
+    });
   }
 };
 
@@ -368,6 +373,8 @@ var _angular = require('angular');
 var _angular2 = _interopRequireDefault(_angular);
 
 require('../app-core/index');
+
+// import '../app-user/index';
 
 var _controllersCategoryController = require('./controllers/category.controller');
 
@@ -389,11 +396,19 @@ var _controllersIngredientsController = require('./controllers/ingredients.contr
 
 var _controllersIngredientsController2 = _interopRequireDefault(_controllersIngredientsController);
 
+// import DashboardController from '../app-user/controllers/dashboard.controller';
+
 var _servicesRecipeService = require('./services/recipe.service');
 
 var _servicesRecipeService2 = _interopRequireDefault(_servicesRecipeService);
 
-_angular2['default'].module('app.recipes', ['app.core']).controller('CategoryController', _controllersCategoryController2['default']).controller('AddRecipeController', _controllersAddRecipeController2['default']).controller('SingleRecipeController', _controllersSingleRecipeController2['default']).controller('DirectionsController', _controllersDirectionsController2['default']).controller('IngredientsController', _controllersIngredientsController2['default']).service('RecipeService', _servicesRecipeService2['default']);
+// import DashboardService from '../app-user/services/dashboard.service';
+
+_angular2['default'].module('app.recipes', ['app.core']).controller('CategoryController', _controllersCategoryController2['default']).controller('AddRecipeController', _controllersAddRecipeController2['default']).controller('SingleRecipeController', _controllersSingleRecipeController2['default']).controller('DirectionsController', _controllersDirectionsController2['default']).controller('IngredientsController', _controllersIngredientsController2['default'])
+// .controller('DashboardController', DashboardController)
+.service('RecipeService', _servicesRecipeService2['default']);
+
+// .service('DashboardService', DashboardService)
 
 },{"../app-core/index":2,"./controllers/add-recipe.controller":6,"./controllers/category.controller":7,"./controllers/directions.controller":8,"./controllers/ingredients.controller":9,"./controllers/singleRecipe.controller":10,"./services/recipe.service":12,"angular":21}],12:[function(require,module,exports){
 'use strict';
@@ -406,6 +421,7 @@ var RecipeService = function RecipeService($http, SERVER, $cookies) {
   var url = SERVER.URL;
 
   this.getCategoryRecipes = getCategoryRecipes;
+  this.getCategories = getCategories;
   this.getRecipe = getRecipe;
   this.addRecipe = addRecipe;
 
@@ -418,6 +434,17 @@ var RecipeService = function RecipeService($http, SERVER, $cookies) {
     this.itemAmount = recipeObj.ingredients.amount;
     this.itemUnit = recipeObj.ingredients.unit;
     this.image = recipeObj.my_image;
+  }
+
+  function getCategories() {
+    var token = $cookies.get('auth-token');
+    return $http({
+      url: url + '/categories',
+      method: 'GET',
+      headers: {
+        auth_token: token
+      }
+    });
   }
 
   function getCategoryRecipes(id) {

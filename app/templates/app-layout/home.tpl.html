@@ -1,21 +1,13 @@
 <div class="home">
-
-
-  <div>
-
-    <form ng-submit="login(user)">
-      <input placeholder="email" ng-model="user.email">
-      <input placeholder="password" ng-model="user.password" type="password">
-    </form>
-
-  </div>
-
-  <div>
-
-    <button ng-click="register(user)">Get Started</button> |
-    <button ng-click="login(user)">Login</button>
-
-  </div>
-
+  <form ng-submit="login(user)">
+    <input type="text" placeholder="email" ng-model="user.email">
+    <input placeholder="password" ng-model="user.password" type="password">
+    <div>
+      <a href="#/dashboard" ng-click="register(user)">Get Started</a> |
+      <a href="#/dashboard" ng-click="login(user)">Login</a>
+    </div>
+  </form>
 </div>
+
+  
 

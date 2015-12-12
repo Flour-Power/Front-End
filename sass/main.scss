@@ -3,6 +3,9 @@
 @include foundation-everything;
 @include foundation-flex-grid;
 
+$cellBorder: 2px solid white;
+$cellBorderRadius: 5px;
+
 body {
   background-image: url('../photos/pink.png'); 
   background-size: cover;
@@ -30,10 +33,11 @@ nav {
 }
 
 .home {
-  border: 1px solid black;
-  border-radius: 4px;
+  @include absolute-center;
+  text-align: center;
+  border: $cellBorder;
+  border-radius: $cellBorderRadius;
   width: 50%;
-  margin: 20% auto 20%;
   padding: 30px;
 }
 
@@ -42,20 +46,23 @@ nav {
   margin: 25px auto;
 }
 
+
+
 .row {
   margin: auto;
   padding: 10px;
   .recipe {
+    // opacity: 1;
     margin: 10px;
-    border: 2px solid white;
-    border-radius: 4px;
+    border: $cellBorder;
+    border-radius: $cellBorderRadius;
     .title {
       text-align: center;
     }
     .thumbnail{
+      width: 100%;
       margin-top: 10px;
       align: center;
-
     }
   }
 }

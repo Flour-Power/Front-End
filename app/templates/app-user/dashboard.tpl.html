@@ -2,9 +2,9 @@
   
 
   <div class="row align-center">
-    <div class="recipe small-10 medium-4 large-3 columns" ng-repeat="recipe in vm.recipes">
+    <div class="recipe small-10 medium-4 large-3 columns" style="background-image: url( {{ recipe.source_image_url }} )" ng-repeat="recipe in vm.recipes">
       <img class="thumbnail" ng-if="recipe.source_image_url" ng-src="{{ recipe.source_image_url }}" height="250" width="250">
-      <img class="thumbnail" ng-if="!recipe.source_image_url" src="http://placehold.it/250x250">
+      <img class="thumbnail" ng-if="!recipe.source_image_url" src="../photos/pink.png">
       <p class="title">
         <a href="#/recipes/{{ recipe.id }}">{{ recipe.name }}</a>
       </p>

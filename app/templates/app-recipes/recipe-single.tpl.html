@@ -1,15 +1,31 @@
+
 <h3>{{ vm.recipe.name}}</h3>
 
 <img ng-if="vm.recipe.source_image_url" ng-src="{{ vm.recipe.source_image_url }}" height="100" width="100">
 <img ng-if="!vm.recipe.source_image_url" src="http://placehold.it/100x100">
 
-<!-- Populating Directions from DirectionsController -->
- <ul claas="directions" ng-controller="DirectionsController as directions">
-  <h4>Directions</h4>
-  <li ng-repeat="directions in directions">{{ directions }}</li>
- </ul>
+<div class="row align-middle">
+  <!-- Populating Ingredients from IngredientsController -->
+   <div claas="ingredients shrink columns" ng-controller="IngredientsController as ingredients">
+    <h4>Ingredients</h4>
+    <div ng-repeat="ingredient in ingredients">
+      {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
+    </div>
+   </div>
 
- <ul claas="ingredients" ng-controller="IngredientsController as ingredients">
-  <h4>Ingredients</h4>
-  <li ng-repeat="ingredient in ingredients">{{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}</li>
- </ul>
+  <!-- Populating Directions from DirectionsController -->
+   <div claas="directions columns" ng-controller="DirectionsController as directions">
+    <h4>Directions</h4>
+    <div ng-repeat="directions in directions">
+      {{ directions }}</div>
+   </div>
+
+ </div>
+<!-- In console, but not rendering -->
+<footer >
+  <ul ng-controller="DashboardController">
+    <li ng-repeat="category in vm.categories"> 
+    <a href="#/category/{{ category.id }}">{{ category.name }}</a>
+    </li>
+  </ul>
+</footer>
