@@ -1,7 +1,7 @@
 @import "foundation";
      
 @include foundation-everything;
-
+@include foundation-flex-grid;
 
 body {
   background-image: url('../photos/pink.png'); 
@@ -40,6 +40,24 @@ nav {
 .register {
   width: 800px;
   margin: 25px auto;
+}
+
+.row {
+  margin: auto;
+  padding: 10px;
+  .recipe {
+    margin: 10px;
+    border: 2px solid white;
+    border-radius: 4px;
+    .title {
+      text-align: center;
+    }
+    .thumbnail{
+      margin-top: 10px;
+      align: center;
+
+    }
+  }
 }
 
 .addRecipeForm {

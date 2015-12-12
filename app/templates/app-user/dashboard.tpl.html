@@ -1,15 +1,16 @@
 <div class="dashboard">
   
-  <h1>{{ vm.message }}</h1>
 
-  <ul>
-    <li ng-repeat="recipe in vm.recipes">
-    <a href="#/recipes/{{ recipe.id }}">{{ recipe.name }}</a>
-      <img ng-if="recipe.source_image_url" ng-src="{{ recipe.source_image_url }}" height="100" width="100">
-    <img ng-if="!recipe.source_image_url" src="http://placehold.it/100x100">
-    </li>
+  <div class="row align-center">
+    <div class="recipe small-10 medium-4 large-3 columns" ng-repeat="recipe in vm.recipes">
+      <img class="thumbnail" ng-if="recipe.source_image_url" ng-src="{{ recipe.source_image_url }}" height="250" width="250">
+      <img class="thumbnail" ng-if="!recipe.source_image_url" src="http://placehold.it/250x250">
+      <p class="title">
+        <a href="#/recipes/{{ recipe.id }}">{{ recipe.name }}</a>
+      </p>
+    </div>
       
-  </ul>
+  </div>
 
 <footer>
   <ul>
