@@ -3077,7 +3077,7 @@ table.hover tr:nth-of-type(even):hover {
     margin-left: -0.9375rem;
     margin-right: -0.9375rem; }
 
-.column, .columns {
+.column, .columns, div #recipe.row .column, div #recipe.row .columns {
   flex: 1 1 0px;
   padding-left: 0.9375rem;
   padding-right: 0.9375rem; }
@@ -3312,17 +3312,13 @@ table.hover tr:nth-of-type(even):hover {
   align-self: stretch; }
 
 body {
-  background-image: url("../photos/pink.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 50% 50%; }
-
-nav {
-  border-bottom: 2px solid blue;
-  opacity: 0.9; }
+  background: #FAFAF5; }
 
 .top-bar {
-  background: transparent;
+  background: url("../photos/pink.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 60% 50%;
   height: 4em; }
   .top-bar section {
     display: inline-block; }
@@ -3336,6 +3332,7 @@ nav {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background-image: url("../photos/pink.png");
   text-align: center;
   border: 2px solid white;
   border-radius: 5px;
@@ -3346,19 +3343,288 @@ nav {
   width: 800px;
   margin: 25px auto; }
 
-.row {
+.dashboard .row {
   margin: auto;
   padding: 10px; }
-  .row .recipe {
+  .dashboard .row .recipe {
     margin: 10px;
     border: 2px solid white;
     border-radius: 5px; }
-    .row .recipe .title {
+    .dashboard .row .recipe .title {
       text-align: center; }
-    .row .recipe .thumbnail {
+    .dashboard .row .recipe .thumbnail {
       width: 100%;
       margin-top: 10px;
       align: center; }
+
+div .singleRecipe .ng-scope {
+  color: blue;
+  width: 100%; }
+
+div #mainPhoto {
+  padding: 200px 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-attachment: fixed; }
+  div #mainPhoto h3.ng-binding {
+    color: white;
+    text-align: center; }
+
+div #recipe.row .row {
+  max-width: 75rem;
+  display: flex;
+  flex-flow: row wrap;
+  margin-left: auto;
+  margin-right: auto; }
+  div #recipe.row .row div #recipe.row .row,
+  .column-row div #recipe.row .row {
+    margin-left: -0.9375rem;
+    margin-right: -0.9375rem; }
+
+div #recipe.row .column, div #recipe.row .columns {
+  flex: 1 1 0px;
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem; }
+
+div #recipe.row .small-1 {
+  flex: 0 0 8.33333%;
+  max-width: 8.33333%; }
+
+div #recipe.row .small-2 {
+  flex: 0 0 16.66667%;
+  max-width: 16.66667%; }
+
+div #recipe.row .small-3 {
+  flex: 0 0 25%;
+  max-width: 25%; }
+
+div #recipe.row .small-4 {
+  flex: 0 0 33.33333%;
+  max-width: 33.33333%; }
+
+div #recipe.row .small-5 {
+  flex: 0 0 41.66667%;
+  max-width: 41.66667%; }
+
+div #recipe.row .small-6 {
+  flex: 0 0 50%;
+  max-width: 50%; }
+
+div #recipe.row .small-7 {
+  flex: 0 0 58.33333%;
+  max-width: 58.33333%; }
+
+div #recipe.row .small-8 {
+  flex: 0 0 66.66667%;
+  max-width: 66.66667%; }
+
+div #recipe.row .small-9 {
+  flex: 0 0 75%;
+  max-width: 75%; }
+
+div #recipe.row .small-10 {
+  flex: 0 0 83.33333%;
+  max-width: 83.33333%; }
+
+div #recipe.row .small-11 {
+  flex: 0 0 91.66667%;
+  max-width: 91.66667%; }
+
+div #recipe.row .small-12 {
+  flex: 0 0 100%;
+  max-width: 100%; }
+
+@media screen and (min-width: 40em) {
+  div #recipe.row .medium-1 {
+    flex: 0 0 8.33333%;
+    max-width: 8.33333%; }
+  div #recipe.row .medium-2 {
+    flex: 0 0 16.66667%;
+    max-width: 16.66667%; }
+  div #recipe.row .medium-3 {
+    flex: 0 0 25%;
+    max-width: 25%; }
+  div #recipe.row .medium-4 {
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%; }
+  div #recipe.row .medium-5 {
+    flex: 0 0 41.66667%;
+    max-width: 41.66667%; }
+  div #recipe.row .medium-6 {
+    flex: 0 0 50%;
+    max-width: 50%; }
+  div #recipe.row .medium-7 {
+    flex: 0 0 58.33333%;
+    max-width: 58.33333%; }
+  div #recipe.row .medium-8 {
+    flex: 0 0 66.66667%;
+    max-width: 66.66667%; }
+  div #recipe.row .medium-9 {
+    flex: 0 0 75%;
+    max-width: 75%; }
+  div #recipe.row .medium-10 {
+    flex: 0 0 83.33333%;
+    max-width: 83.33333%; }
+  div #recipe.row .medium-11 {
+    flex: 0 0 91.66667%;
+    max-width: 91.66667%; }
+  div #recipe.row .medium-12 {
+    flex: 0 0 100%;
+    max-width: 100%; } }
+
+@media screen and (min-width: 64em) {
+  div #recipe.row .large-1 {
+    flex: 0 0 8.33333%;
+    max-width: 8.33333%; }
+  div #recipe.row .large-2 {
+    flex: 0 0 16.66667%;
+    max-width: 16.66667%; }
+  div #recipe.row .large-3 {
+    flex: 0 0 25%;
+    max-width: 25%; }
+  div #recipe.row .large-4 {
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%; }
+  div #recipe.row .large-5 {
+    flex: 0 0 41.66667%;
+    max-width: 41.66667%; }
+  div #recipe.row .large-6 {
+    flex: 0 0 50%;
+    max-width: 50%; }
+  div #recipe.row .large-7 {
+    flex: 0 0 58.33333%;
+    max-width: 58.33333%; }
+  div #recipe.row .large-8 {
+    flex: 0 0 66.66667%;
+    max-width: 66.66667%; }
+  div #recipe.row .large-9 {
+    flex: 0 0 75%;
+    max-width: 75%; }
+  div #recipe.row .large-10 {
+    flex: 0 0 83.33333%;
+    max-width: 83.33333%; }
+  div #recipe.row .large-11 {
+    flex: 0 0 91.66667%;
+    max-width: 91.66667%; }
+  div #recipe.row .large-12 {
+    flex: 0 0 100%;
+    max-width: 100%; } }
+
+@media screen and (min-width: 40em) {
+  div #recipe.row .medium-expand {
+    flex: 1 1 0px; } }
+
+@media screen and (min-width: 64em) {
+  div #recipe.row .large-expand {
+    flex: 1 1 0px; } }
+
+div #recipe.row .shrink {
+  flex: 0 0 auto; }
+
+div #recipe.row .row.medium-unstack .column, div #recipe.row .row.medium-unstack .columns {
+  flex: 0 0 100%; }
+  @media screen and (min-width: 40em) {
+    div #recipe.row .row.medium-unstack .column, div #recipe.row .row.medium-unstack .columns {
+      flex: 1 1 0px; } }
+
+div #recipe.row .row.large-unstack .column, div #recipe.row .row.large-unstack .columns {
+  flex: 0 0 100%; }
+  @media screen and (min-width: 64em) {
+    div #recipe.row .row.large-unstack .column, div #recipe.row .row.large-unstack .columns {
+      flex: 1 1 0px; } }
+
+div #recipe.row .small-order-1 {
+  order: 1; }
+
+div #recipe.row .small-order-2 {
+  order: 2; }
+
+div #recipe.row .small-order-3 {
+  order: 3; }
+
+div #recipe.row .small-order-4 {
+  order: 4; }
+
+div #recipe.row .small-order-5 {
+  order: 5; }
+
+div #recipe.row .small-order-6 {
+  order: 6; }
+
+@media screen and (min-width: 40em) {
+  div #recipe.row .medium-order-1 {
+    order: 1; }
+  div #recipe.row .medium-order-2 {
+    order: 2; }
+  div #recipe.row .medium-order-3 {
+    order: 3; }
+  div #recipe.row .medium-order-4 {
+    order: 4; }
+  div #recipe.row .medium-order-5 {
+    order: 5; }
+  div #recipe.row .medium-order-6 {
+    order: 6; } }
+
+@media screen and (min-width: 64em) {
+  div #recipe.row .large-order-1 {
+    order: 1; }
+  div #recipe.row .large-order-2 {
+    order: 2; }
+  div #recipe.row .large-order-3 {
+    order: 3; }
+  div #recipe.row .large-order-4 {
+    order: 4; }
+  div #recipe.row .large-order-5 {
+    order: 5; }
+  div #recipe.row .large-order-6 {
+    order: 6; } }
+
+div #recipe.row .row.align-right {
+  justify-content: flex-end; }
+
+div #recipe.row .row.align-center {
+  justify-content: center; }
+
+div #recipe.row .row.align-justify {
+  justify-content: space-between; }
+
+div #recipe.row .row.align-spaced {
+  justify-content: space-around; }
+
+div #recipe.row .row.align-top {
+  align-items: flex-start; }
+
+div #recipe.row .column.align-top, div #recipe.row .align-top.columns {
+  align-self: flex-start; }
+
+div #recipe.row .row.align-bottom {
+  align-items: flex-end; }
+
+div #recipe.row .column.align-bottom, div #recipe.row .align-bottom.columns {
+  align-self: flex-end; }
+
+div #recipe.row .row.align-middle {
+  align-items: center; }
+
+div #recipe.row .column.align-middle, div #recipe.row .align-middle.columns {
+  align-self: center; }
+
+div #recipe.row .row.align-stretch {
+  align-items: stretch; }
+
+div #recipe.row .column.align-stretch, div #recipe.row .align-stretch.columns {
+  align-self: stretch; }
+
+div #recipe.row div.ingredients.shrink.columns.ng-scope {
+  background: #FFFFFF;
+  width: auto;
+  mrgin: 10px;
+  border: 2px solid white; }
+
+div #recipe.row .directions {
+  background: #FFFFFF;
+  border: 2px solid white; }
 
 .addRecipeForm {
   width: 800px;

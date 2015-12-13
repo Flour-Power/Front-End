@@ -3,21 +3,28 @@
 @include foundation-everything;
 @include foundation-flex-grid;
 
+$cellBackground: #FFFFFF;
 $cellBorder: 2px solid white;
 $cellBorderRadius: 5px;
+$mainBackgroundColor: #FAFAF5;
+$mainImage: url('../photos/pink.png');
 
 body {
-  background-image: url('../photos/pink.png'); 
+  // background-image: url('../photos/pink.png'); 
+  background: $mainBackgroundColor; 
+  // background-size: cover;
+  // background-repeat: no-repeat;
+  // background-position: 50% 50%;
+}
+// nav {
+//   border-bottom: 2px solid blue;
+//   opacity: 0.9;
+// } 
+.top-bar {
+  background: $mainImage;
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: 50% 50%;
-}
-nav {
-  border-bottom: 2px solid blue;
-  opacity: 0.9;
-} 
-.top-bar {
-  background: transparent;
+  background-position: 60% 50%;
   height: 4em;
   section {
     display: inline-block;
@@ -34,6 +41,7 @@ nav {
 
 .home {
   @include absolute-center;
+  background-image: url('../photos/pink.png'); 
   text-align: center;
   border: $cellBorder;
   border-radius: $cellBorderRadius;
@@ -47,23 +55,57 @@ nav {
 }
 
 
+.dashboard {
+  .row {
+    margin: auto;
+    padding: 10px;
+    .recipe {
+      // opacity: 1;
+      margin: 10px;
+      border: $cellBorder;
+      border-radius: $cellBorderRadius;
+      .title {
+        text-align: center;
+      }
+      .thumbnail{
+        width: 100%;
+        margin-top: 10px;
+        align: center;
+      }
+    }
+  }
+}
 
-.row {
-  margin: auto;
-  padding: 10px;
-  .recipe {
-    // opacity: 1;
-    margin: 10px;
-    border: $cellBorder;
-    border-radius: $cellBorderRadius;
-    .title {
+div .singleRecipe .ng-scope{
+  color: blue;
+  width: 100%;
+}
+ div #mainPhoto {
+    padding: 200px 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-attachment: fixed;
+    h3.ng-binding {
+      color: white;
       text-align: center;
     }
-    .thumbnail{
-      width: 100%;
-      margin-top: 10px;
-      align: center;
+    img.ng-scope{
     }
+  }
+
+div #recipe.row{
+  @include foundation-flex-grid;
+  
+  div.ingredients.shrink.columns.ng-scope {
+    background: $cellBackground;
+    width: auto;
+    mrgin: 10px;
+    border: $cellBorder;
+  }
+  .directions {
+    background: $cellBackground;
+    border: $cellBorder;
   }
 }
 
