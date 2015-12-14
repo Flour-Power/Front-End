@@ -5,16 +5,17 @@
 
 $cellBackground: #FFFFFF;
 $cellBorder: 2px solid white;
-$cellBorderRadius: 5px;
+$cellBorderRadius: 9px;
 $mainBackgroundColor: #FAFAF5;
-$mainImage: url('../photos/pink.png');
+$mainImage: url('../photos/GYEIFHUP3O.jpg');
 
 body {
-  // background-image: url('../photos/pink.png'); 
-  background: $mainBackgroundColor; 
-  // background-size: cover;
-  // background-repeat: no-repeat;
-  // background-position: 50% 50%;
+  background-image: url('../photos/GYEIFHUP3O.jpg'); 
+  // background: $mainBackgroundColor; 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-attachment: fixed;
 }
 // nav {
 //   border-bottom: 2px solid blue;
@@ -26,14 +27,17 @@ body {
   background-repeat: no-repeat;
   background-position: 60% 50%;
   height: 4em;
+  .input-group{
+    display: inline-block;
+    margin: 0 20%;
+    width: 30%;
+  }
   section {
     display: inline-block;
   }
-
-  .title-area {
+  .title-area{
     float: left;
   }
-  
   .right{
     float: right;
   }
@@ -41,13 +45,24 @@ body {
 
 .home {
   @include absolute-center;
-  background-image: url('../photos/pink.png'); 
+  //background-image: url('../photos/GYEIFHUP3O.jpg'); 
+  background: transparent;
+  color: white;
   text-align: center;
   border: $cellBorder;
   border-radius: $cellBorderRadius;
   width: 50%;
-  padding: 30px;
+  padding: 40px;
+  box-sizing: border-box;
+  h1 {
+    color: white;
+    font-family: 'Cookie', cursive;
+    text-align: center;
+    font-size: 6em;
+    font-weight: bold;
+  }
 }
+
 
 .register {
   width: 800px;
@@ -64,6 +79,8 @@ body {
       margin: 10px;
       border: $cellBorder;
       border-radius: $cellBorderRadius;
+      height: 10em;
+
       .title {
         text-align: center;
       }

@@ -1,4 +1,4 @@
-let HomeController = function($scope, HomeService, DashboardService, $cookies, $state) {
+let HomeController = function($scope, $$http, HomeService, DashboardService, $cookies, $state) {
 
 
 
@@ -37,9 +37,21 @@ let HomeController = function($scope, HomeService, DashboardService, $cookies, $
   $scope.logmeout = function() {
     HomeService.logout();
   };  
+
+  //Search Function
+  $scope.search = function(query) {
+
+    console.log(query);
+
+    HomeService.search(query).then( (res) =>{
+      console.log(res);
+    });
+  };
   
 };
 
-HomeController.$inject = ['$scope', 'HomeService', 'DashboardService', '$cookies', '$state'];
+
+
+HomeController.$inject = ['$scope', '$http', 'HomeService', 'DashboardService', '$cookies', '$state'];
 
 export default HomeController;

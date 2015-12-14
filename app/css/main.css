@@ -3312,14 +3312,22 @@ table.hover tr:nth-of-type(even):hover {
   align-self: stretch; }
 
 body {
-  background: #FAFAF5; }
+  background-image: url("../photos/GYEIFHUP3O.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-attachment: fixed; }
 
 .top-bar {
-  background: url("../photos/pink.png");
+  background: url("../photos/GYEIFHUP3O.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 60% 50%;
   height: 4em; }
+  .top-bar .input-group {
+    display: inline-block;
+    margin: 0 20%;
+    width: 30%; }
   .top-bar section {
     display: inline-block; }
   .top-bar .title-area {
@@ -3332,12 +3340,20 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-image: url("../photos/pink.png");
+  background: transparent;
+  color: white;
   text-align: center;
   border: 2px solid white;
-  border-radius: 5px;
+  border-radius: 9px;
   width: 50%;
-  padding: 30px; }
+  padding: 40px;
+  box-sizing: border-box; }
+  .home h1 {
+    color: white;
+    font-family: 'Cookie', cursive;
+    text-align: center;
+    font-size: 6em;
+    font-weight: bold; }
 
 .register {
   width: 800px;
@@ -3349,7 +3365,8 @@ body {
   .dashboard .row .recipe {
     margin: 10px;
     border: 2px solid white;
-    border-radius: 5px; }
+    border-radius: 9px;
+    height: 10em; }
     .dashboard .row .recipe .title {
       text-align: center; }
     .dashboard .row .recipe .thumbnail {

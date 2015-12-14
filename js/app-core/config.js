@@ -37,6 +37,11 @@ let config = function($stateProvider, $urlRouterProvider) {
       url: '/add',
       templateUrl: 'templates/app-recipes/add-recipe.tpl.html',
       controller: 'AddRecipeController as vm'
+    })
+    .state('root.search', {
+      url: '/search',
+      controller: 'SearchController as vm',
+      templateUrl: 'templates/app-user/dashboard.tpl.html'
     });
 
 };

@@ -2,6 +2,8 @@ let HomeService = function($http, SERVER, $cookies, $state) {
 
   console.log(SERVER);
 
+  let url = SERVER.URL;
+
   // Check Authentication
   this.checkAuth = function () {
 
@@ -12,7 +14,6 @@ let HomeService = function($http, SERVER, $cookies, $state) {
     console.log('checkAuth is running', token);
     
     if (token) {
-      // return $http.get(SERVER.URL + 'check', SERVER.CONFIG);
     } else {
       $state.go('root.home');
     }
@@ -64,18 +65,17 @@ let HomeService = function($http, SERVER, $cookies, $state) {
     $state.go('root.home');
   };
 
-  // // Categories
-  // this.getCategories = function() {
-  //   let token = $cookies.get('auth-token');
-  //   return $http({
-  //     url: url + '/categories',
-  //     method: 'GET',
-  //     headers: {
-  //       auth_token: token
-  //     }
-  //   });
-  // };
-  
+  //Search API for recipe
+  this.search = function(query) {
+    let token = $cookies.get('auth-token');
+    return $http({
+      url: url + '/api/recipes/search?' + 'query=' + query,
+      method: 'GET',
+      headers: {
+        auth_token: token
+      }
+    });
+  };
 };
 
 HomeService.$inject = ['$http', 'SERVER', '$cookies', '$state'];

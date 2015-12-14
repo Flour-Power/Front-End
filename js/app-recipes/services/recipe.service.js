@@ -6,6 +6,7 @@ let RecipeService = function($http, SERVER, $cookies) {
   this.getCategories      = getCategories;
   this.getRecipe          = getRecipe;
   this.addRecipe          = addRecipe;
+  this.searchApi          = searchApi;
 
   function Recipe (recipeObj) {
     this.name        = recipeObj.name;
@@ -59,6 +60,17 @@ let RecipeService = function($http, SERVER, $cookies) {
     return $http({
       url: url + '/recipes',
       method: 'POST',
+      headers: {
+        auth_token: token
+      }
+    });
+  }
+
+  function searchApi(query) {
+    let token = $cookies.get('auth-token');
+    return $http({
+      url: url + '/api/recipes/search?' + 'query=' + query,
+      method: 'GET',
       headers: {
         auth_token: token
       }
