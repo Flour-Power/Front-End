@@ -14,7 +14,8 @@ var config = function config($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/app-layout/layout.tpl.html'
   }).state('home', {
     url: '/',
-    templateUrl: 'templates/app-layout/home.tpl.html'
+    templateUrl: 'templates/app-layout/home.tpl.html',
+    controller: 'HomeController as vm'
   }).state('register', {
     url: '/register',
     controller: 'HomeController as vm',
@@ -102,7 +103,7 @@ var HomeController = function HomeController($scope, $http, HomeService, Dashboa
 
   // Login into Session
   $scope.login = function (user) {
-    console.log(user);
+    console.log('hello', user);
     HomeService.sendLogin(user).then(function (res) {
       console.log(res);
       HomeService.loginSuccess(res);
@@ -117,26 +118,26 @@ var HomeController = function HomeController($scope, $http, HomeService, Dashboa
 
   //Search Function
 
-  $scope.search = function (query) {
+  // $scope.search = function(query) {
 
-    $state.go('root.search', { query: query });
-    console.log(this);
+  //   $state.go('root.search', { query: query });
+  //   console.log(this);
 
-    console.log(query);
+  //   console.log(query);
 
-    // HomeService.search(query).then( (res) =>{
-    //   console.log(res.data.recipes);
-    //   vm.searchResults = res.data.recipes;
-    //   console.log(vm);
-    //   // vm.searchResults.forEach( function(recipes) {
-    //   //   vm.resultNames = recipes.name;
-    //   //   console.log('DUDE', vm.resultNames);
-    //   // });
-    //   // $state.go('root.search');
-    //   // console.log('RESULTS',vm.searchResults);
+  //   // HomeService.search(query).then( (res) =>{
+  //   //   console.log(res.data.recipes);
+  //   //   vm.searchResults = res.data.recipes;
+  //   //   console.log(vm);
+  //   //   // vm.searchResults.forEach( function(recipes) {
+  //   //   //   vm.resultNames = recipes.name;
+  //   //   //   console.log('DUDE', vm.resultNames);
+  //   //   // });
+  //   //   // $state.go('root.search');
+  //   //   // console.log('RESULTS',vm.searchResults);
 
-    // });
-  };
+  //   // });
+  // };
 };
 
 HomeController.$inject = ['$scope', '$http', 'HomeService', 'DashboardService', '$cookies', '$state'];
@@ -161,7 +162,7 @@ var SearchController = function SearchController($scope, $stateParams, HomeServi
   // activate();
 
   // function activate () {
-  //   $scope.search = function(query) {
+  //  $scope.search = function(query) {
   HomeService.search(query).then(function (res) {
     console.log(res.data.recipes);
     vm.searchResults = res.data.recipes;
@@ -173,7 +174,7 @@ var SearchController = function SearchController($scope, $stateParams, HomeServi
     $state.go('root.search');
     console.log('RESULTS', vm.searchResults);
   });
-  //   };
+  // };
   // }
 };
 
@@ -243,7 +244,7 @@ var HomeService = function HomeService($http, SERVER, $cookies, $state) {
     console.log('checkAuth is running', token);
 
     if (token) {} else {
-      $state.go('root.home');
+      $state.go('home');
     }
   };
 
@@ -290,20 +291,20 @@ var HomeService = function HomeService($http, SERVER, $cookies, $state) {
   this.logout = function () {
     $cookies.remove('auth-token');
     SERVER.CONFIG.headers['auth-token'] = null;
-    $state.go('root.home');
+    $state.go('home');
   };
 
-  //Search API for recipe
-  this.search = function (query) {
-    var token = $cookies.get('auth-token');
-    return $http({
-      url: url + '/api/recipes/search?' + 'query=' + query,
-      method: 'GET',
-      headers: {
-        auth_token: token
-      }
-    });
-  };
+  // //Search API for recipe
+  // this.search = function(query) {
+  //   let token = $cookies.get('auth-token');
+  //   return $http({
+  //     url: url + '/api/recipes/search?' + 'query=' + query,
+  //     method: 'GET',
+  //     headers: {
+  //       auth_token: token
+  //     }
+  //   });
+  // };
 };
 
 HomeService.$inject = ['$http', 'SERVER', '$cookies', '$state'];

@@ -25,7 +25,7 @@ let HomeController = function($scope, $http, HomeService, DashboardService, $coo
 
   // Login into Session
   $scope.login = function (user) {
-    console.log(user);
+    console.log('hello', user);
     HomeService.sendLogin(user).then( (res) => {
       console.log(res);
       HomeService.loginSuccess(res);
@@ -40,26 +40,26 @@ let HomeController = function($scope, $http, HomeService, DashboardService, $coo
 
   //Search Function
 
-  $scope.search = function(query) {
+  // $scope.search = function(query) {
 
-    $state.go('root.search', { query: query });
-      console.log(this);
+  //   $state.go('root.search', { query: query });
+  //   console.log(this);
 
-      console.log(query);
+  //   console.log(query);
 
-    // HomeService.search(query).then( (res) =>{
-    //   console.log(res.data.recipes);
-    //   vm.searchResults = res.data.recipes;
-    //   console.log(vm);
-    //   // vm.searchResults.forEach( function(recipes) {
-    //   //   vm.resultNames = recipes.name;
-    //   //   console.log('DUDE', vm.resultNames);
-    //   // });
-    //   // $state.go('root.search');
-    //   // console.log('RESULTS',vm.searchResults);
+  //   // HomeService.search(query).then( (res) =>{
+  //   //   console.log(res.data.recipes);
+  //   //   vm.searchResults = res.data.recipes;
+  //   //   console.log(vm);
+  //   //   // vm.searchResults.forEach( function(recipes) {
+  //   //   //   vm.resultNames = recipes.name;
+  //   //   //   console.log('DUDE', vm.resultNames);
+  //   //   // });
+  //   //   // $state.go('root.search');
+  //   //   // console.log('RESULTS',vm.searchResults);
   
-    // });
-  };
+  //   // });
+  // };
   
 };
 

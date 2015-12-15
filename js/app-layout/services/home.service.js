@@ -15,7 +15,7 @@ let HomeService = function($http, SERVER, $cookies, $state) {
     
     if (token) {
     } else {
-      $state.go('root.home');
+      $state.go('home');
     }
   };
   
@@ -62,20 +62,20 @@ let HomeService = function($http, SERVER, $cookies, $state) {
   this.logout = function () {
     $cookies.remove('auth-token');
     SERVER.CONFIG.headers['auth-token'] = null;
-    $state.go('root.home');
+    $state.go('home');
   };
 
-  //Search API for recipe
-  this.search = function(query) {
-    let token = $cookies.get('auth-token');
-    return $http({
-      url: url + '/api/recipes/search?' + 'query=' + query,
-      method: 'GET',
-      headers: {
-        auth_token: token
-      }
-    });
-  };
+  // //Search API for recipe
+  // this.search = function(query) {
+  //   let token = $cookies.get('auth-token');
+  //   return $http({
+  //     url: url + '/api/recipes/search?' + 'query=' + query,
+  //     method: 'GET',
+  //     headers: {
+  //       auth_token: token
+  //     }
+  //   });
+  // };
 };
 
 HomeService.$inject = ['$http', 'SERVER', '$cookies', '$state'];

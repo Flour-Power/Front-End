@@ -11,20 +11,20 @@ let SearchController = function($scope, $stateParams, HomeService, $state) {
 
 
   // function activate () {
-  //   $scope.search = function(query) {
-      HomeService.search(query).then( (res) =>{
-      console.log(res.data.recipes);
-        vm.searchResults = res.data.recipes;
-        console.log(vm);
-        vm.searchResults.forEach( function(recipes) {
-          vm.resultNames = recipes.name;
-          console.log('DUDE', vm.resultNames);
-        });
-        $state.go('root.search');
-        console.log('RESULTS',vm.searchResults);
+  //  $scope.search = function(query) {
+  HomeService.search(query).then( (res) =>{
+    console.log(res.data.recipes);
+    vm.searchResults = res.data.recipes;
+    console.log(vm);
+    vm.searchResults.forEach( function(recipes) {
+      vm.resultNames = recipes.name;
+      console.log('DUDE', vm.resultNames);
+    });
+    $state.go('root.search');
+    console.log('RESULTS',vm.searchResults);
 
-      });
-  //   };
+  });
+  // };
   // }
 };
 

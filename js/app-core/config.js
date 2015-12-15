@@ -11,7 +11,8 @@ let config = function($stateProvider, $urlRouterProvider) {
     })
     .state('home', {
       url: '/',
-      templateUrl: 'templates/app-layout/home.tpl.html'
+      templateUrl: 'templates/app-layout/home.tpl.html',
+      controller: 'HomeController as vm'
     })
     .state('register', {
       url: '/register',
