@@ -111,33 +111,35 @@ var HomeController = function HomeController($scope, $http, HomeService, Dashboa
     });
   };
 
-  // Logout of Session
-  $scope.logmeout = function () {
-    HomeService.logout();
+  // // Logout of Session
+  // $scope.logout = function() {
+  //   HomeService.logout();
+  // }; 
+
+  // Search Function
+
+  $scope.search = function (query) {
+
+    console.log(query);
+
+    $state.go('root.search', { query: query });
+    // console.log(this);
+
+    // console.log(query);
+
+    // HomeService.search(query).then( (res) =>{
+    //   console.log(res.data.recipes);
+    //   vm.searchResults = res.data.recipes;
+    //   console.log(vm);
+    //   // vm.searchResults.forEach( function(recipes) {
+    //   //   vm.resultNames = recipes.name;
+    //   //   console.log('DUDE', vm.resultNames);
+    //   // });
+    //   // $state.go('root.search');
+    //   // console.log('RESULTS',vm.searchResults);
+
+    // });
   };
-
-  //Search Function
-
-  // $scope.search = function(query) {
-
-  //   $state.go('root.search', { query: query });
-  //   console.log(this);
-
-  //   console.log(query);
-
-  //   // HomeService.search(query).then( (res) =>{
-  //   //   console.log(res.data.recipes);
-  //   //   vm.searchResults = res.data.recipes;
-  //   //   console.log(vm);
-  //   //   // vm.searchResults.forEach( function(recipes) {
-  //   //   //   vm.resultNames = recipes.name;
-  //   //   //   console.log('DUDE', vm.resultNames);
-  //   //   // });
-  //   //   // $state.go('root.search');
-  //   //   // console.log('RESULTS',vm.searchResults);
-
-  //   // });
-  // };
 };
 
 HomeController.$inject = ['$scope', '$http', 'HomeService', 'DashboardService', '$cookies', '$state'];
@@ -159,23 +161,21 @@ var SearchController = function SearchController($scope, $stateParams, HomeServi
   vm.searchResults = [];
   vm.resultNames = [];
 
-  // activate();
+  activate();
 
-  // function activate () {
-  //  $scope.search = function(query) {
-  HomeService.search(query).then(function (res) {
-    console.log(res.data.recipes);
-    vm.searchResults = res.data.recipes;
-    console.log(vm);
-    vm.searchResults.forEach(function (recipes) {
-      vm.resultNames = recipes.name;
-      console.log('DUDE', vm.resultNames);
+  function activate() {
+    HomeService.search($stateParams.query).then(function (res) {
+      console.log(res.data.recipes);
+      vm.searchResults = res.data.recipes;
+      console.log(vm);
+      vm.searchResults.forEach(function (recipes) {
+        vm.resultNames = recipes.name;
+        console.log('DUDE', vm.resultNames);
+      });
+      $state.go('root.search');
+      console.log('RESULTS', vm.searchResults);
     });
-    $state.go('root.search');
-    console.log('RESULTS', vm.searchResults);
-  });
-  // };
-  // }
+  }
 };
 
 SearchController.$inject = ['$scope', '$stateParams', 'HomeService', '$state'];
@@ -294,17 +294,17 @@ var HomeService = function HomeService($http, SERVER, $cookies, $state) {
     $state.go('home');
   };
 
-  // //Search API for recipe
-  // this.search = function(query) {
-  //   let token = $cookies.get('auth-token');
-  //   return $http({
-  //     url: url + '/api/recipes/search?' + 'query=' + query,
-  //     method: 'GET',
-  //     headers: {
-  //       auth_token: token
-  //     }
-  //   });
-  // };
+  //Search API for recipe
+  this.search = function (query) {
+    var token = $cookies.get('auth-token');
+    return $http({
+      url: url + '/api/recipes/search?' + 'query=' + query,
+      method: 'GET',
+      headers: {
+        auth_token: token
+      }
+    });
+  };
 };
 
 HomeService.$inject = ['$http', 'SERVER', '$cookies', '$state'];

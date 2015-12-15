@@ -65,17 +65,17 @@ let HomeService = function($http, SERVER, $cookies, $state) {
     $state.go('home');
   };
 
-  // //Search API for recipe
-  // this.search = function(query) {
-  //   let token = $cookies.get('auth-token');
-  //   return $http({
-  //     url: url + '/api/recipes/search?' + 'query=' + query,
-  //     method: 'GET',
-  //     headers: {
-  //       auth_token: token
-  //     }
-  //   });
-  // };
+  //Search API for recipe
+  this.search = function(query) {
+    let token = $cookies.get('auth-token');
+    return $http({
+      url: url + '/api/recipes/search?' + 'query=' + query,
+      method: 'GET',
+      headers: {
+        auth_token: token
+      }
+    });
+  };
 };
 
 HomeService.$inject = ['$http', 'SERVER', '$cookies', '$state'];
