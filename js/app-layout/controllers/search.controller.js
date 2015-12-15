@@ -1,25 +1,36 @@
-let SearchController = function($scope, $http, RecipeService) {
+let SearchController = function($scope, $stateParams, HomeService, $state) {
+
+  let vm = this;
+  console.log(this);
+
+  vm.searchResults = [];
+  vm.resultNames = [];
   
-  // let url = '';
 
-  $scope.searchInput = (query) => { 
-    query = encodeURI(query);
+  // activate();
 
-    function searchApi (query) {
-      RecipeService.searchApi(query).then( (res) => {
-        $scope.apiSearchResults = res.data;
+
+  // function activate () {
+  //   $scope.search = function(query) {
+      HomeService.search(query).then( (res) =>{
+      console.log(res.data.recipes);
+        vm.searchResults = res.data.recipes;
+        console.log(vm);
+        vm.searchResults.forEach( function(recipes) {
+          vm.resultNames = recipes.name;
+          console.log('DUDE', vm.resultNames);
+        });
+        $state.go('root.search');
+        console.log('RESULTS',vm.searchResults);
+
       });
-    }
-
-  };
-  
-  function change (query) {
-    console.log(query);
-  }
-
-  $scope.change = change;
+  //   };
+  // }
 };
 
-SearchController.$inject = ['$scope', '$http', 'RecipeService'];
+SearchController.$inject = ['$scope', '$stateParams', 'HomeService','$state'];
 
 export default SearchController;
+
+
+

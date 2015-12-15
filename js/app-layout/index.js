@@ -6,7 +6,7 @@ import '../app-user/index';
 import '../app-recipes/index';
 
 import HomeController from './controllers/home.controller';
-import SearchController from '../app-layout/controllers/search.controller';
+import SearchController from './controllers/search.controller';
 
 import HomeService from './services/home.service';
 import RecipeService from '../app-recipes/services/recipe.service';

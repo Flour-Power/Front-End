@@ -39,9 +39,9 @@ let config = function($stateProvider, $urlRouterProvider) {
       controller: 'AddRecipeController as vm'
     })
     .state('root.search', {
-      url: '/search',
+      url: '/search/:query',
       controller: 'SearchController as vm',
-      templateUrl: 'templates/app-user/dashboard.tpl.html'
+      templateUrl: 'templates/app-recipes/search.tpl.html'
     });
 
 };

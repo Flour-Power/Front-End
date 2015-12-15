@@ -36,9 +36,9 @@ var config = function config($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/app-recipes/add-recipe.tpl.html',
     controller: 'AddRecipeController as vm'
   }).state('root.search', {
-    url: '/search',
+    url: '/search/:query',
     controller: 'SearchController as vm',
-    templateUrl: 'templates/app-user/dashboard.tpl.html'
+    templateUrl: 'templates/app-recipes/search.tpl.html'
   });
 };
 
@@ -77,7 +77,7 @@ _angular2['default'].module('app.core', ['ui.router', 'ngCookies']).constant('SE
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var HomeController = function HomeController($scope, $$http, HomeService, DashboardService, $cookies, $state) {
+var HomeController = function HomeController($scope, $http, HomeService, DashboardService, $cookies, $state) {
 
   // Authentication
   var promise = HomeService.checkAuth();
@@ -116,13 +116,26 @@ var HomeController = function HomeController($scope, $$http, HomeService, Dashbo
   };
 
   //Search Function
+
   $scope.search = function (query) {
+
+    $state.go('root.search', { query: query });
+    console.log(this);
 
     console.log(query);
 
-    HomeService.search(query).then(function (res) {
-      console.log(res);
-    });
+    // HomeService.search(query).then( (res) =>{
+    //   console.log(res.data.recipes);
+    //   vm.searchResults = res.data.recipes;
+    //   console.log(vm);
+    //   // vm.searchResults.forEach( function(recipes) {
+    //   //   vm.resultNames = recipes.name;
+    //   //   console.log('DUDE', vm.resultNames);
+    //   // });
+    //   // $state.go('root.search');
+    //   // console.log('RESULTS',vm.searchResults);
+
+    // });
   };
 };
 
@@ -137,28 +150,34 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var SearchController = function SearchController($scope, $http, RecipeService) {
+var SearchController = function SearchController($scope, $stateParams, HomeService, $state) {
 
-  // let url = '';
+  var vm = this;
+  console.log(this);
 
-  $scope.searchInput = function (query) {
-    query = encodeURI(query);
+  vm.searchResults = [];
+  vm.resultNames = [];
 
-    function searchApi(query) {
-      RecipeService.searchApi(query).then(function (res) {
-        $scope.apiSearchResults = res.data;
-      });
-    }
-  };
+  // activate();
 
-  function change(query) {
-    console.log(query);
-  }
-
-  $scope.change = change;
+  // function activate () {
+  //   $scope.search = function(query) {
+  HomeService.search(query).then(function (res) {
+    console.log(res.data.recipes);
+    vm.searchResults = res.data.recipes;
+    console.log(vm);
+    vm.searchResults.forEach(function (recipes) {
+      vm.resultNames = recipes.name;
+      console.log('DUDE', vm.resultNames);
+    });
+    $state.go('root.search');
+    console.log('RESULTS', vm.searchResults);
+  });
+  //   };
+  // }
 };
 
-SearchController.$inject = ['$scope', '$http', 'RecipeService'];
+SearchController.$inject = ['$scope', '$stateParams', 'HomeService', '$state'];
 
 exports['default'] = SearchController;
 module.exports = exports['default'];
@@ -184,9 +203,9 @@ var _controllersHomeController = require('./controllers/home.controller');
 
 var _controllersHomeController2 = _interopRequireDefault(_controllersHomeController);
 
-var _appLayoutControllersSearchController = require('../app-layout/controllers/search.controller');
+var _controllersSearchController = require('./controllers/search.controller');
 
-var _appLayoutControllersSearchController2 = _interopRequireDefault(_appLayoutControllersSearchController);
+var _controllersSearchController2 = _interopRequireDefault(_controllersSearchController);
 
 var _servicesHomeService = require('./services/home.service');
 
@@ -198,11 +217,11 @@ var _appRecipesServicesRecipeService2 = _interopRequireDefault(_appRecipesServic
 
 // import DashboardService from '.../services/dashboard.service';
 
-_angular2['default'].module('app.layout', ['app.core']).controller('HomeController', _controllersHomeController2['default']).controller('SearchController', _appLayoutControllersSearchController2['default']).service('HomeService', _servicesHomeService2['default']).service('RecipeService', _appRecipesServicesRecipeService2['default']);
+_angular2['default'].module('app.layout', ['app.core']).controller('HomeController', _controllersHomeController2['default']).controller('SearchController', _controllersSearchController2['default']).service('HomeService', _servicesHomeService2['default']).service('RecipeService', _appRecipesServicesRecipeService2['default']);
 
 // .service('DashboardService', DashboardService)
 
-},{"../app-core/index":2,"../app-layout/controllers/search.controller":4,"../app-recipes/index":12,"../app-recipes/services/recipe.service":13,"../app-user/index":15,"./controllers/home.controller":3,"./services/home.service":6,"angular":22,"angular-ui-router":20}],6:[function(require,module,exports){
+},{"../app-core/index":2,"../app-recipes/index":12,"../app-recipes/services/recipe.service":13,"../app-user/index":15,"./controllers/home.controller":3,"./controllers/search.controller":4,"./services/home.service":6,"angular":22,"angular-ui-router":20}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -452,17 +471,13 @@ var _controllersIngredientsController = require('./controllers/ingredients.contr
 
 var _controllersIngredientsController2 = _interopRequireDefault(_controllersIngredientsController);
 
-// import SearchController from '../app-recipes/controllers/search.controller';
-
 var _servicesRecipeService = require('./services/recipe.service');
 
 var _servicesRecipeService2 = _interopRequireDefault(_servicesRecipeService);
 
 // import DashboardService from '../app-user/services/dashboard.service';
 
-_angular2['default'].module('app.recipes', ['app.core']).controller('CategoryController', _controllersCategoryController2['default']).controller('AddRecipeController', _controllersAddRecipeController2['default']).controller('SingleRecipeController', _controllersSingleRecipeController2['default']).controller('DirectionsController', _controllersDirectionsController2['default']).controller('IngredientsController', _controllersIngredientsController2['default'])
-// .controller('SearchController', SearchController)
-.service('RecipeService', _servicesRecipeService2['default']);
+_angular2['default'].module('app.recipes', ['app.core']).controller('CategoryController', _controllersCategoryController2['default']).controller('AddRecipeController', _controllersAddRecipeController2['default']).controller('SingleRecipeController', _controllersSingleRecipeController2['default']).controller('DirectionsController', _controllersDirectionsController2['default']).controller('IngredientsController', _controllersIngredientsController2['default']).service('RecipeService', _servicesRecipeService2['default']);
 
 // .service('DashboardService', DashboardService)
 
@@ -571,7 +586,6 @@ var DashboardController = function DashboardController($scope, DashboardService,
   vm.categoryNames = [];
 
   vm.message = 'hello';
-  // vm.clicked = clicked;
 
   activate();
 
@@ -579,36 +593,13 @@ var DashboardController = function DashboardController($scope, DashboardService,
     DashboardService.getDashboard().then(function (res) {
       vm.recipes = res.data.recipes;
       console.log(vm.recipes);
-      // vm.recipes.forEach( function (recipe) {
-      //   // vm.category = recipes.category;
-      //   // console.log('Category: ', category.category);
-      //   recipe.categories.forEach( function (category) {
-      //     // vm.singleRecipe = recipe.name;
-      //     console.log('Recipe:', recipe.name);
-      //   });
-
-      // });
-      // return vm.recipes;
     });
-
-    // DashboardService.getRecipes().then( (res) => {
-    //   vm.categories = res.data.recipes;
-    //   console.log('categories:', vm.categories);
-    //     vm.categories.forEach( function (recipes) {
-    //       vm.categoryNames = recipes.category;
-    //       console.log('labels:', vm.categoryNames);
-    //     });
-    // });
 
     DashboardService.getCategories().then(function (res) {
       vm.categories = res.data.categories;
       console.log('categories:', vm.categories);
     });
   }
-
-  // function clicked (category) {
-  //   console.log('clicked', category.id);
-  // }
 };
 
 DashboardController.$inject = ['$scope', 'DashboardService', '$state'];
