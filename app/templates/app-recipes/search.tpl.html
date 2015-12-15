@@ -1,11 +1,12 @@
-<div class="search">
+<h1> Search</h1>
+{{ query }}
+
+<div class="row align-center" ng-controller="SearchController as results" class="search">
   
-<h1> Search</h1>cgb
-{{ vm.searchResults }}
-  <div>
-    <div style="background-image: url( {{ result.source_image_url }} )" ng-repeat="recipe in vm.resultNames">
-      <p class="title">
-        <a href="#/recipes/{{ recipe.id }}">{{ recipe.name }}</a>
+  <div ng-repeat="results in vm.searchResults">
+    <div class="recipe small-10 medium-4 large-3 columns"  style="background-image: url( {{ results.source_image_url }} )" >
+      <p class="title" >
+        <a href="#/recipes/{{ results.id }}">{{ results.name }}</a>
       </p>
     </div>
   </div>
