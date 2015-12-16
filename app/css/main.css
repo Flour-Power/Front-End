@@ -3312,14 +3312,14 @@ table.hover tr:nth-of-type(even):hover {
   align-self: stretch; }
 
 body {
-  background-image: url("../photos/GYEIFHUP3O.jpg");
+  background: #202020;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-attachment: fixed; }
 
 .top-bar {
-  background: url("../photos/GYEIFHUP3O.jpg");
+  background: #44A19E;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 60% 50%;
@@ -3375,8 +3375,20 @@ body {
       align: center; }
 
 div .singleRecipe .ng-scope {
-  color: blue;
+  color: #44A19E;
+  border-top: 1px solid #44A19E;
+  margin-bottom: 0px;
+  margin-left: 15px;
+  overflow: hidden;
   width: 100%; }
+  div .singleRecipe .ng-scope .heading {
+    background: green;
+    color: white;
+    width: 100%; }
+    div .singleRecipe .ng-scope .heading h4 {
+      margin-bottom: 0px; }
+  div .singleRecipe .ng-scope p {
+    padding: 17px; }
 
 div #mainPhoto {
   padding: 200px 0;
@@ -3634,14 +3646,16 @@ div #recipe.row .column.align-stretch, div #recipe.row .align-stretch.columns {
   align-self: stretch; }
 
 div #recipe.row div.ingredients.shrink.columns.ng-scope {
-  background: #FFFFFF;
+  background: #D2FBFE;
   width: auto;
   mrgin: 10px;
-  border: 2px solid white; }
+  border: 2px solid white;
+  padding: 0px; }
 
 div #recipe.row .directions {
-  background: #FFFFFF;
-  border: 2px solid white; }
+  background: #D2FBFE;
+  border: 2px solid white;
+  padding: 0px; }
 
 .addRecipeForm {
   width: 800px;

@@ -3,13 +3,17 @@
 
 
   <div id="mainPhoto" style="background-image: url( {{ vm.recipe.source_image_url }} ) ">
+    <div class="heading">
      <h3>{{ vm.recipe.name}}</h3>
+    </div>
   </div>
   
     <div id="recipe"class="row">
       <!-- Populating Ingredients from IngredientsController -->
        <div class="ingredients shrink columns" ng-controller="IngredientsController as ingredients">
-        <h4>Ingredients</h4>
+        <div class="heading">
+          <h4>Ingredients</h4>
+        </div>
         <p ng-repeat="ingredient in ingredients">
           {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
         </p>
@@ -17,7 +21,9 @@
 
       <!-- Populating Directions from DirectionsController -->
        <div class="directions columns" ng-controller="DirectionsController as directions">
-        <h4>Directions</h4>
+        <div class="heading">
+          <h4>Directions</h4>
+        </div>
         <p ng-repeat="directions in directions">
           {{ directions }}
         </p>

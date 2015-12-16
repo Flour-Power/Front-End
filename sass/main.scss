@@ -3,15 +3,21 @@
 @include foundation-everything;
 @include foundation-flex-grid;
 
-$cellBackground: #FFFFFF;
+
 $cellBorder: 2px solid white;
 $cellBorderRadius: 9px;
+
+$cellBackground: #D2FBFE;
+$dashboardColor: #202020;
 $mainBackgroundColor: #FAFAF5;
+$themeColor: #44A19E;
+
 $mainImage: url('../photos/GYEIFHUP3O.jpg');
 
+
 body {
-  background-image: url('../photos/GYEIFHUP3O.jpg'); 
-  // background: $mainBackgroundColor; 
+  //background-image: $mainImage; 
+  background: $dashboardColor; 
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -22,7 +28,7 @@ body {
 //   opacity: 0.9;
 // } 
 .top-bar {
-  background: $mainImage;
+  background: $themeColor;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 60% 50%;
@@ -94,8 +100,25 @@ body {
 }
 
 div .singleRecipe .ng-scope{
-  color: blue;
+  color: $themeColor;
+  border-top: 1px solid $themeColor;
+  margin-bottom: 0px;
+  margin-left: 15px;
+  overflow: hidden;
   width: 100%;
+  .heading {
+    background: green;
+    color: white;
+    width: 100%;
+    h4 {
+      margin-bottom: 0px;
+    }
+  }
+  p {
+    padding: 17px;
+
+  }
+
 }
  div #mainPhoto {
     padding: 200px 0;
@@ -119,10 +142,12 @@ div #recipe.row{
     width: auto;
     mrgin: 10px;
     border: $cellBorder;
+    padding: 0px;
   }
   .directions {
     background: $cellBackground;
     border: $cellBorder;
+    padding: 0px;
   }
 }
 
