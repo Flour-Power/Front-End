@@ -24,54 +24,78 @@ $mainImage: url('../photos/GYEIFHUP3O.jpg');
 
 body {
   font-family: 'Raleway', sans-serif;
+  font-weight: 200;
   background: $dashboardColor;
 }
 li {
   list-style: none;
 }
+p {
+  padding: 17px 10px 17px 0;
+}
+a {
+  color: $lightAccent;
+}
 
 .top-bar {
   @include top-bar-container;
   background: $topbar-background;
-  padding-top: 1.5em;
-  a {
-    color: $lightAccent;
-  }
+  padding: 0 0.5em;
+  position: relative;
 
   .title-area{
-    clear: left;
+    // clear: left;
+    display: block;
     float: left;
     font-family: 'Cookie', cursive;
     font-size: 50px;
   }
+  #logo {
+    color: white;
+  }
   #right{
-    clear: right;
+    // clear: right;
     float: right;
+    margin-top: 1.4em;
     a {
-      margin: 0.5em;
+      color: white;
+      font-size: 1.4em;
+      margin: 0.7em 1em;
     }
     #create {
-      border: 2px solid $lightAccent;
+      border: 1px solid white;
       border-radius: 9px;
       padding: 10px;
     }
   }
-  div #search {
-    background: #82D8D5;
-    display: imline-block;
-    // margin-left: 2em;
-    width: 300px;
-    form #serch-bar .ng-pristine .ng-untouched .ng-valid {
-      // display: inline-block;
-      #input [type='text'] textarea{
-       background: #82D8D5;
-        // margin-right: 0px !important;
-      }
+  #search {
+    background: blue;
+    display: inline-block;
+    height: 0;
+    margin: 0 5em;
+    width: 400px;
+    form #search-bar {
+      background: orange;
+      display: inline-block;
     }
+    input{
+      bottom: 0;
+      border: none;
+      color: $highlight;
+      background: $lightAccent;
+      font-size: 1.6em;
+      width: 100%;
+      height: 2.9em;
+      }
+      input:focus {
+        color: white;
+      }
   }
-  
 }
-
+.container {
+  display: block;
+  margin: 20px auto;
+}
 .home {
   @include absolute-center;
   //background-image: url('../photos/GYEIFHUP3O.jpg'); 
@@ -107,7 +131,7 @@ div .page-title {
 }
 .dashboard {
   .row {
-    margin: auto;
+    margin: 40px auto;
     padding: 10px;
     .recipe {
       margin: 10px;
@@ -165,6 +189,7 @@ div .singleRecipe .ng-scope{
   #page p {
     color: white;
     border: 4px solid $highlight;
+    font-size: 1.4em;
     margin: 20px auto;
     padding: 17px;
     width: 85%;
@@ -189,13 +214,16 @@ div #recipe.row{
   width: 800px;
   margin: auto;
 }
-
-#category {
-  border: 2px solid $lightAccent;
-  border-radius: 9px;
-  padding: 10px;
-  color: $lightAccent;
-  font-size: 12px;
-  // width: 0.25em;
-
-}
+// .categories {
+//   margin: 40px 30px; 
+// }
+  #category {
+    // border: 2px solid $lightAccent;
+    // border-radius: 9px;
+    color: $lightAccent;
+    font-size: 1.3em;
+    font-weight: 500;
+    
+    padding: 10px;
+    // width: 0.25em;
+  }
