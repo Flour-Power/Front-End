@@ -3,12 +3,18 @@
 
 
   <div id="mainPhoto" style="background-image: url( {{ vm.recipe.source_image_url }} ) ">
-    <div class="heading">
-     <h3>{{ vm.recipe.name}}</h3>
-    </div>
+    
   </div>
-  
-    <div id="recipe"class="row">
+
+
+  <div id="card">
+    <div class="row">
+     <span id="recipe-title">{{ vm.recipe.name}}</span>
+    </div>
+   
+
+    <div id="recipe" class="row">
+
       <!-- Populating Ingredients from IngredientsController -->
        <div class="ingredients shrink columns" ng-controller="IngredientsController as ingredients">
         <div class="heading">
@@ -32,13 +38,14 @@
        </div>
 
      </div>
+  </div>
 
 </div>
 
-<footer class"categories">
-  <ul ng-controller="DashboardController">
-    <li ng-repeat="category in vm.categories"> 
-    <a href="#/category/{{ category.id }}">{{ category.name }}</a>
-    </li>
-  </ul>
-</footer>
+<div class"categories">
+  <div class="row align-spaced ">
+    <div class="column small-2" ng-repeat="category in vm.categories"> 
+      <a id="category" href="#/category/{{ category.id }}">{{ category.name }}</a>
+    </div>
+  </div>
+</div>

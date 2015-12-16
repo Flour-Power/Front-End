@@ -1,6 +1,9 @@
+<div id="page">
+  <p>Dashboard</p>
+</div>
+
 <div class="dashboard">
   
-
   <div class="row align-center">
     <div class="recipe small-10 medium-4 large-3 columns" style="background-image: url( {{ recipe.source_image_url }} )" ng-repeat="recipe in vm.recipes">
       <p class="title">
@@ -11,10 +14,10 @@
 
 </div>
 
-<footer class"categories">
-  <ul>
-    <li ng-repeat="category in vm.categories"> 
-    <a href="#/category/{{ category.id }}">{{ category.name }}</a>
-    </li>
-  </ul>
-</footer>
+<div class"categories">
+  <div class="row align-spaced ">
+    <div class="column small-2" ng-repeat="category in vm.categories"> 
+      <a id="category" href="#/category/{{ category.id }}">{{ category.name }}</a>
+    </div>
+  </div>
+</div>

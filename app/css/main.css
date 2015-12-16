@@ -3312,27 +3312,51 @@ table.hover tr:nth-of-type(even):hover {
   align-self: stretch; }
 
 body {
-  background: #202020;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  background-attachment: fixed; }
+  font-family: 'Raleway', sans-serif;
+  background: #202020; }
+
+li {
+  list-style: none; }
 
 .top-bar {
-  background: #44A19E;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 60% 50%;
-  height: 4em; }
-  .top-bar .input-group {
-    display: inline-block;
-    margin: 0 20%;
-    width: 30%; }
+  padding: 0.5rem;
+  background: #4DB3AB;
+  padding-top: 1.5em; }
+  .top-bar::before, .top-bar::after {
+    content: ' ';
+    display: table; }
+  .top-bar::after {
+    clear: both; }
+  .top-bar, .top-bar ul {
+    background-color: #4DB3AB; }
+  .top-bar input {
+    width: 200px;
+    margin-right: 1rem; }
+  .top-bar a {
+    color: #86D3CE; }
   .top-bar section {
     display: inline-block; }
   .top-bar .title-area {
-    float: left; }
-  .top-bar .right {
+    clear: left;
+    float: left;
+    font-family: 'Cookie', cursive;
+    font-size: 50px; }
+  .top-bar #right {
+    clear: right;
     float: right; }
+    .top-bar #right a {
+      margin: 0.5em; }
+    .top-bar #right #create {
+      border: 2px solid #86D3CE;
+      border-radius: 9px;
+      padding: 10px; }
+  .top-bar div #search {
+    background: #82D8D5;
+    display: imline-block;
+    margin-left: 1em;
+    width: 300px; }
+    .top-bar div #search form #serch-bar .ng-pristine .ng-untouched .ng-valid #input [type='text'] textarea {
+      background: #82D8D5; }
 
 .home {
   position: absolute;
@@ -3358,6 +3382,12 @@ body {
   width: 800px;
   margin: 25px auto; }
 
+div .page-title {
+  color: white; }
+  div .page-title p {
+    border: 2px solid blue;
+    padding: 17px 10px 17px 0; }
+
 .dashboard .row {
   margin: auto;
   padding: 10px; }
@@ -3373,23 +3403,8 @@ body {
       margin-top: 10px;
       align: center; }
 
-div .singleRecipe .ng-scope {
-  border-radius: 0px 6px;
-  color: #44A19E;
-  border-top: 1px solid #44A19E;
-  margin-bottom: 0px;
-  margin-left: 15px;
-  overflow: hidden;
-  width: 100%; }
-  div .singleRecipe .ng-scope .heading {
-    background: #367459;
-    color: white;
-    width: 100%; }
-    div .singleRecipe .ng-scope .heading h4 {
-      margin-bottom: 0px;
-      padding: 15px; }
-  div .singleRecipe .ng-scope p {
-    padding: 17px; }
+#card .row #recipe-title .ng-binding {
+  color: green; }
 
 div #mainPhoto {
   padding: 200px 0;
@@ -3397,9 +3412,31 @@ div #mainPhoto {
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-attachment: fixed; }
-  div #mainPhoto h3.ng-binding {
+
+div .singleRecipe .ng-scope {
+  color: white;
+  border-bottom: 1px solid #86D3CE;
+  margin-bottom: 0px;
+  margin-left: 15px;
+  overflow: hidden;
+  width: 100%; }
+  div .singleRecipe .ng-scope .heading {
+    border-bottom: 1px solid white;
     color: white;
-    text-align: center; }
+    margin-left: 15px;
+    width: 100%; }
+  div .singleRecipe .ng-scope h4 {
+    margin-bottom: 0px;
+    padding: 15px 0; }
+  div .singleRecipe .ng-scope p {
+    padding: 17px 10px 17px 0; }
+
+#page p {
+  color: white;
+  border: 2px solid #36827C;
+  margin: 20px auto;
+  padding: 17px;
+  width: 70%; }
 
 div #recipe.row .row {
   max-width: 75rem;
@@ -3647,17 +3684,13 @@ div #recipe.row .column.align-stretch, div #recipe.row .align-stretch.columns {
   align-self: stretch; }
 
 div #recipe.row div.ingredients.shrink.columns.ng-scope {
-  background: #D2FBFE;
+  background: url("../photos/blueopacity-1.png");
   width: auto;
   mrgin: 10px;
-  border: 2px solid #202020;
-  border-radius: 9px;
   padding: 0px; }
 
 div #recipe.row .directions {
-  background: #D2FBFE;
-  border: 2px solid #202020;
-  border-radius: 9px;
+  background: url("../photos/blueopacity-1.png");
   padding: 0px; }
 
 .addRecipeForm {
