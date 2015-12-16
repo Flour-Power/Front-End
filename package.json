@@ -37,22 +37,26 @@
     "watchify": "^3.4.0"
   },
   "dependencies": {
+    "angular-mm-foundation": "^0.7.0-SNAPSHOT",
     "bootstrap": "^3.3.6",
     "font-awesome": "^4.4.0",
+    "foundation-apps": "^1.2.0",
     "jquery": "^2.1.4",
     "moment": "^2.10.6",
     "normalize.css": "^3.0.3",
     "underscore": "^1.8.3"
   },
   "browser": {
-  "jquery": "./node_modules/jquery/dist/jquery.js",
-  "foundation": "./node_modules/foundation-sites/dist/foundation.js"
+    "jquery": "./node_modules/jquery/dist/jquery.js",
+    "foundation": "./node_modules/foundation-sites/dist/foundation.js"
   },
   "browserify-shim": {
     "jquery": "$",
     "foundation": "foundation"
   },
   "browserify": {
-    "transform": ["browserify-shim"]
+    "transform": [
+      "browserify-shim"
+    ]
   }
 }

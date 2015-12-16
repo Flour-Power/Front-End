@@ -3334,8 +3334,6 @@ li {
     margin-right: 1rem; }
   .top-bar a {
     color: #86D3CE; }
-  .top-bar section {
-    display: inline-block; }
   .top-bar .title-area {
     clear: left;
     float: left;
@@ -3353,7 +3351,6 @@ li {
   .top-bar div #search {
     background: #82D8D5;
     display: imline-block;
-    margin-left: 1em;
     width: 300px; }
     .top-bar div #search form #serch-bar .ng-pristine .ng-untouched .ng-valid #input [type='text'] textarea {
       background: #82D8D5; }
@@ -3396,12 +3393,11 @@ div .page-title {
     border: 2px solid #202020;
     border-radius: 9px;
     height: 10em; }
-    .dashboard .row .recipe .title {
-      text-align: center; }
-    .dashboard .row .recipe .thumbnail {
-      width: 100%;
-      margin-top: 10px;
-      align: center; }
+
+.dashboard .title {
+  text-align: center; }
+  .dashboard .title a {
+    color: #86D3CE; }
 
 #card .row #recipe-title .ng-binding {
   color: green; }
@@ -3433,10 +3429,10 @@ div .singleRecipe .ng-scope {
 
 #page p {
   color: white;
-  border: 2px solid #36827C;
+  border: 4px solid #36827C;
   margin: 20px auto;
   padding: 17px;
-  width: 70%; }
+  width: 85%; }
 
 div #recipe.row .row {
   max-width: 75rem;
@@ -3696,5 +3692,12 @@ div #recipe.row .directions {
 .addRecipeForm {
   width: 800px;
   margin: auto; }
+
+#category {
+  border: 2px solid #86D3CE;
+  border-radius: 9px;
+  padding: 10px;
+  color: #86D3CE;
+  font-size: 12px; }
 
 /*# sourceMappingURL=main.css.map */

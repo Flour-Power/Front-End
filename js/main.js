@@ -5,6 +5,7 @@ import 'angular-ui-router';
 // Import jQuery & Foundaiton
 import $ from 'jquery';
 import 'foundation';
+import 'angular-foundation';
 
 
 // Modules
@@ -20,7 +21,7 @@ $(document).foundation();
 // Set up a run block on an angular module to help with 
 // loading foundation after templates load
 angular
-  .module('app', [ 'app.core', 'app.layout', 'app.user', 'app.recipes', 'app.external'])
+  .module('app', [ 'app.core', 'app.layout', 'app.user', 'app.recipes', 'app.external', 'mm.foundation'])
   .run( function (HomeService, $rootScope) {
 
     // $stateChangeSuccess comes from Ui Router

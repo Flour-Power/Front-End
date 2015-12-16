@@ -1,14 +1,18 @@
-<h1> Search</h1>
-{{ query }}
+<div class="dashboard" id="page">
+  <p>Search Results for... " {{ query }} "</p>
+</div>
 
-<div class="row align-center" ng-controller="SearchController as results" class="search">
-  
-  <div ng-repeat="results in vm.searchResults">
-    <div class="recipe small-10 medium-4 large-3 columns"  style="background-image: url( {{ results.source_image_url }} )" >
-      <p class="title" >
-        <a href="#/api/recipes/{{ results.id }}">{{ results.name }}</a>
-      </p>
+<div class="dashboard">
+  <div class="row align-center" ng-controller="SearchController as results" class="search">
+    
+    <div class="recipe small-10 medium-4 large-3 columns" ng-repeat="results in vm.searchResults">
+      <div  style="background-image: url( {{ results.source_image_url }} )" >
+
+        <p class="title" >
+          <a href="#/api/recipes/{{ results.id }}">{{ results.name }}</a>
+        </p>
+      </div>
+
     </div>
   </div>
-
 </div>
