@@ -84,12 +84,18 @@ Object.defineProperty(exports, '__esModule', {
 });
 var DirectionsController = function DirectionsController($scope, $stateParams, RecipeService, $state) {
 
+  $scope.directionsinternal = [];
   $scope.directions = [];
 
+  RecipeService.getRecipe($stateParams.id).then(function (res) {
+    $scope.recipe = res.data;
+    $scope.directionsinternal = $scope.recipe.directions;
+    console.log('STUFF1', $scope.directionsinternal);
+  });
   RecipeService.apiRecipe($stateParams.id).then(function (res) {
     $scope.recipe = res.data;
     $scope.directions = $scope.recipe.directions;
-    console.log('DIRECTIONS', $scope.directions);
+    console.log('STUFF2', $scope.directions);
   });
 };
 
@@ -591,11 +597,12 @@ var DirectionsController = function DirectionsController($scope, $stateParams, R
 
   $scope.directions = [];
 
-  RecipeService.getRecipe($stateParams.id).then(function (res) {
-    $scope.recipe = res.data;
-    $scope.directions = $scope.recipe.directions;
-    console.log('DIRECTIONS', $scope.directions);
-  });
+  // RecipeService.getRecipe($stateParams.id).then( (res) => {
+  //   console.log('Stuff', res);
+  //   $scope.recipe = res.data;
+  //   $scope.directions = $scope.recipe.directions;
+  //   // console.log('DIRECTIONS', $scope.directions);
+  // });
 };
 
 DirectionsController.$inject = ['$scope', '$stateParams', 'RecipeService', '$state'];

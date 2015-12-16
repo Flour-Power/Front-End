@@ -14,8 +14,10 @@
         <div class="heading">
           <h4>Ingredients</h4>
         </div>
+
         <p ng-repeat="ingredient in ingredients">
-          {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
+          <span> {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
+          </span>
         </p>
        </div>
 
@@ -24,7 +26,7 @@
         <div class="heading">
           <h4>Directions</h4>
         </div>
-        <p ng-repeat="directions in directions">
+        <p ng-repeat="directions in directionsinternal">
           {{ directions }}
         </p>
        </div>

@@ -3343,7 +3343,7 @@ body {
   background: transparent;
   color: white;
   text-align: center;
-  border: 2px solid white;
+  border: 2px solid #202020;
   border-radius: 9px;
   width: 50%;
   padding: 40px;
@@ -3364,7 +3364,7 @@ body {
   padding: 10px; }
   .dashboard .row .recipe {
     margin: 10px;
-    border: 2px solid white;
+    border: 2px solid #202020;
     border-radius: 9px;
     height: 10em; }
     .dashboard .row .recipe .title {
@@ -3375,6 +3375,7 @@ body {
       align: center; }
 
 div .singleRecipe .ng-scope {
+  border-radius: 0px 6px;
   color: #44A19E;
   border-top: 1px solid #44A19E;
   margin-bottom: 0px;
@@ -3382,11 +3383,12 @@ div .singleRecipe .ng-scope {
   overflow: hidden;
   width: 100%; }
   div .singleRecipe .ng-scope .heading {
-    background: green;
+    background: #367459;
     color: white;
     width: 100%; }
     div .singleRecipe .ng-scope .heading h4 {
-      margin-bottom: 0px; }
+      margin-bottom: 0px;
+      padding: 15px; }
   div .singleRecipe .ng-scope p {
     padding: 17px; }
 
@@ -3649,12 +3651,14 @@ div #recipe.row div.ingredients.shrink.columns.ng-scope {
   background: #D2FBFE;
   width: auto;
   mrgin: 10px;
-  border: 2px solid white;
+  border: 2px solid #202020;
+  border-radius: 9px;
   padding: 0px; }
 
 div #recipe.row .directions {
   background: #D2FBFE;
-  border: 2px solid white;
+  border: 2px solid #202020;
+  border-radius: 9px;
   padding: 0px; }
 
 .addRecipeForm {
