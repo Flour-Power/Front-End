@@ -3313,7 +3313,6 @@ table.hover tr:nth-of-type(even):hover {
 
 body {
   background: #202020;
-  background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-attachment: fixed; }

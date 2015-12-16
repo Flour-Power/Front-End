@@ -16,12 +16,14 @@ $mainImage: url('../photos/GYEIFHUP3O.jpg');
 
 
 body {
+  
   //background-image: $mainImage; 
   background: $dashboardColor; 
-  background-size: cover;
+  // background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-attachment: fixed;
+
 }
 // nav {
 //   border-bottom: 2px solid blue;
