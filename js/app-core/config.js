@@ -1,6 +1,6 @@
 let config = function($stateProvider, $urlRouterProvider) {
   
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/dashboard');
 
   $stateProvider
 
@@ -43,6 +43,11 @@ let config = function($stateProvider, $urlRouterProvider) {
       url: '/search/:query',
       controller: 'SearchController as vm',
       templateUrl: 'templates/app-recipes/search.tpl.html'
+    })
+    .state('root.apiRecipe', {
+      url: '/api/recipes/:id',
+      controller: 'ApiRecipeController as vm',
+      templateUrl: 'templates/app-recipes/recipe-api.tpl.html'
     });
 
 };

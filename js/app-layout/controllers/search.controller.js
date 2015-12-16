@@ -1,7 +1,6 @@
 let SearchController = function($scope, $stateParams, HomeService, $state) {
 
   let vm = this;
-  console.log(this);
 
   vm.searchResults = [];
   vm.resultNames = [];
@@ -21,9 +20,9 @@ let SearchController = function($scope, $stateParams, HomeService, $state) {
       });
       $state.go('root.search');
       console.log('RESULTS',vm.searchResults);
-
     });
   }
+
 };
 
 SearchController.$inject = ['$scope', '$stateParams', 'HomeService','$state'];

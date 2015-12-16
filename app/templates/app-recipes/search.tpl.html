@@ -6,7 +6,7 @@
   <div ng-repeat="results in vm.searchResults">
     <div class="recipe small-10 medium-4 large-3 columns"  style="background-image: url( {{ results.source_image_url }} )" >
       <p class="title" >
-        <a href="#/recipes/{{ results.id }}">{{ results.name }}</a>
+        <a href="#/api/recipes/{{ results.id }}">{{ results.name }}</a>
       </p>
     </div>
   </div>

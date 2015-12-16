@@ -6,7 +6,7 @@ Object.defineProperty(exports, '__esModule', {
 });
 var config = function config($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/dashboard');
 
   $stateProvider.state('root', {
     abstract: true,
@@ -40,6 +40,10 @@ var config = function config($stateProvider, $urlRouterProvider) {
     url: '/search/:query',
     controller: 'SearchController as vm',
     templateUrl: 'templates/app-recipes/search.tpl.html'
+  }).state('root.apiRecipe', {
+    url: '/api/recipes/:id',
+    controller: 'ApiRecipeController as vm',
+    templateUrl: 'templates/app-recipes/recipe-api.tpl.html'
   });
 };
 
@@ -72,7 +76,215 @@ _angular2['default'].module('app.core', ['ui.router', 'ngCookies']).constant('SE
   }
 }).config(_config2['default']);
 
-},{"./config":1,"angular":22,"angular-cookies":19,"angular-ui-router":20}],3:[function(require,module,exports){
+},{"./config":1,"angular":27,"angular-cookies":24,"angular-ui-router":25}],3:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var DirectionsController = function DirectionsController($scope, $stateParams, RecipeService, $state) {
+
+  $scope.directions = [];
+
+  RecipeService.apiRecipe($stateParams.id).then(function (res) {
+    $scope.recipe = res.data;
+    $scope.directions = $scope.recipe.directions;
+    console.log('DIRECTIONS', $scope.directions);
+  });
+};
+
+DirectionsController.$inject = ['$scope', '$stateParams', 'RecipeService', '$state'];
+
+exports['default'] = DirectionsController;
+module.exports = exports['default'];
+
+},{}],4:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var IngredientsController = function IngredientsController($scope, $stateParams, RecipeService, $state) {
+
+  $scope.ingredients = [];
+
+  RecipeService.apiRecipe($stateParams.id).then(function (res) {
+    $scope.recipe = res.data;
+    $scope.ingredients = $scope.recipe.ingredients;
+    console.log('INGREDIENTS', $scope.ingredients);
+  });
+};
+
+IngredientsController.$inject = ['$scope', '$stateParams', 'RecipeService', '$state'];
+
+exports['default'] = IngredientsController;
+module.exports = exports['default'];
+
+},{}],5:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var ApiRecipeController = function ApiRecipeController($scope, $stateParams, RecipeService, $state) {
+
+  var vm = this;
+
+  vm.recipe = [];
+  vm.resultNames = [];
+
+  activate();
+
+  function activate() {
+    RecipeService.apiRecipe($stateParams.id).then(function (res) {
+      vm.recipe = res.data;
+      console.log('api recipe', vm.recipe);
+    });
+
+    RecipeService.getCategories().then(function (res) {
+      vm.categories = res.data.categories;
+      console.log('categories:', vm.categories);
+    });
+  }
+};
+
+ApiRecipeController.$inject = ['$scope', '$stateParams', 'RecipeService', '$state'];
+
+exports['default'] = ApiRecipeController;
+module.exports = exports['default'];
+
+},{}],6:[function(require,module,exports){
+'use strict';
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _angular = require('angular');
+
+var _angular2 = _interopRequireDefault(_angular);
+
+require('../app-core/index');
+
+// import CategoryController from './controllers/category.controller';
+// import AddRecipeController from './controllers/add-recipe.controller';
+// import SingleRecipeController from './controllers/singleRecipe.controller';
+
+var _controllersDirectionsController = require('./controllers/directions.controller');
+
+var _controllersDirectionsController2 = _interopRequireDefault(_controllersDirectionsController);
+
+var _controllersIngredientsController = require('./controllers/ingredients.controller');
+
+var _controllersIngredientsController2 = _interopRequireDefault(_controllersIngredientsController);
+
+var _controllersRecipeApiController = require('./controllers/recipe-api.controller');
+
+var _controllersRecipeApiController2 = _interopRequireDefault(_controllersRecipeApiController);
+
+var _servicesRecipeService = require('./services/recipe.service');
+
+var _servicesRecipeService2 = _interopRequireDefault(_servicesRecipeService);
+
+_angular2['default'].module('app.external', ['app.core'])
+//   .controller('CategoryController', CategoryController)
+//   .controller('AddRecipeController', AddRecipeController)
+//   .controller('SingleRecipeController', SingleRecipeController)
+.controller('DirectionsController', _controllersDirectionsController2['default']).controller('IngredientsController', _controllersIngredientsController2['default']).controller('ApiRecipeController', _controllersRecipeApiController2['default']);
+
+//   .service('RecipeService', RecipeService)
+
+},{"../app-core/index":2,"./controllers/directions.controller":3,"./controllers/ingredients.controller":4,"./controllers/recipe-api.controller":5,"./services/recipe.service":7,"angular":27}],7:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var RecipeService = function RecipeService($http, SERVER, $cookies) {
+
+  var url = SERVER.URL;
+
+  this.getCategoryRecipes = getCategoryRecipes;
+  this.getCategories = getCategories;
+  this.getRecipe = getRecipe;
+  this.addRecipe = addRecipe;
+  this.apiRecipe = apiRecipe;
+
+  function Recipe(recipeObj) {
+    this.name = recipeObj.name;
+    this.categories = recipeObj.category_names;
+    this.steps = recipeObj.steps.split(';');
+    this.ingredients = recipeObj.ingredients;
+    this.itemName = recipeObj.ingredients.name;
+    this.itemAmount = recipeObj.ingredients.amount;
+    this.itemUnit = recipeObj.ingredients.unit;
+    this.image = recipeObj.my_image;
+  }
+
+  function getCategories() {
+    var token = $cookies.get('auth-token');
+    return $http({
+      url: url + '/categories',
+      method: 'GET',
+      headers: {
+        auth_token: token
+      }
+    });
+  }
+
+  function getCategoryRecipes(id) {
+    var token = $cookies.get('auth-token');
+    return $http({
+      url: url + '/categories' + '/' + id + '/recipes',
+      method: 'GET',
+      headers: {
+        auth_token: token
+      }
+    });
+  }
+
+  function getRecipe(id) {
+    var token = $cookies.get('auth-token');
+    return $http({
+      url: url + '/recipes' + '/' + id,
+      method: 'GET',
+      headers: {
+        auth_token: token
+      }
+    });
+  }
+
+  function addRecipe(recipeObj) {
+    var token = $cookies.get('auth-token');
+    var r = new Recipe(recipeObj);
+
+    return $http({
+      url: url + '/recipes',
+      method: 'POST',
+      headers: {
+        auth_token: token
+      }
+    });
+  }
+
+  //Get Recipe from API
+  function apiRecipe(id) {
+    var token = $cookies.get('auth-token');
+    console.log(id);
+    return $http({
+      url: url + '/api/recipes' + '/' + id,
+      method: 'GET',
+      headers: {
+        auth_token: token
+      }
+    });
+  }
+};
+
+RecipeService.$inject = ['$http', 'SERVER', '$cookies'];
+
+exports['default'] = RecipeService;
+module.exports = exports['default'];
+
+},{}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -111,35 +323,30 @@ var HomeController = function HomeController($scope, $http, HomeService, Dashboa
     });
   };
 
-  // // Logout of Session
-  // $scope.logout = function() {
-  //   HomeService.logout();
-  // }; 
+  // Logout of Session
+  $scope.logout = function () {
+    HomeService.logout();
+  };
 
   // Search Function
-
   $scope.search = function (query) {
-
     console.log(query);
-
     $state.go('root.search', { query: query });
-    // console.log(this);
-
-    // console.log(query);
-
-    // HomeService.search(query).then( (res) =>{
-    //   console.log(res.data.recipes);
-    //   vm.searchResults = res.data.recipes;
-    //   console.log(vm);
-    //   // vm.searchResults.forEach( function(recipes) {
-    //   //   vm.resultNames = recipes.name;
-    //   //   console.log('DUDE', vm.resultNames);
-    //   // });
-    //   // $state.go('root.search');
-    //   // console.log('RESULTS',vm.searchResults);
-
-    // });
   };
+
+  //Categories
+
+  // $scope.getCategories = function() {
+  //   let vm = this;
+
+  //   vm.recipes = [];
+  //   vm.categories = [];
+
+  //   HomeService.getCategories().then( (res) => {
+  //     vm.categories = res.data.categories;
+  //     console.log('LAYOUTcategories:', vm.categories);
+  //   });
+  // };
 };
 
 HomeController.$inject = ['$scope', '$http', 'HomeService', 'DashboardService', '$cookies', '$state'];
@@ -147,7 +354,7 @@ HomeController.$inject = ['$scope', '$http', 'HomeService', 'DashboardService', 
 exports['default'] = HomeController;
 module.exports = exports['default'];
 
-},{}],4:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -156,7 +363,6 @@ Object.defineProperty(exports, '__esModule', {
 var SearchController = function SearchController($scope, $stateParams, HomeService, $state) {
 
   var vm = this;
-  console.log(this);
 
   vm.searchResults = [];
   vm.resultNames = [];
@@ -183,7 +389,7 @@ SearchController.$inject = ['$scope', '$stateParams', 'HomeService', '$state'];
 exports['default'] = SearchController;
 module.exports = exports['default'];
 
-},{}],5:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -222,7 +428,7 @@ _angular2['default'].module('app.layout', ['app.core']).controller('HomeControll
 
 // .service('DashboardService', DashboardService)
 
-},{"../app-core/index":2,"../app-recipes/index":12,"../app-recipes/services/recipe.service":13,"../app-user/index":15,"./controllers/home.controller":3,"./controllers/search.controller":4,"./services/home.service":6,"angular":22,"angular-ui-router":20}],6:[function(require,module,exports){
+},{"../app-core/index":2,"../app-recipes/index":17,"../app-recipes/services/recipe.service":18,"../app-user/index":20,"./controllers/home.controller":8,"./controllers/search.controller":9,"./services/home.service":11,"angular":27,"angular-ui-router":25}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -305,6 +511,17 @@ var HomeService = function HomeService($http, SERVER, $cookies, $state) {
       }
     });
   };
+
+  // this.getCategories = function() {
+  //   let token = $cookies.get('auth-token');
+  //   return $http({
+  //     url: url + '/categories',
+  //     method: 'GET',
+  //     headers: {
+  //       auth_token: token
+  //     }
+  //   });
+  // };
 };
 
 HomeService.$inject = ['$http', 'SERVER', '$cookies', '$state'];
@@ -312,7 +529,7 @@ HomeService.$inject = ['$http', 'SERVER', '$cookies', '$state'];
 exports['default'] = HomeService;
 module.exports = exports['default'];
 
-},{}],7:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -336,7 +553,7 @@ AddRecipeController.$inject = ['RecipeService'];
 exports['default'] = AddRecipeController;
 module.exports = exports['default'];
 
-},{}],8:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -364,7 +581,7 @@ CategoryController.$inject = ['$scope', '$stateParams', 'RecipeService', '$state
 exports['default'] = CategoryController;
 module.exports = exports['default'];
 
-},{}],9:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -386,7 +603,7 @@ DirectionsController.$inject = ['$scope', '$stateParams', 'RecipeService', '$sta
 exports['default'] = DirectionsController;
 module.exports = exports['default'];
 
-},{}],10:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -408,7 +625,7 @@ IngredientsController.$inject = ['$scope', '$stateParams', 'RecipeService', '$st
 exports['default'] = IngredientsController;
 module.exports = exports['default'];
 
-},{}],11:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -439,7 +656,7 @@ SingleRecipeController.$inject = ['$scope', '$stateParams', 'RecipeService', '$s
 exports['default'] = SingleRecipeController;
 module.exports = exports['default'];
 
-},{}],12:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -449,8 +666,6 @@ var _angular = require('angular');
 var _angular2 = _interopRequireDefault(_angular);
 
 require('../app-core/index');
-
-// import '../app-user/index';
 
 var _controllersCategoryController = require('./controllers/category.controller');
 
@@ -476,13 +691,9 @@ var _servicesRecipeService = require('./services/recipe.service');
 
 var _servicesRecipeService2 = _interopRequireDefault(_servicesRecipeService);
 
-// import DashboardService from '../app-user/services/dashboard.service';
-
 _angular2['default'].module('app.recipes', ['app.core']).controller('CategoryController', _controllersCategoryController2['default']).controller('AddRecipeController', _controllersAddRecipeController2['default']).controller('SingleRecipeController', _controllersSingleRecipeController2['default']).controller('DirectionsController', _controllersDirectionsController2['default']).controller('IngredientsController', _controllersIngredientsController2['default']).service('RecipeService', _servicesRecipeService2['default']);
 
-// .service('DashboardService', DashboardService)
-
-},{"../app-core/index":2,"./controllers/add-recipe.controller":7,"./controllers/category.controller":8,"./controllers/directions.controller":9,"./controllers/ingredients.controller":10,"./controllers/singleRecipe.controller":11,"./services/recipe.service":13,"angular":22}],13:[function(require,module,exports){
+},{"../app-core/index":2,"./controllers/add-recipe.controller":12,"./controllers/category.controller":13,"./controllers/directions.controller":14,"./controllers/ingredients.controller":15,"./controllers/singleRecipe.controller":16,"./services/recipe.service":18,"angular":27}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -496,7 +707,7 @@ var RecipeService = function RecipeService($http, SERVER, $cookies) {
   this.getCategories = getCategories;
   this.getRecipe = getRecipe;
   this.addRecipe = addRecipe;
-  this.searchApi = searchApi;
+  this.apiRecipe = apiRecipe;
 
   function Recipe(recipeObj) {
     this.name = recipeObj.name;
@@ -555,10 +766,12 @@ var RecipeService = function RecipeService($http, SERVER, $cookies) {
     });
   }
 
-  function searchApi(query) {
+  //Get Recipe from API
+  function apiRecipe(id) {
     var token = $cookies.get('auth-token');
+    console.log(id);
     return $http({
-      url: url + '/api/recipes/search?' + 'query=' + query,
+      url: url + '/api/recipes' + '/' + id,
       method: 'GET',
       headers: {
         auth_token: token
@@ -572,7 +785,7 @@ RecipeService.$inject = ['$http', 'SERVER', '$cookies'];
 exports['default'] = RecipeService;
 module.exports = exports['default'];
 
-},{}],14:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -608,7 +821,7 @@ DashboardController.$inject = ['$scope', 'DashboardService', '$state'];
 exports['default'] = DashboardController;
 module.exports = exports['default'];
 
-},{}],15:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -629,7 +842,7 @@ var _servicesDashboardService2 = _interopRequireDefault(_servicesDashboardServic
 
 _angular2['default'].module('app.user', ['app.core']).controller('DashboardController', _controllersDashboardController2['default']).service('DashboardService', _servicesDashboardService2['default']);
 
-},{"../app-core/index":2,"./controllers/dashboard.controller":14,"./services/dashboard.service":16,"angular":22}],16:[function(require,module,exports){
+},{"../app-core/index":2,"./controllers/dashboard.controller":19,"./services/dashboard.service":21,"angular":27}],21:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -680,7 +893,7 @@ DashboardService.$inject = ['$http', 'SERVER', '$cookies'];
 exports['default'] = DashboardService;
 module.exports = exports['default'];
 
-},{}],17:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 // Core Files
 'use strict';
 
@@ -710,12 +923,14 @@ require('./app-user/index');
 
 require('./app-recipes/index');
 
+require('./app-external/index');
+
 // Start it up
 (0, _jquery2['default'])(document).foundation();
 
 // Set up a run block on an angular module to help with
 // loading foundation after templates load
-_angular2['default'].module('app', ['app.core', 'app.layout', 'app.user', 'app.recipes']).run(function (HomeService, $rootScope) {
+_angular2['default'].module('app', ['app.core', 'app.layout', 'app.user', 'app.recipes', 'app.external']).run(function (HomeService, $rootScope) {
 
   // $stateChangeSuccess comes from Ui Router
   $rootScope.$on('$stateChangeSuccess', function () {
@@ -730,7 +945,7 @@ _angular2['default'].module('app', ['app.core', 'app.layout', 'app.user', 'app.r
 
 console.log('Hello, World');
 
-},{"./app-core/index":2,"./app-layout/index":5,"./app-recipes/index":12,"./app-user/index":15,"angular":22,"angular-ui-router":20,"foundation":23,"jquery":24}],18:[function(require,module,exports){
+},{"./app-core/index":2,"./app-external/index":6,"./app-layout/index":10,"./app-recipes/index":17,"./app-user/index":20,"angular":27,"angular-ui-router":25,"foundation":28,"jquery":29}],23:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.8
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -1053,11 +1268,11 @@ angular.module('ngCookies').provider('$$cookieWriter', function $$CookieWriterPr
 
 })(window, window.angular);
 
-},{}],19:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 require('./angular-cookies');
 module.exports = 'ngCookies';
 
-},{"./angular-cookies":18}],20:[function(require,module,exports){
+},{"./angular-cookies":23}],25:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.15
@@ -5428,7 +5643,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],21:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.8
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -34447,11 +34662,11 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],22:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":21}],23:[function(require,module,exports){
+},{"./angular":26}],28:[function(require,module,exports){
 (function (global){
 ; var __browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 !function($) {
@@ -41892,7 +42107,7 @@ Foundation.plugin(ResponsiveToggle, 'ResponsiveToggle');
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],24:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 (function (global){
 ; var __browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 /*!
@@ -51112,7 +51327,7 @@ return jQuery;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}]},{},[17])
+},{}]},{},[22])
 
 
 //# sourceMappingURL=main.js.map

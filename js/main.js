@@ -12,6 +12,7 @@ import './app-core/index';
 import './app-layout/index';
 import './app-user/index';
 import './app-recipes/index';
+import './app-external/index';
 
 // Start it up
 $(document).foundation();
@@ -19,7 +20,7 @@ $(document).foundation();
 // Set up a run block on an angular module to help with 
 // loading foundation after templates load
 angular
-  .module('app', [ 'app.core', 'app.layout', 'app.user', 'app.recipes'])
+  .module('app', [ 'app.core', 'app.layout', 'app.user', 'app.recipes', 'app.external'])
   .run( function (HomeService, $rootScope) {
 
     // $stateChangeSuccess comes from Ui Router

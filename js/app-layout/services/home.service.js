@@ -76,6 +76,18 @@ let HomeService = function($http, SERVER, $cookies, $state) {
       }
     });
   };
+
+  // this.getCategories = function() {
+  //   let token = $cookies.get('auth-token');
+  //   return $http({
+  //     url: url + '/categories',
+  //     method: 'GET',
+  //     headers: {
+  //       auth_token: token
+  //     }
+  //   });
+  // };
+
 };
 
 HomeService.$inject = ['$http', 'SERVER', '$cookies', '$state'];

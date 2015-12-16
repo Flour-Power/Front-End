@@ -1,0 +1,36 @@
+<div class="singleRecipe">
+
+
+
+  <div id="mainPhoto" style="background-image: url( {{ vm.recipe.source_image_url }} ) ">
+     <h3>{{ vm.recipe.name}}</h3>
+  </div>
+  
+    <div id="recipe"class="row">
+      <!-- Populating Ingredients from IngredientsController -->
+       <div class="ingredients shrink columns" ng-controller="IngredientsController as ingredients">
+        <h4>Ingredients</h4>
+        <p ng-repeat="ingredient in ingredients">
+          {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
+        </p>
+       </div>
+
+      <!-- Populating Directions from DirectionsController -->
+       <div class="directions columns" ng-controller="DirectionsController as directions">
+        <h4>Directions</h4>
+        <p ng-repeat="directions in directions">
+          {{ directions }}
+        </p>
+       </div>
+
+     </div>
+
+</div>
+
+<footer class"categories">
+  <ul ng-controller="DashboardController">
+    <li ng-repeat="category in vm.categories"> 
+    <a href="#/category/{{ category.id }}">{{ category.name }}</a>
+    </li>
+  </ul>
+</footer>
