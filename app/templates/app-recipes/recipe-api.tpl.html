@@ -27,10 +27,13 @@
 
 </div>
 
-<footer class"categories">
-  <ul ng-controller="DashboardController">
-    <li ng-repeat="category in vm.categories"> 
-    <a href="#/category/{{ category.id }}">{{ category.name }}</a>
+<div class="bottom">
+  <ul class="categories">
+    <li class="category" ng-repeat="category in vm.categories"> 
+      <a id="category" href="#/category/{{ category.id }}">  
+        {{ category.name }}
+      </a>
     </li>
   </ul>
-</footer>
+</div>
+

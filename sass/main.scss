@@ -43,12 +43,14 @@ p {
 }
 a {
   color: $lightAccent;
-
+  :hover {
+    color: $highlight;
+  }
 }
 
   #page p {
     color: $fontColor;
-    border: 3px solid $highlight;
+    border: 2px solid $highlight;
     box-shadow: $textShadow;
     font-size: 1.4em;
     font-weight: 300;
@@ -74,23 +76,21 @@ a {
     color: $fontColor;
   }
   #right{
-    // clear: right;
     float: right;
     margin-top: 1.4em;
     a {
       color: $fontColor;
-      font-size: 1.4em;
+      font-size: 1.5em;
       margin: 0.7em 1em;
     }
     #create {
-      border: 1px solid $fontColor;
-      border-radius: 10px;
-      box-shadow: $textShadow2;
+      // border: 1px solid $fontColor;
+      // border-radius: 10px;
+      // box-shadow: $textShadow2;
       padding: 6px;
     }
   }
   #search {
-    background: blue;
     display: inline-block;
     float: left;
     height: 0;
@@ -103,13 +103,15 @@ a {
     }
     input{
       bottom: 0;
-      border: 1px solid $topbar-background;
-      color: $highlight;
-      background: $lightAccent;
+      border: none;
+      color: transparent;
+      background: transparent;
+      ;
       font-size: 1.6em;
       width: 100%;
       height: 2.94em;
-
+      margin-bottom: 0;
+      padding: 30px;
       }
       input:focus {
         color: $fontColor;
@@ -152,41 +154,95 @@ div .page-title {
       box-sizing: border-box;
       z-index: 1;
     }
-    .title {
-      position: relative;
-      text-align: center;
-      z-index: 4;
-      color: $fontColor;
-       span {
-        float: left;
-        text-align: left;
-        display: inline-block;
-        margin: 4.5em .7em;
-        font: 400 1.2em 'Raleway';
-        letter-spacing: -.03em;
-        text-shadow: $textShadow;
-      }
-    }
-    .backshade {
-      background-image: linear-gradient(to bottom,rgba(.6,0,0,0)10%,rgba(0,0,0,.8)100%);
-      box-sizing: border-box;
-      background-size: cover;
-      display: block;
-      height: 100%;
-      opacity: 1;
-      position: absolute;
-      padding-bottom: 70%;
-      z-index: 2;
-      width: 16em;
-      transition: background-color .25s;
-      overflow: hidden;
-      vertical-align: baseline;
-
-    }
-
   }
-
+  .title {
+    position: relative;
+    text-align: center;
+    z-index: 4;
+    color: $fontColor;
+     span {
+      float: left;
+      text-align: left;
+      display: inline-block;
+      margin: 4.5em .7em;
+      font: 400 1.2em 'Raleway';
+      letter-spacing: -.03em;
+      text-shadow: $textShadow;
+    }
+  }
+  #backshade {
+    background-image: linear-gradient(to bottom,rgba(.6,0,0,0)10%,rgba(0,0,0,.8)100%);
+    box-sizing: border-box;
+    background-size: cover;
+    display: block;
+    height: 100%;
+    opacity: 1;
+    position: absolute;
+    padding-bottom: 70%;
+    z-index: 2;
+    width: 16em;
+    overflow: hidden;
+    vertical-align: baseline;
+  }
 }
+
+#singleRecipe {
+  width: 100%;
+  margin: 0;
+  position: absolute;
+  top: 4.6em;
+  li {
+    border-radius: $cellBorderRadius;
+    height: 450px;
+    margin-top: -25px;
+    overflow: hidden;
+    width: 100%;
+
+    .mainPhoto {
+      display: block;
+      position: relative;
+      padding-bottom: 75%;
+      height: 0;
+      background-size: cover;
+      background-position: 70% 50%;
+      box-sizing: border-box;
+      margin-top: 0;
+      top: 0;
+      z-index: 1;
+    }
+  }
+  .name {
+    position: relative;
+    text-align: center;
+    z-index: 4;
+    span {
+      color: $fontColor;
+      float: left;
+      text-align: center;
+      display: inline-block;
+      margin: 3em .7em;
+      font: 400 3.2em 'Raleway';
+      letter-spacing: -.03em;
+      text-shadow: $textShadow;
+    }
+  }
+  #shade {
+     background-image: linear-gradient(to bottom,rgba(0,0,0,0)0,rgba(0,0,0,.8)100%);
+    box-sizing: border-box;
+    background-size: cover;
+    display: block;
+    height: 100%;
+    margin-top: 10px;
+    opacity: 1;
+    position: absolute;
+    padding-bottom: 5%;
+    z-index: 2;
+    width: 100%;
+    overflow: hidden;
+    vertical-align: baseline;
+  }
+}
+
 .home {
   @include absolute-center;
   //background-image: url('../photos/GYEIFHUP3O.jpg'); 
@@ -213,79 +269,45 @@ div .page-title {
   margin: 25px auto;
 }
 
-
-.dashboard {
-  // .row {
-  //   margin: 40px auto;
-  //   padding: 10px;
-  //   .recipe {
-  //     margin: 10px;
-  //     border: $cellBorder;
-  //     border-radius: $cellBorderRadius;
-  //     height: 10em;
-  //   }
-  // }
-  // .title {
-  //   text-align: center;
-  //   a {
-  //     color: $lightAccent;
-  //   }
-  // }
-}
-
-//  #card .row #recipe-title .ng-binding{
-//     color: green; 
-// }
-
-div #mainPhoto {
-  padding: 200px 0;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  background-attachment: scroll;
-  img.ng-scope{
-  }
-}
-
-
-
-div .singleRecipe .ng-scope{
+div #recipe {
+  @include outer-container;
+  background: $blueOpacity;
   color: $fontColor;
-  border-bottom: 1px solid $lightAccent;
-  margin-bottom: 0px;
-  margin-left: 15px;
-  overflow: hidden;
-  width: 100%;
+  display: block;
+  margin: 450px auto 40px auto;
+  // z-index: 20 !important;
   .heading {
     border-bottom: 1px solid $fontColor;
     color: $fontColor;
-    margin-left: 15px;
+    padding: 15px 0;
     width: 100%;
-    }
-    h4 {
-      margin-bottom: 0px;
-      padding: 15px 0;
-    }
-  p {
-    padding: 17px 10px 17px 0;
   }
-}  
-  
-
-
-div #recipe.row{
-  @include foundation-flex-grid;
-  
-  div.ingredients.shrink.columns.ng-scope {
-    background: $blueOpacity; 
+  h4 {
+    font-weight: 200;
+  }
+  .ingredients {
+    @include span-columns(4);
+    // background: $blueOpacity; 
     width: auto;
-    mrgin: 10px;
-    padding: 0px;
+    margin: 10px;
+    padding: 30px;
+    p {
+      border-bottom: 1px solid $lightAccent;
+      margin: 0;
+    }
   }
   .directions {
-    background: $blueOpacity;     
-    padding: 0px;
+    @include span-columns(8);
+    @include omega();
+    // background: $blueOpacity;
+    margin: 10px;     
+    padding: 30px;
+    p {
+      border-bottom: 1px solid $lightAccent;
+      margin: 0;
+    }
   }
+
 }
 .addRecipeForm {
   width: 800px;
@@ -310,9 +332,10 @@ div #recipe.row{
   }
 
   footer {
-    margin-bottom: 0;
-    border-top: 3px solid $highlight;
+    border-top: 2px solid $highlight;
+    bottom: 0;
     padding: 30px 0 20px 10px;
+    // position: absolute;
     box-shadow: $textShadow2;
     span {
       color: $highlight;
