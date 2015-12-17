@@ -1,14 +1,19 @@
-
+<div class="landing">
 <div class="home">
-  <h1 class="title">FlourPower</h1>
+  <div class="main-logo">
+    <img src="../photos/logobig.png">
+  </div>
+<!--   <h1 class="title">FlourPower</h1> -->
   <form ng-submit="login(user)">
-    <input type="text" placeholder="email" ng-model="user.email">
-    <input placeholder="password" ng-model="user.password" type="password">
+    <input type="text" placeholder="Email" ng-model="user.email">
+    <input placeholder="Password" ng-model="user.password" type="password">
     <div>
-      <a href="#/dashboard" ng-click="register(user)">Get Started</a> |
-      <a href="#/dashboard" ng-click="login(user)">Login</a>
+      <a class="login" href="#/dashboard" ng-click="login(user)">Login</a>
+      <a class="reg" href="#/dashboard" ng-click="register(user)">Register</a> 
+      
     </div>
   </form>
+</div>
 </div>
 
   

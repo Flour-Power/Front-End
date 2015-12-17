@@ -17,7 +17,8 @@ $themeColor: #44A19E;
 $fontColor: white;
 $highlight: #2E706B;
 $lightAccent: #86D3CE;
-$topbar-background: #4DB3AB;
+$topbar-background: url('../photos/gradient.png');
+
 
 $textShadow: 0 1px 5px rgba(0,0,0,.7);
 $textShadow2: 0 1px 5px rgba(0,0,0,.6);
@@ -34,6 +35,7 @@ body {
   font-family: 'Raleway', sans-serif;
   font-weight: 200;
   background: $dashboardColor;
+  // background-image: url('../photos/gradient.png'); 
   text-shadow: $textShadow;
 }
 
@@ -66,6 +68,7 @@ a {
   background: $topbar-background;
   padding: 0 0.5em;
   position: relative;
+  width: 100%;
 
   .title-area{
     // clear: left;
@@ -245,25 +248,71 @@ div .page-title {
   }
 }
 
+.landing {
+  width: 100%;
+
+}
 .home {
   @include absolute-center;
-  //background-image: url('../photos/GYEIFHUP3O.jpg'); 
+  // background-image: url('../photos/IMG_5395.jpg'); 
   background: transparent;
   color: white;
   text-align: center;
-  border: $cellBorder;
-  border-radius: $cellBorderRadius;
+  // border: $cellBorder;
+  // border-radius: $cellBorderRadius;
   width: 50%;
   padding: 40px;
   box-sizing: border-box;
-  h1 {
-    color: white;
-    font-family: 'Cookie', cursive;
-    text-align: center;
-    font-size: 6em;
-    font-weight: bold;
+  .main-logo {
+    background: $greenOpacity;
+    border-radius: $cellBorderRadius;
+    padding: 20px 40px;
+    margin-bottom: 5px;
   }
+  form {
+    background: $topbar-background;
+    background-position: 20% 10%;
+    border: 1px solid $topbar-background;
+    border-radius: 0 0 3px 3px;
+    padding: 30px 60px;
+    input{
+      bottom: 0;
+      border: none;
+      border-radius: 5px;
+      color: $greenOpacity;
+      background: $lightAccent;
+      font-size: 1.4  em;
+      width: 100%;
+      height: 3em;
+      margin-bottom: 15px;
+      padding: 20px;
+    }
+    input:focus {
+      color: $dashboardColor;
+    }
+  }
+
+  a {
+    padding: 10px;
+    border: 1px solid #2B6546;
+    border-radius: 5px;
+    .reg {
+    background: transparent;  
+    color: $greenOpacity;
+    }
+  }
+      .login {
+      background: #2B6546;
+    }
+  // h1 {
+  //   color: white;
+  //   font-family: 'Cookie', cursive;
+  //   text-align: center;
+  //   font-size: 6em;
+  //   font-weight: bold;
+  // }
 }
+
 
 
 .register {
