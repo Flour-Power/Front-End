@@ -119,6 +119,7 @@ a {
 .container {
   display: block;
   margin: 20px auto;
+  height: 700px;
   width: 100%;
 }
 //For search
@@ -130,9 +131,9 @@ div .page-title {
     width: 90%;
   }
 }
-#dash {
+#dash, #category-recipes, #results {
   @include outer-container;
-  padding-top: 10px;
+  padding-top: 30px;
   width: 90%;
   li {
     @include span-columns(3);
@@ -309,6 +310,7 @@ div #recipe.row{
   }
 
   footer {
+    margin-bottom: 0;
     border-top: 3px solid $highlight;
     padding: 30px 0 20px 10px;
     box-shadow: $textShadow2;

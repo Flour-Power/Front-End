@@ -583,6 +583,7 @@ var CategoryController = function CategoryController($scope, $stateParams, Recip
   var vm = this;
 
   vm.catRecipes = [];
+  vm.categories = [];
 
   activate();
 
@@ -590,7 +591,12 @@ var CategoryController = function CategoryController($scope, $stateParams, Recip
 
     RecipeService.getCategoryRecipes($stateParams.id).then(function (res) {
       vm.catRecipes = res.data.recipes;
-      console.log('Recipes In This Category:', vm.catRecipes);
+      console.log('Recipes In This Category:', res);
+    });
+
+    RecipeService.getCategories().then(function (res) {
+      vm.categories = res.data.categories;
+      console.log('Kategories:', vm.categories);
     });
   }
 };

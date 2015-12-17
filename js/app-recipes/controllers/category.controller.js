@@ -3,6 +3,7 @@ let CategoryController = function($scope, $stateParams, RecipeService, $state) {
   let vm = this;
 
   vm.catRecipes = [];
+  vm.categories = [];
   
   activate();
 
@@ -11,7 +12,12 @@ let CategoryController = function($scope, $stateParams, RecipeService, $state) {
   
     RecipeService.getCategoryRecipes($stateParams.id).then( (res) => { 
       vm.catRecipes = res.data.recipes;
-      console.log('Recipes In This Category:', vm.catRecipes);
+      console.log('Recipes In This Category:', res);
+    }); 
+
+    RecipeService.getCategories().then( (res) => { 
+      vm.categories = res.data.categories;
+      console.log('Kategories:', vm.categories);
     }); 
   }
 

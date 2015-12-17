@@ -3398,6 +3398,7 @@ a {
 .container {
   display: block;
   margin: 20px auto;
+  height: 700px;
   width: 100%; }
 
 div .page-title {
@@ -3407,18 +3408,18 @@ div .page-title {
     padding: 17px 10px 17px 0;
     width: 90%; }
 
-#dash {
+#dash, #category-recipes, #results {
   max-width: 68em;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 10px;
+  padding-top: 30px;
   width: 90%; }
-  #dash::before, #dash::after {
+  #dash::before, #dash::after, #category-recipes::before, #category-recipes::after, #results::before, #results::after {
     content: ' ';
     display: table; }
-  #dash::after {
+  #dash::after, #category-recipes::after, #results::after {
     clear: both; }
-  #dash li {
+  #dash li, #category-recipes li, #results li {
     float: left;
     display: block;
     margin-right: 2.35765%;
@@ -3426,13 +3427,13 @@ div .page-title {
     border-radius: 3px 3px 0 0;
     height: 220px;
     overflow: hidden; }
-    #dash li:last-child {
+    #dash li:last-child, #category-recipes li:last-child, #results li:last-child {
       margin-right: 0; }
-    #dash li:nth-child(4n) {
+    #dash li:nth-child(4n), #category-recipes li:nth-child(4n), #results li:nth-child(4n) {
       margin-right: 0; }
-    #dash li:nth-child(4n+1) {
+    #dash li:nth-child(4n+1), #category-recipes li:nth-child(4n+1), #results li:nth-child(4n+1) {
       clear: left; }
-    #dash li .picture {
+    #dash li .picture, #category-recipes li .picture, #results li .picture {
       border-radius: 3px 3px 0 0;
       display: block;
       position: relative;
@@ -3441,12 +3442,12 @@ div .page-title {
       background-size: cover;
       box-sizing: border-box;
       z-index: 1; }
-    #dash li .title {
+    #dash li .title, #category-recipes li .title, #results li .title {
       position: relative;
       text-align: center;
       z-index: 4;
       color: white; }
-      #dash li .title span {
+      #dash li .title span, #category-recipes li .title span, #results li .title span {
         float: left;
         text-align: left;
         display: inline-block;
@@ -3454,7 +3455,7 @@ div .page-title {
         font: 400 1.2em 'Raleway';
         letter-spacing: -.03em;
         text-shadow: 0 1px 5px rgba(0, 0, 0, 0.7); }
-    #dash li .backshade {
+    #dash li .backshade, #category-recipes li .backshade, #results li .backshade {
       background-image: linear-gradient(to bottom, rgba(1, 0, 0, 0) 10%, rgba(0, 0, 0, 0.8) 100%);
       box-sizing: border-box;
       background-size: cover;
@@ -3791,6 +3792,7 @@ div #recipe.row .directions {
       text-shadow: 0 1px 5px rgba(0, 0, 0, 0.7); }
 
 footer {
+  margin-bottom: 0;
   border-top: 3px solid #2E706B;
   padding: 30px 0 20px 10px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.6); }

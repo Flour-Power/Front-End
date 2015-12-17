@@ -2,17 +2,58 @@
   <p>Search Results for... " {{ query }} "</p>
 </div>
 
-<div class="dashboard">
-  <div class="row align-center" ng-controller="SearchController as results" >
-    
-    <div class="recipe small-10 medium-4 large-3 columns" ng-repeat="results in vm.searchResults">
-      <div  style="background-image: url( {{ results.source_image_url }} )">
 
-        <p class="title" >
-          <a href="#/api/recipes/{{ results.id }}">{{ results.name }}</a>
-        </p>
+<ul id="results"  ng-controller="SearchController as results">
+
+    <li ng-repeat="results in vm.searchResults" ng-if="results.source_image_url" >
+      <div class="wrapper">
+        <a href="#/api/recipes/{{ results.id }}">
+          <div class="title">
+            <span>{{ results.name }}</span>
+          </div>
+          <div class="picture" ng-style="{'background-image':'url( {{ results.source_image_url }} )'}" >
+            <div class="backshade"></div>
+           
+          </div>
+          
+        </a>
       </div>
+    </li>
 
-    </div>
-  </div>
+  </ul>
+
+
+<div class"bottom">
+  <ul class="categories">
+    <li class="category"> 
+      <a id="category" href="#/category/1">  
+        Drinks
+      </a>
+    </li>
+    <li class="category"> 
+      <a id="category" href="#/category/2">  
+        Appetizers
+      </a>
+    </li>
+    <li class="category"> 
+      <a id="category" href="#/category/3">  
+        Main Courses
+      </a>
+    </li>
+    <li class="category"> 
+      <a id="category" href="#/category/4">  
+        Desserts
+      </a>
+    </li>
+    <li class="category"> 
+      <a id="category" href="#/category/5">  
+        Salads and Soups
+      </a>
+    </li>
+    <li class="category"> 
+      <a id="category" href="#/category/6">  
+        Side Dishes
+      </a>
+    </li>
+  </ul>
 </div>
