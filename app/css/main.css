@@ -1,4 +1,10 @@
 @charset "UTF-8";
+html {
+  box-sizing: border-box; }
+
+*, *::after, *::before {
+  box-sizing: inherit; }
+
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
  * 1. Set default font family to sans-serif.
@@ -3314,7 +3320,13 @@ table.hover tr:nth-of-type(even):hover {
 body {
   font-family: 'Raleway', sans-serif;
   font-weight: 200;
-  background: #202020; }
+  background: url("../photos/GYEIFHUP3O.jpg"); }
+  body #category {
+    color: #86D3CE;
+    font-size: 1.2em;
+    font-weight: 400 !important;
+    padding: 10px;
+    text-align: center !important; }
 
 li {
   list-style: none; }
@@ -3324,6 +3336,14 @@ p {
 
 a {
   color: #86D3CE; }
+
+#page p {
+  color: white;
+  border: 2px solid #36827C;
+  font-size: 1.4em;
+  margin: 20px auto;
+  padding: 17px;
+  width: 80%; }
 
 .top-bar {
   padding: 0.5rem;
@@ -3356,17 +3376,20 @@ a {
       margin: 0.7em 1em; }
     .top-bar #right #create {
       border: 1px solid white;
-      border-radius: 9px;
-      padding: 10px; }
+      border-radius: 10px;
+      padding: 6px; }
   .top-bar #search {
     background: blue;
     display: inline-block;
+    float: left;
     height: 0;
-    margin: 0 5em;
-    width: 400px; }
+    margin: 0 0 0 3em;
+    overflow: visible;
+    width: 25%; }
     .top-bar #search form #search-bar {
       background: orange;
-      display: inline-block; }
+      display: inline-block;
+      z-index: 2; }
     .top-bar #search input {
       bottom: 0;
       border: none;
@@ -3374,13 +3397,80 @@ a {
       background: #86D3CE;
       font-size: 1.6em;
       width: 100%;
-      height: 2.9em; }
+      height: 2.95em; }
     .top-bar #search input:focus {
       color: white; }
 
 .container {
   display: block;
-  margin: 20px auto; }
+  margin: 20px auto;
+  width: 100%; }
+
+div .page-title {
+  color: white; }
+  div .page-title p {
+    border: 2px solid blue;
+    padding: 17px 10px 17px 0;
+    width: 90%; }
+
+#hadiya {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto; }
+  #hadiya::before, #hadiya::after {
+    content: ' ';
+    display: table; }
+  #hadiya::after {
+    clear: both; }
+  #hadiya li {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 23.23176%;
+    border-radius: 3px 3px 0 0;
+    height: 220px;
+    overflow: hidden; }
+    #hadiya li:last-child {
+      margin-right: 0; }
+    #hadiya li:nth-child(4n) {
+      margin-right: 0; }
+    #hadiya li:nth-child(4n+1) {
+      clear: left; }
+    #hadiya li .picture {
+      border-radius: 3px 3px 0 0;
+      display: block;
+      position: relative;
+      padding-bottom: 75%;
+      height: 0;
+      background-size: cover;
+      box-sizing: border-box;
+      z-index: 1; }
+    #hadiya li .title {
+      position: relative;
+      text-align: center;
+      z-index: 4;
+      color: white; }
+      #hadiya li .title span {
+        float: left;
+        text-align: left;
+        display: inline-block;
+        margin: 4.5em .7em;
+        font: 400 1.2em 'Raleway';
+        text-shadow: 0 1px 5px rgba(0, 0, 0, 0.7); }
+    #hadiya li .backshade {
+      background-image: linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, 0.6) 100%);
+      box-sizing: border-box;
+      background-size: cover;
+      display: block;
+      height: 100%;
+      opacity: 1;
+      position: absolute;
+      padding-bottom: 70%;
+      z-index: 2;
+      width: 16em;
+      transition: background-color .25s;
+      overflow: hidden;
+      vertical-align: baseline; }
 
 .home {
   position: absolute;
@@ -3391,7 +3481,7 @@ a {
   color: white;
   text-align: center;
   border: 2px solid #202020;
-  border-radius: 9px;
+  border-radius: 3px 3px 0 0;
   width: 50%;
   padding: 40px;
   box-sizing: border-box; }
@@ -3406,35 +3496,12 @@ a {
   width: 800px;
   margin: 25px auto; }
 
-div .page-title {
-  color: white; }
-  div .page-title p {
-    border: 2px solid blue;
-    padding: 17px 10px 17px 0; }
-
-.dashboard .row {
-  margin: 40px auto;
-  padding: 10px; }
-  .dashboard .row .recipe {
-    margin: 10px;
-    border: 2px solid #202020;
-    border-radius: 9px;
-    height: 10em; }
-
-.dashboard .title {
-  text-align: center; }
-  .dashboard .title a {
-    color: #86D3CE; }
-
-#card .row #recipe-title .ng-binding {
-  color: green; }
-
 div #mainPhoto {
   padding: 200px 0;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  background-attachment: fixed; }
+  background-attachment: scroll; }
 
 div .singleRecipe .ng-scope {
   color: white;
@@ -3453,14 +3520,6 @@ div .singleRecipe .ng-scope {
     padding: 15px 0; }
   div .singleRecipe .ng-scope p {
     padding: 17px 10px 17px 0; }
-
-#page p {
-  color: white;
-  border: 4px solid #36827C;
-  font-size: 1.4em;
-  margin: 20px auto;
-  padding: 17px;
-  width: 85%; }
 
 div #recipe.row .row {
   max-width: 75rem;
@@ -3720,11 +3779,5 @@ div #recipe.row .directions {
 .addRecipeForm {
   width: 800px;
   margin: auto; }
-
-#category {
-  color: #86D3CE;
-  font-size: 1.3em;
-  font-weight: 500;
-  padding: 10px; }
 
 /*# sourceMappingURL=main.css.map */

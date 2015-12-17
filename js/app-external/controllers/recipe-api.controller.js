@@ -3,7 +3,7 @@ let ApiRecipeController = function($scope, $stateParams, RecipeService, $state) 
   let vm = this;
 
   vm.recipe = [];
-  vm.resultNames = [];
+
   
 
   activate();
@@ -19,6 +19,7 @@ let ApiRecipeController = function($scope, $stateParams, RecipeService, $state) 
       vm.categories = res.data.categories;
       console.log('categories:', vm.categories);
     });
+    
   }
 
 };

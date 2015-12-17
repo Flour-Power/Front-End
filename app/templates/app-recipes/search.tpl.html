@@ -3,10 +3,10 @@
 </div>
 
 <div class="dashboard">
-  <div class="row align-center" ng-controller="SearchController as results" class="search">
+  <div class="row align-center" ng-controller="SearchController as results" >
     
     <div class="recipe small-10 medium-4 large-3 columns" ng-repeat="results in vm.searchResults">
-      <div  style="background-image: url( {{ results.source_image_url }} )" >
+      <div  style="background-image: url( {{ results.source_image_url }} )">
 
         <p class="title" >
           <a href="#/api/recipes/{{ results.id }}">{{ results.name }}</a>

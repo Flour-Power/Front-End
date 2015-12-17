@@ -17,14 +17,18 @@
   
 
 </nav>
+<div ui-view>
+  <div class="dashboard" id="page">
+    <p>{{ vm.message }}</p>
+  </div>
 
-<section class="container" ui-view></section>
+  <section class="container" ></section>
 
-<footer>
-  <ul>
-    <li ng-repeat="category in vm.categories"> 
-    <a href="#/category/{{ category.id }}">*{{ category.name }}</a>
-    </li>
-  </ul>
-</footer>
-
+  <footer>
+    <ul>
+      <li ng-repeat="category in vm.categories"> 
+      <a href="#/category/{{ category.id }}">*{{ category.name }}</a>
+      </li>
+    </ul>
+  </footer>
+</div>

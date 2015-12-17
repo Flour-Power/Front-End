@@ -6,7 +6,7 @@ let DashboardController = function($scope, DashboardService, $state) {
   vm.categories = [];
   vm.categoryNames = [];
 
-  vm.message = 'hello';
+  vm.message = 'Dashboard';
 
   activate();
 

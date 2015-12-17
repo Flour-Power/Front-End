@@ -7,6 +7,7 @@ let RecipeService = function($http, SERVER, $cookies) {
   this.getRecipe          = getRecipe;
   this.addRecipe          = addRecipe;
   this.apiRecipe          = apiRecipe;
+  this.forkRecipe         = forkRecipe;
 
   function Recipe (recipeObj) {
     this.name        = recipeObj.name;
@@ -73,6 +74,19 @@ let RecipeService = function($http, SERVER, $cookies) {
     return $http({
       url: url + '/api/recipes' + '/' + id,
       method: 'GET',
+      headers: {
+        auth_token: token
+      }
+    });
+  }
+  //Save Recipe from API
+  function forkRecipe() {
+    let token = $cookies.get('auth-token');
+    let r = new Recipe(recipeObj);
+
+    return $http({
+      url: url + '/api/recipes/import',
+      method: 'POST',
       headers: {
         auth_token: token
       }

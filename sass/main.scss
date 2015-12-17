@@ -1,7 +1,11 @@
+@import "bourbon";
+@import "neat";
 @import "foundation";
-     
+
 @include foundation-everything;
 @include foundation-flex-grid;
+
+
 
 $blueOpacity: url('../photos/blueopacity-1.png');
 $greenOpacity: url('../photos/greenopacity-1.png');
@@ -17,7 +21,7 @@ $topbar-background: #4DB3AB;
 
 
 $cellBorder: 2px solid $dashboardColor;
-$cellBorderRadius: 9px;
+$cellBorderRadius: 3px 3px 0 0;
 
 $mainImage: url('../photos/GYEIFHUP3O.jpg');
 
@@ -25,7 +29,14 @@ $mainImage: url('../photos/GYEIFHUP3O.jpg');
 body {
   font-family: 'Raleway', sans-serif;
   font-weight: 200;
-  background: $dashboardColor;
+  background: $mainImage;
+  #category {
+    color: $lightAccent;
+    font-size: 1.2em;
+    font-weight: 400 !important;
+    padding: 10px;
+    text-align: center !important;
+  }
 }
 li {
   list-style: none;
@@ -35,7 +46,17 @@ p {
 }
 a {
   color: $lightAccent;
+
 }
+
+  #page p {
+    color: white;
+    border: 2px solid $highlight;
+    font-size: 1.4em;
+    margin: 20px auto;
+    padding: 17px;
+    width: 80%;
+  }
 
 .top-bar {
   @include top-bar-container;
@@ -51,32 +72,35 @@ a {
     font-size: 50px;
   }
   #logo {
-    color: white;
+    color: $fontColor;
   }
   #right{
     // clear: right;
     float: right;
     margin-top: 1.4em;
     a {
-      color: white;
+      color: $fontColor;
       font-size: 1.4em;
       margin: 0.7em 1em;
     }
     #create {
-      border: 1px solid white;
-      border-radius: 9px;
-      padding: 10px;
+      border: 1px solid $fontColor;
+      border-radius: 10px;
+      padding: 6px;
     }
   }
   #search {
     background: blue;
     display: inline-block;
+    float: left;
     height: 0;
-    margin: 0 5em;
-    width: 400px;
+    margin: 0 0 0 3em;
+    overflow: visible;
+    width: 25%;
     form #search-bar {
       background: orange;
       display: inline-block;
+      z-index: 2;
     }
     input{
       bottom: 0;
@@ -85,7 +109,8 @@ a {
       background: $lightAccent;
       font-size: 1.6em;
       width: 100%;
-      height: 2.9em;
+      height: 2.95em;
+
       }
       input:focus {
         color: white;
@@ -95,6 +120,74 @@ a {
 .container {
   display: block;
   margin: 20px auto;
+  width: 100%;
+}
+//For search
+div .page-title {
+  color: white;
+  p {
+    border: 2px solid blue;
+    padding: 17px 10px 17px 0;
+    width: 90%;
+  }
+}
+#hadiya {
+  @include outer-container;
+  li {
+    @include span-columns(3);
+    @include omega(4n);
+    border-radius: $cellBorderRadius;
+    height: 220px;
+    overflow: hidden;
+
+    .picture {
+      border-radius: $cellBorderRadius;
+      display: block;
+      position: relative;
+      padding-bottom: 75%;
+      height: 0;
+      background-size: cover;
+      box-sizing: border-box;
+      z-index: 1;
+    }
+    .title {
+      position: relative;
+      text-align: center;
+      z-index: 4;
+      color: $fontColor;
+      // bottom: 5px;
+      // left: 5px;
+       span {
+        float: left;
+        text-align: left;
+        display: inline-block;
+        // z-index: 1 !important;
+        margin: 4.5em .7em;
+        font: 400 1.2em 'Raleway';
+      //   letter-spacing: -.03em;
+      //   color: #fff;
+        text-shadow: 0 1px 5px rgba(0,0,0,.7);
+      }
+    }
+    .backshade {
+      background-image: linear-gradient(to bottom,rgba(0,0,0,0)0,rgba(0,0,0,.6)100%);
+      box-sizing: border-box;
+      background-size: cover;
+      display: block;
+      height: 100%;
+      opacity: 1;
+      position: absolute;
+      padding-bottom: 70%;
+      z-index: 2;
+      width: 16em;
+      transition: background-color .25s;
+      overflow: hidden;
+      vertical-align: baseline;
+
+    }
+
+  }
+
 }
 .home {
   @include absolute-center;
@@ -122,42 +215,36 @@ a {
   margin: 25px auto;
 }
 
-div .page-title {
-  color: white;
-  p {
-    border: 2px solid blue;
-    padding: 17px 10px 17px 0;
-  }
-}
+
 .dashboard {
-  .row {
-    margin: 40px auto;
-    padding: 10px;
-    .recipe {
-      margin: 10px;
-      border: $cellBorder;
-      border-radius: $cellBorderRadius;
-      height: 10em;
-    }
-  }
-  .title {
-    text-align: center;
-    a {
-      color: $lightAccent;
-    }
-  }
+  // .row {
+  //   margin: 40px auto;
+  //   padding: 10px;
+  //   .recipe {
+  //     margin: 10px;
+  //     border: $cellBorder;
+  //     border-radius: $cellBorderRadius;
+  //     height: 10em;
+  //   }
+  // }
+  // .title {
+  //   text-align: center;
+  //   a {
+  //     color: $lightAccent;
+  //   }
+  // }
 }
 
- #card .row #recipe-title .ng-binding{
-    color: green; 
-}
+//  #card .row #recipe-title .ng-binding{
+//     color: green; 
+// }
 
 div #mainPhoto {
   padding: 200px 0;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  background-attachment: fixed;
+  background-attachment: scroll;
   img.ng-scope{
   }
 }
@@ -186,14 +273,7 @@ div .singleRecipe .ng-scope{
   }
 }  
   
-  #page p {
-    color: white;
-    border: 4px solid $highlight;
-    font-size: 1.4em;
-    margin: 20px auto;
-    padding: 17px;
-    width: 85%;
-  }
+
 
 div #recipe.row{
   @include foundation-flex-grid;
@@ -217,13 +297,4 @@ div #recipe.row{
 // .categories {
 //   margin: 40px 30px; 
 // }
-  #category {
-    // border: 2px solid $lightAccent;
-    // border-radius: 9px;
-    color: $lightAccent;
-    font-size: 1.3em;
-    font-weight: 500;
-    
-    padding: 10px;
-    // width: 0.25em;
-  }
+

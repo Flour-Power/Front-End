@@ -137,7 +137,6 @@ var ApiRecipeController = function ApiRecipeController($scope, $stateParams, Rec
   var vm = this;
 
   vm.recipe = [];
-  vm.resultNames = [];
 
   activate();
 
@@ -213,6 +212,7 @@ var RecipeService = function RecipeService($http, SERVER, $cookies) {
   this.getRecipe = getRecipe;
   this.addRecipe = addRecipe;
   this.apiRecipe = apiRecipe;
+  this.forkRecipe = forkRecipe;
 
   function Recipe(recipeObj) {
     this.name = recipeObj.name;
@@ -278,6 +278,19 @@ var RecipeService = function RecipeService($http, SERVER, $cookies) {
     return $http({
       url: url + '/api/recipes' + '/' + id,
       method: 'GET',
+      headers: {
+        auth_token: token
+      }
+    });
+  }
+  //Save Recipe from API
+  function forkRecipe() {
+    var token = $cookies.get('auth-token');
+    var r = new Recipe(recipeObj);
+
+    return $http({
+      url: url + '/api/recipes/import',
+      method: 'POST',
       headers: {
         auth_token: token
       }
@@ -806,7 +819,7 @@ var DashboardController = function DashboardController($scope, DashboardService,
   vm.categories = [];
   vm.categoryNames = [];
 
-  vm.message = 'hello';
+  vm.message = 'Dashboard';
 
   activate();
 
