@@ -3320,16 +3320,8 @@ table.hover tr:nth-of-type(even):hover {
 body {
   font-family: 'Raleway', sans-serif;
   font-weight: 200;
-  background: url("../photos/GYEIFHUP3O.jpg"); }
-  body #category {
-    color: #86D3CE;
-    font-size: 1.2em;
-    font-weight: 400 !important;
-    padding: 10px;
-    text-align: center !important; }
-
-li {
-  list-style: none; }
+  background: #202020;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.7); }
 
 p {
   padding: 17px 10px 17px 0; }
@@ -3339,10 +3331,12 @@ a {
 
 #page p {
   color: white;
-  border: 2px solid #36827C;
+  border: 3px solid #2E706B;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.7);
   font-size: 1.4em;
-  margin: 20px auto;
-  padding: 17px;
+  font-weight: 300;
+  margin: 50px auto 30px auto;
+  padding: 20px 15px;
   width: 80%; }
 
 .top-bar {
@@ -3377,6 +3371,7 @@ a {
     .top-bar #right #create {
       border: 1px solid white;
       border-radius: 10px;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);
       padding: 6px; }
   .top-bar #search {
     background: blue;
@@ -3387,17 +3382,16 @@ a {
     overflow: visible;
     width: 25%; }
     .top-bar #search form #search-bar {
-      background: orange;
       display: inline-block;
       z-index: 2; }
     .top-bar #search input {
       bottom: 0;
-      border: none;
-      color: #36827C;
+      border: 1px solid #4DB3AB;
+      color: #2E706B;
       background: #86D3CE;
       font-size: 1.6em;
       width: 100%;
-      height: 2.95em; }
+      height: 2.94em; }
     .top-bar #search input:focus {
       color: white; }
 
@@ -3413,16 +3407,18 @@ div .page-title {
     padding: 17px 10px 17px 0;
     width: 90%; }
 
-#hadiya {
+#dash {
   max-width: 68em;
   margin-left: auto;
-  margin-right: auto; }
-  #hadiya::before, #hadiya::after {
+  margin-right: auto;
+  padding-top: 10px;
+  width: 90%; }
+  #dash::before, #dash::after {
     content: ' ';
     display: table; }
-  #hadiya::after {
+  #dash::after {
     clear: both; }
-  #hadiya li {
+  #dash li {
     float: left;
     display: block;
     margin-right: 2.35765%;
@@ -3430,13 +3426,13 @@ div .page-title {
     border-radius: 3px 3px 0 0;
     height: 220px;
     overflow: hidden; }
-    #hadiya li:last-child {
+    #dash li:last-child {
       margin-right: 0; }
-    #hadiya li:nth-child(4n) {
+    #dash li:nth-child(4n) {
       margin-right: 0; }
-    #hadiya li:nth-child(4n+1) {
+    #dash li:nth-child(4n+1) {
       clear: left; }
-    #hadiya li .picture {
+    #dash li .picture {
       border-radius: 3px 3px 0 0;
       display: block;
       position: relative;
@@ -3445,20 +3441,21 @@ div .page-title {
       background-size: cover;
       box-sizing: border-box;
       z-index: 1; }
-    #hadiya li .title {
+    #dash li .title {
       position: relative;
       text-align: center;
       z-index: 4;
       color: white; }
-      #hadiya li .title span {
+      #dash li .title span {
         float: left;
         text-align: left;
         display: inline-block;
         margin: 4.5em .7em;
         font: 400 1.2em 'Raleway';
+        letter-spacing: -.03em;
         text-shadow: 0 1px 5px rgba(0, 0, 0, 0.7); }
-    #hadiya li .backshade {
-      background-image: linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, 0.6) 100%);
+    #dash li .backshade {
+      background-image: linear-gradient(to bottom, rgba(1, 0, 0, 0) 10%, rgba(0, 0, 0, 0.8) 100%);
       box-sizing: border-box;
       background-size: cover;
       display: block;
@@ -3779,5 +3776,28 @@ div #recipe.row .directions {
 .addRecipeForm {
   width: 800px;
   margin: auto; }
+
+.categories {
+  margin: 20px auto 60px 10px;
+  width: 100%; }
+  .categories li {
+    box-sizing: border-box;
+    padding: 0 27px;
+    display: inline-block; }
+    .categories li #category {
+      font-size: 1.4em;
+      font-weight: 400 !important;
+      margin: 0 30px;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.7); }
+
+footer {
+  border-top: 3px solid #2E706B;
+  padding: 30px 0 20px 10px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.6); }
+  footer span {
+    color: #2E706B;
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-left: 2em; }
 
 /*# sourceMappingURL=main.css.map */

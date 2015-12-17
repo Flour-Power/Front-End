@@ -4,7 +4,7 @@
 
 <!-- <div class="dashboard"> --> 
 
-  <ul id="hadiya"  ng-controller="DashboardController as recipes">
+  <ul id="dash"  ng-controller="DashboardController as recipes">
 
     <li ng-repeat="recipe in vm.recipes" ng-if="recipe.source_image_url" >
       <div class="wrapper">
@@ -16,9 +16,6 @@
             <div class="backshade"></div>
            
           </div>
-          <!-- <img src="{{ recipe.source_image_url }}"> -->
-
-          
           
         </a>
       </div>
@@ -41,10 +38,11 @@
 
 </div> -->
 
-<div class"categories">
-  <div class="row align-spaced ">
-    <div class="column small-2" ng-repeat="category in vm.categories"> 
-      <a id="category" href="#/category/{{ category.id }}">{{ category.name }}</a>
-    </div>
-  </div>
+<div class"bottom">
+  <ul class="categories">
+    <li class="category" ng-repeat="category in vm.categories"> 
+      <a id="category" href="#/category/{{ category.id }}">  {{ category.name }}
+      </a>
+    </li>
+  </ul>
 </div>

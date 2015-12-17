@@ -15,10 +15,12 @@ $headingBackground: $greenOpacity;
 $mainBackgroundColor: #FAFAF5;
 $themeColor: #44A19E;
 $fontColor: white;
-$highlight: #36827C;
+$highlight: #2E706B;
 $lightAccent: #86D3CE;
 $topbar-background: #4DB3AB;
 
+$textShadow: 0 1px 5px rgba(0,0,0,.7);
+$textShadow2: 0 1px 5px rgba(0,0,0,.6);
 
 $cellBorder: 2px solid $dashboardColor;
 $cellBorderRadius: 3px 3px 0 0;
@@ -29,18 +31,13 @@ $mainImage: url('../photos/GYEIFHUP3O.jpg');
 body {
   font-family: 'Raleway', sans-serif;
   font-weight: 200;
-  background: $mainImage;
-  #category {
-    color: $lightAccent;
-    font-size: 1.2em;
-    font-weight: 400 !important;
-    padding: 10px;
-    text-align: center !important;
-  }
+  background: $dashboardColor;
+  text-shadow: $textShadow;
 }
-li {
-  list-style: none;
-}
+
+// li {
+//   list-style: none;
+// }
 p {
   padding: 17px 10px 17px 0;
 }
@@ -50,11 +47,13 @@ a {
 }
 
   #page p {
-    color: white;
-    border: 2px solid $highlight;
+    color: $fontColor;
+    border: 3px solid $highlight;
+    box-shadow: $textShadow;
     font-size: 1.4em;
-    margin: 20px auto;
-    padding: 17px;
+    font-weight: 300;
+    margin: 50px auto 30px auto;
+    padding: 20px 15px;
     width: 80%;
   }
 
@@ -86,6 +85,7 @@ a {
     #create {
       border: 1px solid $fontColor;
       border-radius: 10px;
+      box-shadow: $textShadow2;
       padding: 6px;
     }
   }
@@ -98,22 +98,21 @@ a {
     overflow: visible;
     width: 25%;
     form #search-bar {
-      background: orange;
       display: inline-block;
       z-index: 2;
     }
     input{
       bottom: 0;
-      border: none;
+      border: 1px solid $topbar-background;
       color: $highlight;
       background: $lightAccent;
       font-size: 1.6em;
       width: 100%;
-      height: 2.95em;
+      height: 2.94em;
 
       }
       input:focus {
-        color: white;
+        color: $fontColor;
       }
   }
 }
@@ -131,8 +130,10 @@ div .page-title {
     width: 90%;
   }
 }
-#hadiya {
+#dash {
   @include outer-container;
+  padding-top: 10px;
+  width: 90%;
   li {
     @include span-columns(3);
     @include omega(4n);
@@ -155,22 +156,18 @@ div .page-title {
       text-align: center;
       z-index: 4;
       color: $fontColor;
-      // bottom: 5px;
-      // left: 5px;
        span {
         float: left;
         text-align: left;
         display: inline-block;
-        // z-index: 1 !important;
         margin: 4.5em .7em;
         font: 400 1.2em 'Raleway';
-      //   letter-spacing: -.03em;
-      //   color: #fff;
-        text-shadow: 0 1px 5px rgba(0,0,0,.7);
+        letter-spacing: -.03em;
+        text-shadow: $textShadow;
       }
     }
     .backshade {
-      background-image: linear-gradient(to bottom,rgba(0,0,0,0)0,rgba(0,0,0,.6)100%);
+      background-image: linear-gradient(to bottom,rgba(.6,0,0,0)10%,rgba(0,0,0,.8)100%);
       box-sizing: border-box;
       background-size: cover;
       display: block;
@@ -289,12 +286,36 @@ div #recipe.row{
     padding: 0px;
   }
 }
-
 .addRecipeForm {
   width: 800px;
   margin: auto;
 }
-// .categories {
-//   margin: 40px 30px; 
-// }
 
+  .categories {
+    margin: 20px auto 60px 10px;
+    width: 100%;
+    li {
+      box-sizing: border-box;
+      padding: 0 27px;
+      display: inline-block;
+      // text-align: center;
+      #category {
+        font-size: 1.4em;
+        font-weight: 400 !important;
+        margin: 0 30px;
+        text-shadow: $textShadow;
+      } 
+    }
+  }
+
+  footer {
+    border-top: 3px solid $highlight;
+    padding: 30px 0 20px 10px;
+    box-shadow: $textShadow2;
+    span {
+      color: $highlight;
+      font-size: 1.2em;
+      font-weight: 500;
+      margin-left: 2em;
+    }
+  }

@@ -17,6 +17,7 @@
   
 
 </nav>
+
 <div ui-view>
   <div class="dashboard" id="page">
     <p>{{ vm.message }}</p>
@@ -24,11 +25,8 @@
 
   <section class="container" ></section>
 
-  <footer>
-    <ul>
-      <li ng-repeat="category in vm.categories"> 
-      <a href="#/category/{{ category.id }}">*{{ category.name }}</a>
-      </li>
-    </ul>
-  </footer>
 </div>
+
+<footer>
+  <span>&copy; 2015 FlourPower</span>
+</footer>
