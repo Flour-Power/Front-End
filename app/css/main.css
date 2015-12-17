@@ -3344,6 +3344,9 @@ a {
 .top-bar {
   padding: 0.5rem;
   background: url("../photos/gradient.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   padding: 0 0.5em;
   position: relative;
   width: 100%; }
@@ -3685,10 +3688,11 @@ div #recipe {
 
 .categories {
   margin: 20px auto 60px 10px;
-  width: 100%; }
+  width: 100%;
+  text-align: center; }
   .categories li {
     box-sizing: border-box;
-    padding: 0 27px;
+    padding: 0 20px;
     display: inline-block; }
     .categories li #category {
       font-size: 1.4em;
