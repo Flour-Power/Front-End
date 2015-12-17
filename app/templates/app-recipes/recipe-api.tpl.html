@@ -1,31 +1,48 @@
-<div class="singleRecipe">
+<ul id="singleRecipe">
 
+  <li class="food">
+      <div>
+        <div class="name">
+          <span>{{ vm.recipe.name }}</span>
+        </div>
+        <div class="mainPhoto" style="background-image: url( {{ vm.recipe.source_image_url }} ) ">
+          <div id="shade"></div>
+        </div>
+      </div>
+  </li>
 
+</ul>
 
-  <div id="mainPhoto" style="background-image: url( {{ vm.recipe.source_image_url }} ) ">
-     <h3>{{ vm.recipe.name}}</h3>
-  </div>
-  
-    <div id="recipe"class="row">
+   
+
+    <div id="recipe">
+      <!-- <div class="name">
+        <span>{{ vm.recipe.name }}</span>
+      </div> -->
       <!-- Populating Ingredients from IngredientsController -->
-       <div class="ingredients shrink columns" ng-controller="IngredientsController as ingredients">
-        <h4>Ingredients</h4>
+       <div class="ingredients " ng-controller="IngredientsController as ingredients">
+        <div class="heading">
+          <h4>Ingredients</h4>
+        </div>
+
         <p ng-repeat="ingredient in ingredients">
-          {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
+          <span> {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
+          </span>
         </p>
        </div>
 
       <!-- Populating Directions from DirectionsController -->
-       <div class="directions columns" ng-controller="DirectionsController as directions">
-        <h4>Directions</h4>
+       <div class="directions " ng-controller="DirectionsController as directions">
+        <div class="heading">
+          <h4>Directions</h4>
+        </div>
         <p ng-repeat="directions in directions">
           {{ directions }}
         </p>
        </div>
 
      </div>
-
-</div>
+  </div>
 
 <div class="bottom">
   <ul class="categories">

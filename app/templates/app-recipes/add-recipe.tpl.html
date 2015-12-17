@@ -1,6 +1,12 @@
-<h1>Add Recipe</h1>
+<div class="add">
 
- <fieldset class="addRecipeForm categoryFieldset" ng-model="recipe.categories">
+<div class="dashboard" id="page">
+  <p>Create A Recipe</p> 
+</div>
+
+
+
+ <fieldset class="categoryFieldset" ng-model="recipe.categories">
     <legend>Select At Least One Category</legend>
     <input id="checkbox1" type="checkbox"><label for="checkbox1">Drinks</label>
     <input id="checkbox2" type="checkbox"><label for="checkbox2">Appetizers</label>
@@ -25,7 +31,7 @@
   <label>Ingredients
     <input type="text" placeholder="Name" ng-model="recipe.itemName">
     <input type="text" placeholder="Amount" ng-model="recipe.itemAmount">
-    <select placeholder="Unit" type="text" ng-model="recipe.itemUnit">
+    <select type="text" placeholder="Unit" ng-model="recipe.itemUnit">
       <option type="text" value=" ">--</option>
       <option type="text" value="Bar(s)">Bar(s)</option>
       <option type="text" value="Cup(s)">Cup(s)</option>
@@ -40,10 +46,49 @@
       <option type="text" value="TSP">TSP</option>
     </select>
   </label>
-
+<!-- 
   <label>Image
     <input type="image" placeholder="Image" ng-model="recipe.image">
-  </label>
+  </label> -->
 
-  <button ng-click="vm.addRecipe(recipe)">Add Recipe</button>
+  <button ng-click="vm.addRecipe(recipe)">
+    <a href="#/dashboard">Create Recipe</a>
+  </button>
 </form>
+
+</div>
+
+<div class="bottom">
+  <ul class="categories">
+    <li class="category"> 
+      <a id="category" href="#/category/1">  
+        Drinks
+      </a>
+    </li>
+    <li class="category"> 
+      <a id="category" href="#/category/2">  
+        Appetizers
+      </a>
+    </li>
+    <li class="category"> 
+      <a id="category" href="#/category/3">  
+        Main Courses
+      </a>
+    </li>
+    <li class="category"> 
+      <a id="category" href="#/category/4">  
+        Desserts
+      </a>
+    </li>
+    <li class="category"> 
+      <a id="category" href="#/category/5">  
+        Salads and Soups
+      </a>
+    </li>
+    <li class="category"> 
+      <a id="category" href="#/category/6">  
+        Side Dishes
+      </a>
+    </li>
+  </ul>
+</div>

@@ -3389,9 +3389,9 @@ a {
       background: transparent;
       font-size: 1.6em;
       width: 100%;
-      height: 2.94em;
+      height: 3.5em;
       margin-bottom: 0;
-      padding: 30px; }
+      padding: 33px; }
     .top-bar #search input:focus {
       color: white; }
 
@@ -3590,9 +3590,69 @@ div #recipe {
       border-bottom: 1px solid #86D3CE;
       margin: 0; }
 
-.addRecipeForm {
+.add {
   width: 800px;
-  margin: auto; }
+  margin: auto;
+  color: white; }
+  .add .dashboard {
+    text-align: center;
+    width: 800px;
+    margin-bottom: 50px; }
+  .add .categoryFieldset {
+    width: 800px;
+    margin: auto;
+    background: transparent;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.7); }
+    .add .categoryFieldset legend {
+      background: transparent;
+      margin-bottom: 0; }
+    .add .categoryFieldset label {
+      color: #2E706B; }
+  .add .addRecipeForm {
+    width: 800px;
+    background: transparent;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.7);
+    width: 800px;
+    margin: auto; }
+    .add .addRecipeForm label {
+      color: white;
+      font-size: 1em;
+      font-weight: 200;
+      margin-bottom: 5px;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.7); }
+    .add .addRecipeForm .help-text {
+      color: #44A19E;
+      font-size: 0.95em;
+      margin-top: 10px;
+      padding: 0 10px; }
+    .add .addRecipeForm input {
+      border: none;
+      border-radius: 3px;
+      color: #86D3CE;
+      background: transparent;
+      margin-bottom: 5px;
+      padding: 10px;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.7); }
+    .add .addRecipeForm input:focus {
+      color: #202020; }
+    .add .addRecipeForm select {
+      font-family: 'Raleway', sans-serif;
+      color: #86D3CE;
+      background: transparent;
+      border: none;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.7); }
+    .add .addRecipeForm select:focus {
+      color: #202020; }
+  .add button {
+    margin: auto;
+    margin-bottom: 55px;
+    padding: 5px 0; }
+  .add a {
+    color: #2E706B;
+    font-weight: 400;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.7);
+    border-radius: 3px;
+    padding: 9px; }
 
 .categories {
   margin: 20px auto 60px 10px;

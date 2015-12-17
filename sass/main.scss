@@ -6,7 +6,7 @@
 @include foundation-flex-grid;
 
 
-
+$monothrow: url('../photos/IMG_5395.png');
 $blueOpacity: url('../photos/blueopacity-1.png');
 $greenOpacity: url('../photos/greenopacity-1.png');
 $cellBackground: #D2FBFE;
@@ -25,6 +25,8 @@ $textShadow2: 0 1px 5px rgba(0,0,0,.6);
 $cellBorder: 2px solid $dashboardColor;
 $cellBorderRadius: 3px 3px 0 0;
 
+$bigLogo: url('../photos/logobig.png');
+$smallLogo: url('../photos/logosmall.png');
 $mainImage: url('../photos/GYEIFHUP3O.jpg');
 
 
@@ -109,9 +111,9 @@ a {
       ;
       font-size: 1.6em;
       width: 100%;
-      height: 2.94em;
+      height: 3.5em;
       margin-bottom: 0;
-      padding: 30px;
+      padding: 33px;
       }
       input:focus {
         color: $fontColor;
@@ -309,11 +311,87 @@ div #recipe {
   }
 
 }
-.addRecipeForm {
+
+.add {
   width: 800px;
   margin: auto;
-}
+  color: $fontColor;
+  .dashboard {
+    text-align: center;
+    width: 800px;
+    margin-bottom: 50px;
+  }
+  .categoryFieldset {
+    width: 800px;
+    margin: auto;
+    background: transparent;
+    text-shadow: $textShadow;
+    legend {
+      background: transparent;
+      margin-bottom: 0;
+    }
+    label {
+      color: $highlight;
+    }
+  }
+  .addRecipeForm {
+    width: 800px;
+    background: transparent;
+    text-shadow: $textShadow;
+    width: 800px;
+    margin: auto;
+    label {
+      color: $fontColor;
+      font-size: 1em;
+      font-weight: 200;
+      margin-bottom: 5px;
+      text-shadow: $textShadow;
+    }
+    .help-text {
+      color: $themeColor;
+      font-size: 0.95em;
+      margin-top: 10px;
+      padding: 0 10px;
+    }
+    input {
+      border: none;
+      border-radius: 3px;
+      color: $lightAccent;
+      background: transparent;
+      // font-size: 1.6em;
+      // width: 100%;
+      margin-bottom: 5px;
+      padding: 10px;
+      box-shadow: $textShadow;
+    }
+    input:focus {
+      color: $dashboardColor;
+    }
+    select {
+      font-family: 'Raleway', sans-serif;
+      color: $lightAccent;
+      background: transparent;
+      border: none;
+      box-shadow: $textShadow;
+    }
+    select:focus {
+      color: $dashboardColor;
+    }
+  }
 
+  button {
+    margin: auto;
+    margin-bottom: 55px;
+    padding: 5px 0;
+  }
+   a {
+      color: $highlight;
+      font-weight: 400;
+      box-shadow: $textShadow;
+      border-radius: 3px;
+      padding: 9px;
+    }
+}
   .categories {
     margin: 20px auto 60px 10px;
     width: 100%;
